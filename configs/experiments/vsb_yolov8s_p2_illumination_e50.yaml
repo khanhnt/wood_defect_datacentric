@@ -11,12 +11,12 @@ transforms:
 training:
   model: yolov8s
   epochs: 50
-  imgsz: 1024
-  batch: 32
-  workers: 4
+  imgsz: ${IMG_SIZE:-1024}
+  batch: ${BATCH_SIZE:-32}
+  workers: ${WORKERS:-4}
   seed: 42
   patience: 30
-  device: "0"
+  device: "${DEVICE:-0}"
   optimizer: auto
   pretrained: true
   deterministic: true

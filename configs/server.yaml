@@ -1,0 +1,51 @@
+server:
+  profile: vast_rtx3090_24gb
+  prompt: "6.5_server_setup_and_sanity_verification"
+  expected_gpu:
+    model_contains: "RTX 3090"
+    min_vram_gb: 24
+
+paths:
+  code_root: /workspace/wood_defect_datacentric
+  dataset_root: /workspace/data
+  vsb_dataset_yaml: /workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/dataset.yaml
+  vnwoodknot_dataset_yaml: /workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/dataset.yaml
+  generated_dataset_root: /workspace/data/wood_defect_datacentric/generated_yolo
+  results_root: /workspace/wood_defect_datacentric/results
+
+environment_overrides:
+  WOOD_DC_VSB_BASELINE_DATASET_YAML: /workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/dataset.yaml
+  WOOD_DC_VN_BASELINE_DATASET_YAML: /workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/dataset.yaml
+
+sanity_checks:
+  datasets:
+    verify_image_label_matching: true
+    verify_split_sizes: true
+    verify_class_names: true
+    verify_vnwoodknot_knot_free_negatives: true
+  previews:
+    preprocessing:
+      dataset: vnwoodknot
+      split: test
+      num_samples: 2
+    augmentation:
+      dataset: vnwoodknot
+      split: test
+      num_samples: 2
+  training_dry_runs:
+    - vsb_yolov8s_baseline_e50
+    - vn_t0_yolov8s_baseline_e50
+  negative_eval:
+    split: test
+    thresholds:
+      - 0.10
+      - 0.25
+      - 0.50
+
+training_recommendation:
+  detector: yolov8s
+  imgsz: 1024
+  initial_batch_rtx3090_24gb: 16
+  fallback_batch_if_oom: 8
+  batch_to_try_after_successful_probe: 24
+  notes: "Start at batch 16 for Prompt 7, then increase only after a short single-experiment probe confirms VRAM headroom."
