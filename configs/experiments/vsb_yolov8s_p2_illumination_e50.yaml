@@ -1,0 +1,26 @@
+experiment_id: vsb_yolov8s_p2_illumination_e50
+description: VSB curated benchmark with P2 conservative luminance illumination normalization.
+dataset:
+  key: vsb_curated
+  data_yaml: ${WOOD_DC_VSB_P2_DATASET_YAML:-/workspace/data/wood_defect_datacentric/generated_yolo/vsb/P2_illumination_normalization/dataset.yaml}
+  split_protocol: existing_curated_train_val_test
+transforms:
+  preprocessing: P2_illumination_normalization
+  augmentation: A0_default
+  materialized_dataset_required: true
+training:
+  model: yolov8s
+  epochs: 50
+  imgsz: 1024
+  batch: 32
+  workers: 4
+  seed: 42
+  patience: 30
+  device: "0"
+  optimizer: auto
+  pretrained: true
+  deterministic: true
+  single_cls: false
+outputs:
+  output_root: results
+

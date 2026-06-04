@@ -1,0 +1,10 @@
+name: A0_default
+method: yolo_default_reference
+description: Reference setting for YOLOv8 default training augmentation; preview uses no-op image copy.
+params: {}
+training:
+  use_ultralytics_defaults: true
+sanity:
+  preserve_dimensions: true
+  require_boxes_inside_bounds: true
+

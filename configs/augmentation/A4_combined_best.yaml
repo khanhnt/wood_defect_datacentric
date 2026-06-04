@@ -1,0 +1,19 @@
+name: A4_combined_best
+method: safe_crop_plus_texture_color_jitter
+description: Combined safe variant using defect-preserving crop plus controlled wood-texture color jitter; excludes copy-paste by default.
+params:
+  crop:
+    min_box_visibility: 0.92
+    context_scale: 2.35
+    min_crop_scale: 0.66
+    negative_min_crop_scale: 0.80
+    center_jitter: 0.03
+  color_jitter:
+    brightness: 0.08
+    contrast: 0.08
+    saturation: 0.05
+sanity:
+  preserve_dimensions: true
+  require_boxes_inside_bounds: true
+  min_box_visibility: 0.92
+

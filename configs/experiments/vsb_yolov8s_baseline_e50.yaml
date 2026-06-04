@@ -1,0 +1,26 @@
+experiment_id: vsb_yolov8s_baseline_e50
+description: VSB curated benchmark baseline with fixed YOLOv8s detector and default YOLO augmentation.
+dataset:
+  key: vsb_curated
+  data_yaml: ${WOOD_DC_VSB_BASELINE_DATASET_YAML:-/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/dataset.yaml}
+  split_protocol: existing_curated_train_val_test
+transforms:
+  preprocessing: P0_baseline
+  augmentation: A0_default
+  materialized_dataset_required: false
+training:
+  model: yolov8s
+  epochs: 50
+  imgsz: 1024
+  batch: 32
+  workers: 4
+  seed: 42
+  patience: 30
+  device: "0"
+  optimizer: auto
+  pretrained: true
+  deterministic: true
+  single_cls: false
+outputs:
+  output_root: results
+

@@ -1,0 +1,10 @@
+name: P3_mild_unsharp
+method: mild_unsharp_mask
+description: Mild unsharp masking to improve edge contrast while avoiding aggressive sharpening artifacts.
+params:
+  sigma: 1.0
+  amount: 0.25
+sanity:
+  preserve_dimensions: true
+  preserve_labels: true
+

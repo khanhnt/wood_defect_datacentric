@@ -1,0 +1,10 @@
+name: P1_CLAHE_luminance
+method: clahe_luminance
+description: Mild CLAHE on the LAB luminance channel only; chroma channels are unchanged.
+params:
+  clip_limit: 1.5
+  tile_grid_size: 8
+  blend: 0.50
+sanity:
+  preserve_dimensions: true
+  preserve_labels: true

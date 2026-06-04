@@ -1,0 +1,14 @@
+name: A1_defect_preserving_crop
+method: crop_resize_with_visibility_guard
+description: Crop with context around defects, resize back to original dimensions, and keep boxes only when visibility is preserved.
+params:
+  min_box_visibility: 0.90
+  context_scale: 2.25
+  min_crop_scale: 0.62
+  negative_min_crop_scale: 0.76
+  center_jitter: 0.04
+sanity:
+  preserve_dimensions: true
+  require_boxes_inside_bounds: true
+  min_box_visibility: 0.90
+

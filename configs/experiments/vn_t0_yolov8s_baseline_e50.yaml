@@ -1,0 +1,26 @@
+experiment_id: vn_t0_yolov8s_baseline_e50
+description: VNWoodKnot target-domain T0 baseline with fixed YOLOv8s detector.
+dataset:
+  key: vnwoodknot
+  data_yaml: ${WOOD_DC_VN_BASELINE_DATASET_YAML:-/workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/dataset.yaml}
+  split_protocol: existing_vnwoodknot_train_val_test_with_knot_free_retained
+transforms:
+  preprocessing: P0_baseline
+  augmentation: A0_default
+  materialized_dataset_required: false
+training:
+  model: yolov8s
+  epochs: 50
+  imgsz: 1024
+  batch: 32
+  workers: 4
+  seed: 42
+  patience: 30
+  device: "0"
+  optimizer: auto
+  pretrained: true
+  deterministic: true
+  single_cls: false
+outputs:
+  output_root: results
+

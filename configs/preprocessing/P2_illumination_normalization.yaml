@@ -1,0 +1,11 @@
+name: P2_illumination_normalization
+method: clipped_luminance_gamma
+description: Conservative auto-gamma normalization on luminance to reduce uneven lighting without changing geometry.
+params:
+  target_luminance: 0.50
+  gamma_min: 0.85
+  gamma_max: 1.18
+sanity:
+  preserve_dimensions: true
+  preserve_labels: true
+

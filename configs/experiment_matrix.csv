@@ -1,0 +1,13 @@
+experiment_id,dataset,group,priority,config_path,detector,epochs,imgsz,batch,seed,preprocessing,augmentation,materialized_dataset_required,optional,notes
+vsb_yolov8s_baseline_e50,vsb_curated,vsb_baseline,main,configs/experiments/vsb_yolov8s_baseline_e50.yaml,yolov8s,50,1024,32,42,P0_baseline,A0_default,false,false,VSB controlled baseline
+vsb_yolov8s_p1_clahe_e50,vsb_curated,vsb_preprocessing_candidate,main,configs/experiments/vsb_yolov8s_p1_clahe_e50.yaml,yolov8s,50,1024,32,42,P1_CLAHE_luminance,A0_default,true,false,Individual preprocessing candidate
+vsb_yolov8s_p2_illumination_e50,vsb_curated,vsb_preprocessing_candidate,main,configs/experiments/vsb_yolov8s_p2_illumination_e50.yaml,yolov8s,50,1024,32,42,P2_illumination_normalization,A0_default,true,false,Individual preprocessing candidate
+vsb_yolov8s_p3_unsharp_e50,vsb_curated,vsb_preprocessing_candidate,secondary,configs/experiments/vsb_yolov8s_p3_unsharp_e50.yaml,yolov8s,50,1024,32,42,P3_mild_unsharp,A0_default,true,false,Individual preprocessing candidate
+vsb_yolov8s_a1_crop_e50,vsb_curated,vsb_augmentation_candidate,main,configs/experiments/vsb_yolov8s_a1_crop_e50.yaml,yolov8s,50,1024,32,42,P0_baseline,A1_defect_preserving_crop,true,false,Individual augmentation candidate
+vsb_yolov8s_a2_colorjitter_e50,vsb_curated,vsb_augmentation_candidate,main,configs/experiments/vsb_yolov8s_a2_colorjitter_e50.yaml,yolov8s,50,1024,32,42,P0_baseline,A2_texture_aware_color_jitter,true,false,Individual augmentation candidate
+vsb_yolov8s_a3_copypaste_e50,vsb_curated,vsb_augmentation_candidate,optional,configs/experiments/vsb_yolov8s_a3_copypaste_e50.yaml,yolov8s,50,1024,32,42,P0_baseline,A3_copy_paste_defects,true,true,Experimental copy-paste candidate
+vsb_yolov8s_p4_a4_combined_e50,vsb_curated,vsb_combined,main,configs/experiments/vsb_yolov8s_p4_a4_combined_e50.yaml,yolov8s,50,1024,32,42,P4_combined_safe,A4_combined_best,true,false,Combined safe pipeline
+vn_t0_yolov8s_baseline_e50,vnwoodknot,vn_baseline,main,configs/experiments/vn_t0_yolov8s_baseline_e50.yaml,yolov8s,50,1024,32,42,P0_baseline,A0_default,false,false,VNWoodKnot T0 baseline
+vn_yolov8s_p2_illumination_e50,vnwoodknot,vn_preprocessing_selected,main,configs/experiments/vn_yolov8s_p2_illumination_e50.yaml,yolov8s,50,1024,32,42,P2_illumination_normalization,A0_default,true,false,Selected preprocessing candidate
+vn_yolov8s_a1_crop_e50,vnwoodknot,vn_augmentation_selected,main,configs/experiments/vn_yolov8s_a1_crop_e50.yaml,yolov8s,50,1024,32,42,P0_baseline,A1_defect_preserving_crop,true,false,Selected augmentation candidate
+vn_yolov8s_p4_a4_combined_e50,vnwoodknot,vn_combined,main,configs/experiments/vn_yolov8s_p4_a4_combined_e50.yaml,yolov8s,50,1024,32,42,P4_combined_safe,A4_combined_best,true,false,Combined safe pipeline

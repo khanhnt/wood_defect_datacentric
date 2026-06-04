@@ -1,0 +1,8 @@
+name: P0_baseline
+method: identity
+description: No extra preprocessing. Original RGB image is passed through unchanged.
+params: {}
+sanity:
+  preserve_dimensions: true
+  preserve_labels: true
+

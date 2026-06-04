@@ -1,0 +1,12 @@
+name: A2_texture_aware_color_jitter
+method: controlled_pil_color_jitter
+description: Mild brightness, contrast, and saturation jitter designed for wood texture without unrealistic hue shifts.
+params:
+  brightness: 0.10
+  contrast: 0.10
+  saturation: 0.06
+sanity:
+  preserve_dimensions: true
+  preserve_labels: true
+  require_boxes_inside_bounds: true
+

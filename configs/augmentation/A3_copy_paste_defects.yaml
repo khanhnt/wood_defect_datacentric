@@ -1,0 +1,19 @@
+name: A3_copy_paste_defects
+method: conservative_feathered_copy_paste
+description: Experimental conservative copy-paste using defect patches with wood context, feathered borders, and overlap guards.
+params:
+  max_objects_per_image: 1
+  max_iou_with_existing: 0.05
+  max_attempts: 60
+  context_pad_ratio: 0.18
+  feather_px: 12
+  alpha: 0.88
+  scale_range:
+    - 0.75
+    - 1.05
+sanity:
+  preserve_dimensions: true
+  require_boxes_inside_bounds: true
+  require_added_box_for_preview: true
+  experimental: true
+

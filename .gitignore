@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+.DS_Store
+
+# Large or generated datasets
+/data/raw/**
+/data/generated/**
+/data/yolo/**
+/data/**/images/**
+/data/**/labels/**
+!/data/processed/
+!/data/processed/*.jsonl
+!/data/raw/.gitkeep
+!/data/splits/.gitkeep
+
+# Generated outputs and training artifacts
+/results/**
+!/results/
+!/results/.gitkeep
+artifacts/
+outputs/
+runs/
+*.log
+*.pt
+*.pth
+*.onnx
+*.engine
+*.mlpackage
+
+# Local caches
+.cache/
+.mplconfig/
