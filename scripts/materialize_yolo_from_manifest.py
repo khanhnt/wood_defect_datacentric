@@ -310,7 +310,9 @@ def output_relative_image_path(raw: dict[str, Any], source_image: Path, split: s
     image_id = str(raw.get("image_id") or source_image.stem).strip().replace("\\", "/")
     rel = Path(image_id)
     parts = rel.parts
-    if parts and normalize_split(parts[0]) == split:
+    if len(parts) >= 2 and parts[0] == "images" and normalize_split(parts[1]) == split:
+        rel = Path(*parts[2:]) if len(parts) > 2 else Path(source_image.stem)
+    elif parts and normalize_split(parts[0]) == split:
         rel = Path(*parts[1:]) if len(parts) > 1 else Path(source_image.stem)
     if rel.suffix.lower() not in IMAGE_EXTENSIONS:
         rel = rel.with_suffix(source_image.suffix.lower())
