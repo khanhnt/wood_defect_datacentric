@@ -67,6 +67,33 @@ Stop if GPU, CUDA, PyTorch, Ultralytics, disk, or folder checks fail.
 
 ## 6. Dataset Readiness
 
+If the copied folders contain only `images/`, `manifest.jsonl`, and `metadata.json`, first generate YOLO datasets:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python scripts/materialize_yolo_from_manifest.py \
+  --manifest /workspace/data/vnwoodknot/manifest.jsonl \
+  --images-root /workspace/data/vnwoodknot/images \
+  --output-root /workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo \
+  --dataset-name vnwoodknot_live_dead_2class_yolo \
+  --classes live_knot dead_knot \
+  --split-strategy manifest \
+  --link-mode symlink
+
+PYTHONDONTWRITEBYTECODE=1 python scripts/materialize_yolo_from_manifest.py \
+  --manifest /workspace/data/main_dataset/manifest.jsonl \
+  --images-root /workspace/data/main_dataset/images \
+  --output-root /workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo \
+  --dataset-name vsb7_3600_rare_first_yolo \
+  --classes live_knot dead_knot resin knot_with_crack crack marrow knot_missing \
+  --split-strategy random \
+  --seed 42 \
+  --link-mode symlink
+```
+
+Use `--split-strategy random` for VSB only if no curated split labels are available in the copied manifest.
+
+Then run:
+
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python scripts/check_server_ready.py
 ```

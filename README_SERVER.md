@@ -70,7 +70,40 @@ Expected baseline YOLO dataset YAMLs:
 
 This checks GPU visibility, PyTorch CUDA, Ultralytics, disk space, and required folders. It does not start training.
 
-## 6. Verify Datasets
+## 6. Generate YOLO Datasets From Manifests If Needed
+
+If the copied data contains only `images/`, `manifest.jsonl`, and `metadata.json`, generate YOLO folders before running training.
+
+VNWoodKnot usually has manifest split labels:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python scripts/materialize_yolo_from_manifest.py \
+  --manifest /workspace/data/vnwoodknot/manifest.jsonl \
+  --images-root /workspace/data/vnwoodknot/images \
+  --output-root /workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo \
+  --dataset-name vnwoodknot_live_dead_2class_yolo \
+  --classes live_knot dead_knot \
+  --split-strategy manifest \
+  --link-mode symlink
+```
+
+For VSB, prefer an existing curated split. If the manifest has no split labels and you need a temporary server-ready YOLO folder, create a deterministic random split:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python scripts/materialize_yolo_from_manifest.py \
+  --manifest /workspace/data/main_dataset/manifest.jsonl \
+  --images-root /workspace/data/main_dataset/images \
+  --output-root /workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo \
+  --dataset-name vsb7_3600_rare_first_yolo \
+  --classes live_knot dead_knot resin knot_with_crack crack marrow knot_missing \
+  --split-strategy random \
+  --seed 42 \
+  --link-mode symlink
+```
+
+Review `materialization_report.json` before training. Records with unknown classes or invalid boxes are skipped by default to avoid creating false-negative labels.
+
+## 7. Verify Datasets
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python scripts/check_server_ready.py
@@ -86,7 +119,7 @@ This checks:
 - VNWoodKnot empty/background labels and manifest `knot_free` retention.
 - Results folder writability.
 
-## 7. Preview Data-Centric Transforms
+## 8. Preview Data-Centric Transforms
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python scripts/preview_preprocessing.py \
@@ -104,7 +137,7 @@ PYTHONDONTWRITEBYTECODE=1 python scripts/preview_augmentation.py \
 
 Review the generated panels before training data-centric variants.
 
-## 8. Run Baseline Dry-Runs
+## 9. Run Baseline Dry-Runs
 
 Use the safe Prompt 6.5 sanity helper so dry-run metadata is kept away from real training run folders:
 
@@ -116,7 +149,7 @@ PYTHONDONTWRITEBYTECODE=1 python scripts/server_setup_sanity.py \
 
 Both baseline dry-runs must be `ok=true` before Batch 1.
 
-## 9. Run Batch 1 Baselines
+## 10. Run Batch 1 Baselines
 
 Use tmux so training survives SSH disconnects:
 
@@ -131,7 +164,7 @@ Detach with `Ctrl-b d`. Reattach with:
 tmux attach -t wooddc
 ```
 
-## 10. Aggregate After Batch 1
+## 11. Aggregate After Batch 1
 
 ```bash
 ./scripts/aggregate_after_batch.sh
@@ -139,7 +172,7 @@ tmux attach -t wooddc
 
 Review baseline mAP, precision, recall, logs, and checkpoint files. Continue only if baselines are reasonable and no dataset/path issue appears.
 
-## 11. Continue Controlled Batches
+## 12. Continue Controlled Batches
 
 Run later batches only after confirming Batch 1:
 
