@@ -1,0 +1,174 @@
+{
+  "ok": true,
+  "env_file": "/workspace/wood_defect_datacentric/.env",
+  "results_root": "/workspace/wood_defect_datacentric/results",
+  "checks": {
+    "results_root": {
+      "ok": true,
+      "path": "/workspace/wood_defect_datacentric/results",
+      "message": "Results folder is writable."
+    },
+    "vsb_curated": {
+      "ok": true,
+      "dataset_yaml": "/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/dataset.yaml",
+      "class_names": [
+        "live_knot",
+        "dead_knot",
+        "resin",
+        "knot_with_crack",
+        "crack",
+        "marrow",
+        "knot_missing"
+      ],
+      "splits": {
+        "train": {
+          "ok": true,
+          "path": "/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/images/train",
+          "num_images": 32928,
+          "missing_labels": 0,
+          "empty_label_files": 10353,
+          "label_format_errors": 0,
+          "class_id_errors": 0,
+          "errors": [],
+          "warnings": [],
+          "sample_label_errors": []
+        },
+        "val": {
+          "ok": true,
+          "path": "/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/images/val",
+          "num_images": 7060,
+          "missing_labels": 0,
+          "empty_label_files": 2286,
+          "label_format_errors": 0,
+          "class_id_errors": 0,
+          "errors": [],
+          "warnings": [],
+          "sample_label_errors": []
+        },
+        "test": {
+          "ok": true,
+          "path": "/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/images/test",
+          "num_images": 7083,
+          "missing_labels": 0,
+          "empty_label_files": 2201,
+          "label_format_errors": 0,
+          "class_id_errors": 0,
+          "errors": [],
+          "warnings": [],
+          "sample_label_errors": []
+        }
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "vsb_curated_manifest": {
+      "ok": true,
+      "manifest": "/workspace/wood_defect_datacentric/data/processed/large_scale_wood_surface_defects_manifest.jsonl",
+      "records": 20276,
+      "split_counts": {
+        "unspecified": 20276
+      },
+      "observed_classes": [
+        "blue_stain",
+        "crack",
+        "dead_knot",
+        "knot_missing",
+        "knot_with_crack",
+        "live_knot",
+        "marrow",
+        "overgrown",
+        "quartzity",
+        "resin"
+      ],
+      "knot_free_by_split": {},
+      "errors": [],
+      "warnings": [
+        "vsb_curated: unspecified split records found; existing train/val/test split cannot be fully verified from this source.",
+        "vsb_curated: labels outside configured class set found: blue_stain, overgrown, quartzity."
+      ]
+    },
+    "vnwoodknot": {
+      "ok": true,
+      "dataset_yaml": "/workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/dataset.yaml",
+      "class_names": [
+        "live_knot",
+        "dead_knot"
+      ],
+      "splits": {
+        "train": {
+          "ok": true,
+          "path": "/workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/images/train",
+          "num_images": 1059,
+          "missing_labels": 0,
+          "empty_label_files": 350,
+          "label_format_errors": 0,
+          "class_id_errors": 0,
+          "errors": [],
+          "warnings": [],
+          "sample_label_errors": []
+        },
+        "val": {
+          "ok": true,
+          "path": "/workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/images/val",
+          "num_images": 226,
+          "missing_labels": 0,
+          "empty_label_files": 75,
+          "label_format_errors": 0,
+          "class_id_errors": 0,
+          "errors": [],
+          "warnings": [],
+          "sample_label_errors": []
+        },
+        "test": {
+          "ok": true,
+          "path": "/workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/images/test",
+          "num_images": 228,
+          "missing_labels": 0,
+          "empty_label_files": 75,
+          "label_format_errors": 0,
+          "class_id_errors": 0,
+          "errors": [],
+          "warnings": [],
+          "sample_label_errors": []
+        }
+      },
+      "errors": [],
+      "warnings": [],
+      "vnwoodknot_negative_check": {
+        "ok": true,
+        "empty_label_files_by_split": {
+          "train": 350,
+          "val": 75,
+          "test": 75
+        },
+        "message": "VNWoodKnot has empty label files in all splits."
+      }
+    },
+    "vnwoodknot_manifest": {
+      "ok": true,
+      "manifest": "/workspace/wood_defect_datacentric/data/processed/vnwoodknot_manifest.jsonl",
+      "records": 1515,
+      "split_counts": {
+        "test": 229,
+        "train": 1060,
+        "val": 226
+      },
+      "observed_classes": [
+        "dead_knot",
+        "live_knot"
+      ],
+      "knot_free_by_split": {
+        "test": 75,
+        "train": 350,
+        "val": 75
+      },
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "vsb_curated: unspecified split records found; existing train/val/test split cannot be fully verified from this source.",
+    "vsb_curated: labels outside configured class set found: blue_stain, overgrown, quartzity."
+  ]
+}

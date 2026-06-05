@@ -2,9 +2,9 @@
 
 This evaluation reports AP-style detection metrics together with false-positive behavior on VNWoodKnot `knot_free` images. Thresholds are reported transparently and are not tuned to hide failure cases.
 
-- Experiment: `t0_yolov8s_vnwoodknot_target_only_e50_negative_eval`
-- Manifest: `/Users/ntkhanh/PycharmProjects/wood_defect_datacentric/data/processed/vnwoodknot_manifest.jsonl`
-- Prediction source: `artifacts/vnwoodknot/tables/t0_yolov8s_vnwoodknot_target_only_e50_eval_test_predictions.jsonl`
+- Experiment: `vn_yolov8s_p4_a4_combined_e50_negative_eval`
+- Manifest: `/workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/vnwoodknot_existing_images_manifest.jsonl`
+- Prediction source: `results/runs/vn_yolov8s_p4_a4_combined_e50/ultralytics/train/weights/best.pt`
 - Input prediction records: 229
 - Aligned image records: 229
 - Unmatched prediction records: 0
@@ -13,10 +13,10 @@ This evaluation reports AP-style detection metrics together with false-positive 
 
 | Conf | AP50 | mAP50-95 | Precision | Recall | FP knot-free images | FP image rate | Pred/knot-free | Mean FP conf |
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 0.10 | 0.7721 | 0.3884 | 0.5696 | 0.8710 | 5 | 0.0667 | 0.0667 | 0.1326 |
-| 0.25 | 0.7280 | 0.3641 | 0.7911 | 0.8065 | 0 | 0.0000 | 0.0000 | 0.0000 |
-| 0.50 | 0.3284 | 0.2148 | 0.9091 | 0.3226 | 0 | 0.0000 | 0.0000 | 0.0000 |
-| 0.75 | 0.1382 | 0.1069 | 1.0000 | 0.1355 | 0 | 0.0000 | 0.0000 | 0.0000 |
+| 0.10 | 0.7567 | 0.3850 | 0.4577 | 0.8387 | 2 | 0.0267 | 0.0267 | 0.1157 |
+| 0.25 | 0.7282 | 0.3655 | 0.6119 | 0.7935 | 0 | 0.0000 | 0.0000 | 0.0000 |
+| 0.50 | 0.6206 | 0.3215 | 0.8240 | 0.6645 | 0 | 0.0000 | 0.0000 | 0.0000 |
+| 0.75 | 0.1053 | 0.0843 | 1.0000 | 0.1032 | 0 | 0.0000 | 0.0000 | 0.0000 |
 
 ## Interpretation Notes
 
