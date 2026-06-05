@@ -13,6 +13,7 @@ from dataclasses import dataclass
 import json
 import os
 from pathlib import Path
+import random
 import re
 import shlex
 import sys
@@ -30,6 +31,7 @@ if str(PACKAGE_PARENT) not in sys.path:
 
 ENV_PATTERN = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)(?::-(.*?))?\}")
 ALLOWED_DATASETS = {"vsb_curated", "vnwoodknot"}
+CONTROLLED_SEEDS = {42, 43, 44}
 
 
 @dataclass(frozen=True)
@@ -125,8 +127,14 @@ def validate_experiment(config: dict[str, Any], source_config: Path) -> list[Val
         issues.append(ValidationIssue("warning", "nonstandard_epochs", "Main controlled budget is 50 epochs."))
     if int(training.get("imgsz", 0)) != 1024:
         issues.append(ValidationIssue("warning", "nonstandard_imgsz", "Expected image size is 1024 unless justified."))
-    if int(training.get("seed", -1)) != 42:
-        issues.append(ValidationIssue("warning", "nonstandard_seed", "Expected seed is 42 unless justified."))
+    if int(training.get("seed", -1)) not in CONTROLLED_SEEDS:
+        issues.append(
+            ValidationIssue(
+                "warning",
+                "nonstandard_seed",
+                f"Expected seed to be one of {sorted(CONTROLLED_SEEDS)} unless justified.",
+            )
+        )
 
     data_yaml = dataset.get("data_yaml")
     if not data_yaml:
@@ -250,6 +258,8 @@ def execute_training(config: dict[str, Any], run_dir: Path, *, resume: bool) -> 
         raise ImportError("ultralytics is required for execution. Dry-run does not require it.") from exc
 
     training = config["training"]
+    seed = int(training["seed"])
+    set_reproducible_seed(seed)
     project_dir = run_dir / "ultralytics"
     train_name = "train"
     log_path = run_dir / "training.log"
@@ -260,7 +270,7 @@ def execute_training(config: dict[str, Any], run_dir: Path, *, resume: bool) -> 
         "batch": int(training["batch"]),
         "device": str(training["device"]),
         "workers": int(training["workers"]),
-        "seed": int(training["seed"]),
+        "seed": seed,
         "patience": int(training["patience"]),
         "project": str(project_dir),
         "name": train_name,
@@ -296,6 +306,29 @@ def execute_training(config: dict[str, Any], run_dir: Path, *, resume: bool) -> 
     }
     (run_dir / "run_summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     return summary
+
+
+def set_reproducible_seed(seed: int) -> None:
+    """Set Python, NumPy, and PyTorch seeds before creating the YOLO model."""
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    random.seed(seed)
+    try:
+        import numpy as np
+
+        np.random.seed(seed)
+    except Exception:
+        pass
+    try:
+        import torch
+
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
+        if hasattr(torch.backends, "cudnn"):
+            torch.backends.cudnn.benchmark = False
+            torch.backends.cudnn.deterministic = True
+    except Exception:
+        pass
 
 
 def collect_metrics(train_dir: Path) -> dict[str, Any]:

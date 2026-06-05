@@ -87,6 +87,19 @@ python3 scripts/launch_yolo_experiment.py   --experiment-config configs/experime
 
 Run folders are written to `results/runs/<experiment_id>/` and store the resolved config, command, training log, validation status, validation metrics placeholder or parsed metrics, and expected checkpoint path.
 
+## Phase 1 Multi-GPU Multiseed Runs
+
+The Vast.ai two-GPU workflow for batch-size probing and the 36-job multiseed
+queue is documented in `docs/PHASE1_GPU_OPTIMIZATION_RUNBOOK.md`.
+
+Key entry points:
+
+```bash
+python scripts/batch_size_test.py
+python scripts/run_all_experiments.py --batch-size 32 --gpus 0,1 --dry-run
+bash scripts/setup_fresh_run.sh --timestamp
+```
+
 ## Negative-Aware Evaluation
 
 Run threshold-sensitive VNWoodKnot evaluation from an existing prediction JSONL:
