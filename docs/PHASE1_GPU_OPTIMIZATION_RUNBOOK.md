@@ -132,15 +132,15 @@ results/gpu_optimization/materialization_logs/
 Training outputs:
 
 ```text
-results/multiseed/vnwoodknot/per_seed/<variant>_seed<seed>/
-results/multiseed/vsb_rarefirst/per_seed/<variant>_seed<seed>/
+results/multiseed/vnwoodknot/per_seed/runs/<variant>_seed<seed>/
+results/multiseed/vsb_rarefirst/per_seed/runs/<variant>_seed<seed>/
 ```
 
 Best checkpoint paths:
 
 ```text
-results/multiseed/vnwoodknot/per_seed/<variant>_seed<seed>/ultralytics/train/weights/best.pt
-results/multiseed/vsb_rarefirst/per_seed/<variant>_seed<seed>/ultralytics/train/weights/best.pt
+results/multiseed/vnwoodknot/per_seed/runs/<variant>_seed<seed>/ultralytics/train/weights/best.pt
+results/multiseed/vsb_rarefirst/per_seed/runs/<variant>_seed<seed>/ultralytics/train/weights/best.pt
 ```
 
 ## Notes

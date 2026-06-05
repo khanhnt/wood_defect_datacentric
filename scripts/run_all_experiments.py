@@ -551,7 +551,9 @@ def output_root_for(dataset: str) -> Path:
 
 
 def run_dir_for(job: Job) -> Path:
-    return output_root_for(job.spec.dataset) / job.run_id
+    # launch_yolo_experiment.py always appends "runs/<experiment_id>" to
+    # outputs.output_root, so mirror that layout when checking completion.
+    return output_root_for(job.spec.dataset) / "runs" / job.run_id
 
 
 def job_log_path(job: Job, *, attempt: int) -> Path:
