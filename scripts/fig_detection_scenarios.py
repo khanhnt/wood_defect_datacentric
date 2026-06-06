@@ -45,6 +45,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--predictions-dir", type=Path, default=PREDICTIONS_DIR)
     parser.add_argument("--checkpoint-root", type=Path, default=DEFAULT_CHECKPOINT_ROOT)
     parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
+    parser.add_argument(
+        "--render-only",
+        action="store_true",
+        help="Reuse detection_scenarios_selection.json and existing prediction JSONs; never run candidate search or inference.",
+    )
+    parser.add_argument(
+        "--selection-json",
+        type=Path,
+        default=None,
+        help="Selection JSON to use with --render-only. Defaults to <output-dir>/detection_scenarios_selection.json.",
+    )
     parser.add_argument("--force-inline", action="store_true", help="Ignore existing prediction JSONs and run checkpoint inference.")
     parser.add_argument("--no-save-inline-predictions", action="store_true")
     parser.add_argument("--device", default="0")
@@ -73,13 +84,18 @@ def main() -> None:
 
     payloads = load_payloads(args)
     warn_if_prediction_datasets_differ(payloads, args.data_yaml)
-    scenarios, candidate_log = build_scenarios(payloads, args)
-    render_all_scenarios(scenarios, output_dir=output_dir, dpi=args.dpi)
+    if args.render_only:
+        scenarios, candidate_log = build_scenarios_from_selection(payloads, args, output_dir)
+    else:
+        scenarios, candidate_log = build_scenarios(payloads, args)
+    figure_paths = render_all_scenarios(scenarios, output_dir=output_dir, dpi=args.dpi)
     write_selection_logs(scenarios, candidate_log, output_dir)
 
     print("Chosen detection scenario images:")
     for index, scenario in enumerate(scenarios, start=1):
         print(f"Scenario {index}: {scenario['image_id']} | {scenario['title']}")
+    for path in figure_paths:
+        print(f"Wrote: {path}")
     print(f"Wrote: {output_dir / 'detection_scenarios_selection.txt'}")
 
 
@@ -98,6 +114,8 @@ def load_or_generate_payload(variant: str, args: argparse.Namespace) -> dict[str
         payload.setdefault("variant", variant)
         payload.setdefault("seed", args.seed)
         return payload
+    if args.render_only:
+        raise SystemExit(f"--render-only requires existing prediction JSON: {predictions_path}")
 
     data_yaml = args.data_yaml.expanduser().resolve()
     if not data_yaml.exists():
@@ -195,6 +213,103 @@ def build_scenarios(payloads: dict[str, dict[str, Any]], args: argparse.Namespac
         },
     ]
     return scenarios, candidate_log
+
+
+def build_scenarios_from_selection(
+    payloads: dict[str, dict[str, Any]],
+    args: argparse.Namespace,
+    output_dir: Path,
+) -> tuple[list[dict[str, Any]], dict[str, list[dict[str, Any]]]]:
+    selection_path = args.selection_json.expanduser().resolve() if args.selection_json else output_dir / "detection_scenarios_selection.json"
+    if not selection_path.exists():
+        raise SystemExit(f"--render-only requires an existing selection JSON: {selection_path}")
+    selection = json.loads(selection_path.read_text(encoding="utf-8"))
+    chosen = selection.get("chosen") or []
+    if len(chosen) < 4:
+        raise SystemExit(f"Selection JSON must contain four chosen scenarios: {selection_path}")
+
+    ids_by_scenario = {}
+    for item in chosen:
+        scenario_number = int(item.get("scenario", 0))
+        image_id = str(item.get("image_id") or "")
+        if scenario_number and image_id:
+            ids_by_scenario[scenario_number] = image_id
+    missing = [number for number in range(1, 5) if number not in ids_by_scenario]
+    if missing:
+        raise SystemExit(f"Selection JSON missing scenario IDs: {missing}")
+
+    lookups = {variant: image_lookup(payload) for variant, payload in payloads.items()}
+    candidate_log = selection.get("candidates") or {}
+    scenarios = build_scenarios_for_ids(
+        lookups,
+        args,
+        scenario1_id=ids_by_scenario[1],
+        scenario2_id=ids_by_scenario[2],
+        scenario3_id=ids_by_scenario[3],
+        scenario4_id=ids_by_scenario[4],
+    )
+    print(f"Render-only: reused selected images from {selection_path}")
+    return scenarios, candidate_log
+
+
+def build_scenarios_for_ids(
+    lookups: dict[str, dict[str, dict[str, Any]]],
+    args: argparse.Namespace,
+    *,
+    scenario1_id: str,
+    scenario2_id: str,
+    scenario3_id: str,
+    scenario4_id: str,
+) -> list[dict[str, Any]]:
+    validate_selected_ids(lookups, scenario1_id, ("a1_crop", "p4_a4_combined"), "scenario 1")
+    validate_selected_ids(lookups, scenario2_id, ("baseline", "p4_a4_combined"), "scenario 2")
+    validate_selected_ids(lookups, scenario3_id, ("p4_a4_combined",), "scenario 3")
+    validate_selected_ids(lookups, scenario4_id, ("a1_crop", "a2_colorjitter", "p2_illumination"), "scenario 4")
+    return [
+        {
+            "title": f"Clean wood at tau={args.scenario1_threshold:.2f}",
+            "image_id": scenario1_id,
+            "panels": [
+                panel("a1_crop", lookups["a1_crop"][scenario1_id], args.scenario1_threshold, "A1 crop"),
+                panel("p4_a4_combined", lookups["p4_a4_combined"][scenario1_id], args.scenario1_threshold, "P4+A4 combined"),
+            ],
+        },
+        {
+            "title": "Missed knots vs retained recall",
+            "image_id": scenario2_id,
+            "panels": [
+                panel("baseline", lookups["baseline"][scenario2_id], args.scenario2_baseline_threshold, "Baseline"),
+                panel("p4_a4_combined", lookups["p4_a4_combined"][scenario2_id], args.scenario2_p4_threshold, "P4+A4 combined"),
+            ],
+        },
+        {
+            "title": f"Correct detection at tau={args.scenario3_threshold:.2f}",
+            "image_id": scenario3_id,
+            "panels": [
+                panel("p4_a4_combined", lookups["p4_a4_combined"][scenario3_id], args.scenario3_threshold, "P4+A4 combined"),
+            ],
+        },
+        {
+            "title": f"Clean-wood confidence at tau={args.scenario4_threshold:.2f}",
+            "image_id": scenario4_id,
+            "panels": [
+                panel("a1_crop", lookups["a1_crop"][scenario4_id], args.scenario4_threshold, "A1 crop"),
+                panel("a2_colorjitter", lookups["a2_colorjitter"][scenario4_id], args.scenario4_threshold, "A2 color jitter"),
+                panel("p2_illumination", lookups["p2_illumination"][scenario4_id], args.scenario4_threshold, "P2 illumination"),
+            ],
+        },
+    ]
+
+
+def validate_selected_ids(
+    lookups: dict[str, dict[str, dict[str, Any]]],
+    image_id: str,
+    variants: tuple[str, ...],
+    scenario_name: str,
+) -> None:
+    missing = [variant for variant in variants if image_id not in lookups[variant]]
+    if missing:
+        raise SystemExit(f"Selected {scenario_name} image is missing for variants {missing}: {image_id}")
 
 
 def choose_scenario1(lookups: dict[str, dict[str, dict[str, Any]]], args: argparse.Namespace) -> tuple[str, list[dict[str, Any]]]:
@@ -309,56 +424,69 @@ def choose_scenario4(lookups: dict[str, dict[str, dict[str, Any]]], args: argpar
     return choose_best("scenario 4", candidates, score_key="score", log_size=args.candidate_log_size)
 
 
-def render_all_scenarios(scenarios: list[dict[str, Any]], *, output_dir: Path, dpi: int) -> None:
+def render_all_scenarios(scenarios: list[dict[str, Any]], *, output_dir: Path, dpi: int) -> list[Path]:
     configure_matplotlib_cache()
     import matplotlib
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
+    paths: list[Path] = []
     for index, scenario in enumerate(scenarios, start=1):
-        render_scenario_figure(scenario, output_dir / f"scenario_{index}", dpi=dpi)
-    render_combined_figure(scenarios, output_dir / "detection_scenarios", dpi=dpi)
+        paths.extend(render_scenario_figure(scenario, output_dir / f"scenario_{index}", dpi=dpi))
+    paths.extend(render_combined_figure(scenarios, output_dir / "detection_scenarios", dpi=dpi))
     plt.close("all")
+    return paths
 
 
-def render_scenario_figure(scenario: dict[str, Any], stem: Path, *, dpi: int) -> None:
+def render_scenario_figure(scenario: dict[str, Any], stem: Path, *, dpi: int) -> list[Path]:
     import matplotlib.pyplot as plt
 
     panels = scenario["panels"]
-    fig, axes = plt.subplots(1, len(panels), figsize=(3.25 * len(panels), 3.25), squeeze=False)
+    fig, axes = plt.subplots(1, len(panels), figsize=(3.2 * len(panels), 3.25), squeeze=False)
     reference = panels[0]["image"]
     for axis, panel_data in zip(axes.flat, panels):
         draw_panel(axis, panel_data, reference_image=reference)
-    fig.suptitle(scenario["title"], fontsize=10, y=0.98)
-    fig.tight_layout(pad=0.2, w_pad=0.2)
-    save_figure(fig, stem, dpi=dpi)
+    fig.suptitle(scenario["title"], fontsize=11, fontweight="bold", y=0.975)
+    fig.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.88, wspace=0.04)
+    return save_figure(fig, stem, dpi=dpi)
 
 
-def render_combined_figure(scenarios: list[dict[str, Any]], stem: Path, *, dpi: int) -> None:
+def render_combined_figure(scenarios: list[dict[str, Any]], stem: Path, *, dpi: int) -> list[Path]:
     import matplotlib.pyplot as plt
 
-    fig, axes = plt.subplots(4, 3, figsize=(7.0, 9.1))
+    row_heights = [max(0.95, 0.98 + 0.08 * len(scenario["panels"])) for scenario in scenarios]
+    fig = plt.figure(figsize=(7.0, 7.6))
+    outer = fig.add_gridspec(
+        len(scenarios),
+        1,
+        height_ratios=row_heights,
+        left=0.01,
+        right=0.99,
+        bottom=0.01,
+        top=0.985,
+        hspace=0.10,
+    )
     for row_index, scenario in enumerate(scenarios):
         panels = scenario["panels"]
         reference = panels[0]["image"]
-        axes[row_index, 0].text(
+        inner = outer[row_index].subgridspec(2, len(panels), height_ratios=[0.20, 1.0], hspace=0.06, wspace=0.05)
+        caption_axis = fig.add_subplot(inner[0, :])
+        caption_axis.set_axis_off()
+        caption_axis.text(
             0.0,
-            1.06,
+            0.50,
             f"{chr(ord('A') + row_index)}. {scenario['title']}",
-            transform=axes[row_index, 0].transAxes,
-            fontsize=9,
+            transform=caption_axis.transAxes,
+            fontsize=11,
             fontweight="bold",
-            va="bottom",
+            va="center",
+            ha="left",
         )
-        for col_index in range(3):
-            axis = axes[row_index, col_index]
-            if col_index < len(panels):
-                draw_panel(axis, panels[col_index], reference_image=reference)
-            else:
-                axis.set_axis_off()
-    fig.tight_layout(pad=0.25, w_pad=0.15, h_pad=0.45)
-    save_figure(fig, stem, dpi=dpi)
+        for col_index, panel_data in enumerate(panels):
+            axis = fig.add_subplot(inner[1, col_index])
+            draw_panel(axis, panel_data, reference_image=reference)
+    return save_figure(fig, stem, dpi=dpi)
 
 
 def draw_panel(axis, panel_data: dict[str, Any], *, reference_image: dict[str, Any]) -> None:
@@ -367,8 +495,8 @@ def draw_panel(axis, panel_data: dict[str, Any], *, reference_image: dict[str, A
     image = panel_data["image"]
     display_image = load_image(reference_image)
     axis.imshow(display_image)
-    axis.set_axis_off()
-    axis.set_title(f"{panel_data['label']}  tau={panel_data['threshold']:.2f}", fontsize=8, pad=2)
+    axis.axis("off")
+    axis.set_title(f"{panel_data['label']}  tau={panel_data['threshold']:.2f}", fontsize=9, pad=2)
 
     for gt in image.get("gt_boxes", []):
         x, y, w, h, class_name = gt
@@ -524,9 +652,11 @@ def load_image(image: dict[str, Any]) -> Image.Image:
     return Image.open(path).convert("RGB")
 
 
-def save_figure(fig: Any, stem: Path, *, dpi: int) -> None:
-    fig.savefig(stem.with_suffix(".pdf"), bbox_inches="tight")
-    fig.savefig(stem.with_suffix(".png"), dpi=dpi, bbox_inches="tight")
+def save_figure(fig: Any, stem: Path, *, dpi: int) -> list[Path]:
+    paths = [stem.with_suffix(".pdf"), stem.with_suffix(".png")]
+    fig.savefig(paths[0], bbox_inches="tight")
+    fig.savefig(paths[1], dpi=dpi, bbox_inches="tight")
+    return paths
 
 
 def write_selection_logs(scenarios: list[dict[str, Any]], candidate_log: dict[str, list[dict[str, Any]]], output_dir: Path) -> None:
