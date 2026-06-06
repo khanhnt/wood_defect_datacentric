@@ -72,6 +72,8 @@ mkdir -p \
   results/gpu_optimization/materialization_logs \
   results/multiseed/vsb_rarefirst/per_seed \
   results/multiseed/vnwoodknot/per_seed \
+  results/negative_aware/predictions \
+  results/negative_aware/logs \
   results/negative_aware/threshold_sweep \
   results/negative_aware/bootstrap \
   results/negative_aware/plots
