@@ -1,6 +1,6 @@
 # Wood Defect Data-Centric Experiments
 
-Independent experiment repository for the IJACSA/thesis wood surface defect detection study.
+Independent experiment repository for the wood surface defect detection study.
 
 The accepted CMC paper focused on detector-family comparison, protocol breadth, and source-to-target transfer. This repository intentionally uses a different research question: keep the detector fixed as YOLOv8s, then evaluate whether data-centric changes improve defect detection and reduce false positives on negative wood images.
 
