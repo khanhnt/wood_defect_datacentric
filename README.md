@@ -2,7 +2,7 @@
 
 Independent experiment repository for the wood surface defect detection study.
 
-The accepted CMC paper focused on detector-family comparison, protocol breadth, and source-to-target transfer. This repository intentionally uses a different research question: keep the detector fixed as YOLOv8s, then evaluate whether data-centric changes improve defect detection and reduce false positives on negative wood images.
+This study focuses on a research question: keep the detector fixed as YOLOv8s, then evaluate whether data-centric changes improve defect detection and reduce false positives on negative wood images.
 
 ## Research Focus
 
