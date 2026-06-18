@@ -116,6 +116,3 @@ python3 scripts/run_negative_eval.py   --checkpoint results/runs/vn_t0_yolov8s_b
 
 Outputs are written under `results/negative_eval/` and summarized in `docs/negative_aware_evaluation.md`.
 
-## Next Step
-
-Next planned step is Prompt 6.5: set up and verify the Vast.ai server with an RTX 3090 24GB instance. Do not start full training until server setup, data paths, CUDA, YOLO import, and dry-run validation pass.
