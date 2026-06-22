@@ -288,18 +288,32 @@ def resolve_image_path(raw: dict[str, Any], image_index: dict[str, Path]) -> Pat
     if raw_path.exists():
         return raw_path
 
-    image_id = str(raw.get("image_id") or "").strip().replace("\\", "/")
-    candidates = [image_id]
-    if image_id:
-        candidates.append(str(Path(image_id).with_suffix("")))
-        candidates.append(Path(image_id).name)
-        candidates.append(Path(image_id).stem)
-    raw_name = raw_path.name
-    raw_stem = raw_path.stem
-    if raw_name:
-        candidates.append(raw_name)
-    if raw_stem:
-        candidates.append(raw_stem)
+    candidates: list[str] = []
+
+    def add_path_candidates(value: Any) -> None:
+        text = str(value or "").strip().replace("\\", "/")
+        if not text:
+            return
+        path = Path(text)
+        path_variants = [path]
+        parts = path.parts
+        if parts and parts[0] == "images" and len(parts) > 1:
+            # Manifests may store image paths as images/<split>/..., while the
+            # configured images root already points at the images/ directory.
+            path_variants.append(Path(*parts[1:]))
+        for variant in path_variants:
+            variant_text = variant.as_posix()
+            candidates.append(variant_text)
+            if variant.suffix:
+                candidates.append(variant.with_suffix("").as_posix())
+            if variant.name:
+                candidates.append(variant.name)
+            if variant.stem:
+                candidates.append(variant.stem)
+
+    add_path_candidates(raw.get("image_id"))
+    add_path_candidates(raw.get("image_path"))
+
     for key in candidates:
         if key in image_index:
             return image_index[key]
