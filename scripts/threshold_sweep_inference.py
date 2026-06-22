@@ -95,9 +95,21 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Optional fixed VNWoodKnot dataset YAML. Defaults to each run's config_used.yaml data_yaml.",
     )
+    parser.add_argument(
+        "--variant-data-yaml",
+        action="append",
+        default=[],
+        metavar="VARIANT=PATH",
+        help=(
+            "Per-variant dataset YAML override, e.g. "
+            "a1_crop=/workspace/data/vnwoodknot/.../dataset.yaml. "
+            "Takes precedence over --data-yaml and run config data_yaml."
+        ),
+    )
     parser.add_argument("--variants", nargs="+", default=list(VARIANTS))
     parser.add_argument("--seeds", nargs="+", type=int, default=list(SEEDS))
     parser.add_argument("--conf", type=float, default=0.01, help="Low base confidence used to export candidate detections.")
+    parser.add_argument("--iou", type=float, default=0.7, help="NMS IoU threshold used during prediction export.")
     parser.add_argument("--imgsz", type=int, default=1024)
     parser.add_argument("--batch", type=int, default=32)
     parser.add_argument("--max-det", type=int, default=300)
@@ -156,7 +168,7 @@ def run_single_checkpoint(args: argparse.Namespace) -> None:
         print(f"Existing output; use --overwrite to replace: {output_path}")
         return
 
-    data_yaml = resolve_data_yaml(run_dir, args.data_yaml)
+    data_yaml = resolve_data_yaml(run_dir, args.data_yaml, parse_variant_data_yamls(args.variant_data_yaml), variant)
     records, class_names = load_yolo_test_records(data_yaml)
     predictions_by_key = predict_records(
         checkpoint=checkpoint,
@@ -166,6 +178,7 @@ def run_single_checkpoint(args: argparse.Namespace) -> None:
         batch=args.batch,
         max_det=args.max_det,
         conf=args.conf,
+        iou=args.iou,
         device=args.device,
     )
 
@@ -258,6 +271,8 @@ def run_job(gpu_id: str, args: argparse.Namespace, job: InferenceJob, state: "Ru
         str(args.output_dir),
         "--conf",
         str(args.conf),
+        "--iou",
+        str(args.iou),
         "--imgsz",
         str(args.imgsz),
         "--batch",
@@ -271,6 +286,8 @@ def run_job(gpu_id: str, args: argparse.Namespace, job: InferenceJob, state: "Ru
         command.append("--overwrite")
     if args.data_yaml:
         command.extend(["--data-yaml", str(args.data_yaml)])
+    for item in args.variant_data_yaml:
+        command.extend(["--variant-data-yaml", str(item)])
 
     env = os.environ.copy()
     env["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
@@ -290,7 +307,25 @@ def run_job(gpu_id: str, args: argparse.Namespace, job: InferenceJob, state: "Ru
     print_progress(count, job, gpu_id, status if status == "ok" else error, started, finished)
 
 
-def resolve_data_yaml(run_dir: Path, override: Path | None) -> Path:
+def parse_variant_data_yamls(items: list[str]) -> dict[str, Path]:
+    mapping: dict[str, Path] = {}
+    for item in items:
+        if "=" not in item:
+            raise ValueError(f"--variant-data-yaml must be VARIANT=PATH, got: {item}")
+        variant, path_text = item.split("=", 1)
+        variant = variant.strip()
+        if not variant:
+            raise ValueError(f"Missing variant in --variant-data-yaml: {item}")
+        mapping[variant] = Path(path_text).expanduser()
+    return mapping
+
+
+def resolve_data_yaml(run_dir: Path, override: Path | None, variant_overrides: dict[str, Path] | None = None, variant: str | None = None) -> Path:
+    if variant and variant_overrides and variant in variant_overrides:
+        path = variant_overrides[variant].expanduser().resolve()
+        if not path.exists():
+            raise FileNotFoundError(f"Variant dataset YAML for {variant} does not exist: {path}")
+        return path
     if override is not None:
         path = override.expanduser().resolve()
         if not path.exists():
@@ -357,6 +392,7 @@ def predict_records(
     batch: int,
     max_det: int,
     conf: float,
+    iou: float,
     device: str,
 ) -> dict[str, list[dict[str, Any]]]:
     try:
@@ -374,6 +410,7 @@ def predict_records(
             stream=True,
             imgsz=int(imgsz),
             conf=float(conf),
+            iou=float(iou),
             max_det=int(max_det),
             device=str(device),
             batch=len(batch_records),
