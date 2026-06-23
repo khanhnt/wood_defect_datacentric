@@ -6,10 +6,14 @@ The analysis uses the corrected common-evaluation prediction JSON files emitted 
 ``--run-inference`` to export them first from the seed checkpoints.
 
 Outputs:
+- calibration_records.csv
 - per_detection_records.csv
 - calibration_per_seed.csv
 - calibration_summary.csv
 - reliability_bins.csv
+- clean_max_confidence_per_image.csv
+- clean_max_confidence_summary.csv
+- clean_max_confidence_cdf.{pdf,png}
 - reliability_curve.{pdf,png}
 """
 
@@ -36,7 +40,7 @@ VARIANT_LABELS = {
     "baseline": "Baseline",
     "p2_illumination": "P2 illumination",
     "a1_crop": "A1 crop",
-    "a2_colorjitter": "A2 color jitter",
+    "a2_colorjitter": "A2 colour jitter",
     "p4_a4_combined": "P4+A4 combined",
 }
 VARIANT_ORDER = {variant: index for index, variant in enumerate(VARIANT_LABELS)}
@@ -110,7 +114,13 @@ def main() -> None:
         min_conf=float(args.conf),
         bins=int(args.bins),
     )
+    clean_max_rows, clean_max_per_seed_rows, clean_max_summary_rows, clean_max_cdf_rows = compute_clean_max_confidence(
+        prediction_sets,
+        min_conf=float(args.conf),
+    )
+    summary_rows = merge_clean_max_into_summary(summary_rows, clean_max_summary_rows)
 
+    write_csv(records, output_dir / "calibration_records.csv", REQUESTED_RECORD_FIELDS)
     write_csv(records, output_dir / "per_detection_records.csv", REQUESTED_RECORD_FIELDS)
     write_csv(per_seed_rows, output_dir / "calibration_per_seed.csv")
     write_csv(summary_rows, output_dir / "calibration_summary.csv")
@@ -118,9 +128,15 @@ def main() -> None:
     write_csv(knotfree_rows, output_dir / "knotfree_confidence_per_seed.csv")
     write_csv(knotfree_summary_rows, output_dir / "knotfree_confidence_summary.csv")
     write_csv(knotfree_hist_rows, output_dir / "knotfree_confidence_bins.csv")
+    write_csv(clean_max_rows, output_dir / "clean_max_confidence_per_image.csv")
+    write_csv(clean_max_per_seed_rows, output_dir / "clean_max_confidence_per_seed.csv")
+    write_csv(clean_max_summary_rows, output_dir / "clean_max_confidence_summary.csv")
+    write_csv(clean_max_cdf_rows, output_dir / "clean_max_confidence_cdf.csv")
     plot_reliability(reliability_rows, output_dir)
     plot_knotfree_confidence(knotfree_hist_rows, output_dir)
+    plot_clean_max_confidence_cdf(clean_max_cdf_rows, output_dir)
 
+    print(f"Wrote: {output_dir / 'calibration_records.csv'}")
     print(f"Wrote: {output_dir / 'per_detection_records.csv'}")
     print(f"Wrote: {output_dir / 'calibration_per_seed.csv'}")
     print(f"Wrote: {output_dir / 'calibration_summary.csv'}")
@@ -128,12 +144,19 @@ def main() -> None:
     print(f"Wrote: {output_dir / 'knotfree_confidence_per_seed.csv'}")
     print(f"Wrote: {output_dir / 'knotfree_confidence_summary.csv'}")
     print(f"Wrote: {output_dir / 'knotfree_confidence_bins.csv'}")
+    print(f"Wrote: {output_dir / 'clean_max_confidence_per_image.csv'}")
+    print(f"Wrote: {output_dir / 'clean_max_confidence_per_seed.csv'}")
+    print(f"Wrote: {output_dir / 'clean_max_confidence_summary.csv'}")
+    print(f"Wrote: {output_dir / 'clean_max_confidence_cdf.csv'}")
     print(f"Wrote: {output_dir / 'reliability_curve.pdf'}")
     print(f"Wrote: {output_dir / 'reliability_curve.png'}")
     print(f"Wrote: {output_dir / 'knotfree_confidence_histogram.pdf'}")
     print(f"Wrote: {output_dir / 'knotfree_confidence_histogram.png'}")
+    print(f"Wrote: {output_dir / 'clean_max_confidence_cdf.pdf'}")
+    print(f"Wrote: {output_dir / 'clean_max_confidence_cdf.png'}")
     print_summary(summary_rows)
     print_knotfree_summary(knotfree_summary_rows)
+    print_clean_max_summary(clean_max_summary_rows)
 
 
 def resolve_predictions_dir(args: argparse.Namespace, output_dir: Path) -> Path:
@@ -435,6 +458,125 @@ def summarize_per_seed(per_seed_rows: list[dict[str, Any]]) -> list[dict[str, An
     return output
 
 
+def compute_clean_max_confidence(
+    prediction_sets: list[dict[str, Any]],
+    *,
+    min_conf: float,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Summarize the maximum prediction confidence per knot-free image.
+
+    This is the confidence statistic a deployment threshold must exceed to keep a
+    clean image quiet. Images with no exported detections receive max_confidence=0.
+    """
+
+    per_image_rows: list[dict[str, Any]] = []
+    for prediction_set in prediction_sets:
+        variant = str(prediction_set["variant"])
+        seed = int(prediction_set["seed"])
+        for image in prediction_set["images"]:
+            if not bool(image.get("is_knot_free", False)):
+                continue
+            confidences = [
+                float(prediction.get("conf", 0.0))
+                for prediction in image.get("predictions", [])
+                if float(prediction.get("conf", 0.0)) >= min_conf
+            ]
+            max_confidence = max(confidences) if confidences else 0.0
+            per_image_rows.append(
+                {
+                    "variant": variant,
+                    "variant_label": VARIANT_LABELS.get(variant, variant),
+                    "seed": seed,
+                    "image_id": str(image.get("canonical_id") or image.get("image") or image.get("image_path")),
+                    "num_predictions": len(confidences),
+                    "max_confidence": format_float(max_confidence),
+                }
+            )
+
+    grouped_seed: dict[tuple[str, int], list[dict[str, Any]]] = defaultdict(list)
+    for row in per_image_rows:
+        grouped_seed[(str(row["variant"]), int(row["seed"]))].append(row)
+
+    per_seed_rows: list[dict[str, Any]] = []
+    for (variant, seed), rows in sorted(grouped_seed.items(), key=lambda item: (variant_sort_key(item[0][0]), item[0][1])):
+        max_values = np.asarray([parse_float(row["max_confidence"]) for row in rows], dtype=np.float64)
+        pred_counts = np.asarray([parse_float(row["num_predictions"]) for row in rows], dtype=np.float64)
+        per_seed_rows.append(
+            {
+                "variant": variant,
+                "variant_label": VARIANT_LABELS.get(variant, variant),
+                "seed": seed,
+                "num_knotfree_images": len(rows),
+                "images_with_predictions": int(np.sum(pred_counts > 0)) if len(pred_counts) else 0,
+                "mean_max_confidence": format_float(float(np.mean(max_values)) if len(max_values) else float("nan")),
+                "p90_max_confidence": format_float(float(np.percentile(max_values, 90)) if len(max_values) else float("nan")),
+                "p95_max_confidence": format_float(float(np.percentile(max_values, 95)) if len(max_values) else float("nan")),
+                "max_of_max_confidence": format_float(float(np.max(max_values)) if len(max_values) else float("nan")),
+            }
+        )
+
+    grouped_variant: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in per_seed_rows:
+        grouped_variant[str(row["variant"])].append(row)
+
+    summary_rows: list[dict[str, Any]] = []
+    for variant, rows in sorted(grouped_variant.items(), key=lambda item: variant_sort_key(item[0])):
+        output_row: dict[str, Any] = {
+            "variant": variant,
+            "variant_label": VARIANT_LABELS.get(variant, variant),
+            "n_seeds": len(rows),
+            "seeds": " ".join(str(row["seed"]) for row in sorted(rows, key=lambda value: int(value["seed"]))),
+        }
+        for metric in (
+            "num_knotfree_images",
+            "images_with_predictions",
+            "mean_max_confidence",
+            "p90_max_confidence",
+            "p95_max_confidence",
+            "max_of_max_confidence",
+        ):
+            values = [parse_float(row[metric]) for row in rows]
+            output_row[f"{metric}_mean"] = format_float(mean(values))
+            output_row[f"{metric}_std"] = format_float(std(values))
+        summary_rows.append(output_row)
+
+    cdf_rows: list[dict[str, Any]] = []
+    grouped_images: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in per_image_rows:
+        grouped_images[str(row["variant"])].append(row)
+    for variant, rows in sorted(grouped_images.items(), key=lambda item: variant_sort_key(item[0])):
+        max_values = np.asarray(sorted(parse_float(row["max_confidence"]) for row in rows), dtype=np.float64)
+        total = len(max_values)
+        for index, value in enumerate(max_values, start=1):
+            cdf_rows.append(
+                {
+                    "variant": variant,
+                    "variant_label": VARIANT_LABELS.get(variant, variant),
+                    "max_confidence": format_float(float(value)),
+                    "cdf": format_float(index / total if total else float("nan")),
+                    "n_images": total,
+                }
+            )
+    return per_image_rows, per_seed_rows, summary_rows, cdf_rows
+
+
+def merge_clean_max_into_summary(
+    calibration_rows: list[dict[str, Any]],
+    clean_max_summary_rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    clean_by_variant = {str(row["variant"]): row for row in clean_max_summary_rows}
+    merged_rows: list[dict[str, Any]] = []
+    for row in calibration_rows:
+        merged = dict(row)
+        clean = clean_by_variant.get(str(row["variant"]), {})
+        for key, value in clean.items():
+            if key in {"variant", "variant_label", "n_seeds", "seeds"}:
+                continue
+            merged[f"clean_{key}"] = value
+        merged_rows.append(merged)
+    return merged_rows
+
+
 def compute_knotfree_confidence(
     prediction_sets: list[dict[str, Any]],
     *,
@@ -621,6 +763,52 @@ def plot_knotfree_confidence(hist_rows: list[dict[str, Any]], output_dir: Path) 
     plt.close(fig)
 
 
+def plot_clean_max_confidence_cdf(cdf_rows: list[dict[str, Any]], output_dir: Path) -> None:
+    os.environ.setdefault("MPLCONFIGDIR", str(output_dir / ".matplotlib"))
+    try:
+        import matplotlib.pyplot as plt
+    except ImportError:
+        print("WARNING: matplotlib not installed; skipping clean max-confidence CDF.")
+        return
+
+    colors = {
+        "baseline": "#4C78A8",
+        "p2_illumination": "#54A24B",
+        "a1_crop": "#E45756",
+        "a2_colorjitter": "#B279A2",
+        "p4_a4_combined": "#F58518",
+    }
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in cdf_rows:
+        grouped[str(row["variant"])].append(row)
+    if not grouped:
+        return
+
+    fig, ax = plt.subplots(figsize=(5.4, 3.8))
+    for variant in sorted(grouped, key=variant_sort_key):
+        rows = sorted(grouped[variant], key=lambda value: parse_float(value["max_confidence"]))
+        x = [0.0] + [parse_float(row["max_confidence"]) for row in rows]
+        y = [0.0] + [parse_float(row["cdf"]) for row in rows]
+        ax.plot(
+            x,
+            y,
+            color=colors.get(variant),
+            linewidth=1.8,
+            drawstyle="steps-post",
+            label=VARIANT_LABELS.get(variant, variant),
+        )
+    ax.set_xlim(0.0, 0.55)
+    ax.set_ylim(0.0, 1.01)
+    ax.set_xlabel("Per-clean-image maximum confidence")
+    ax.set_ylabel("CDF")
+    ax.grid(True, color="0.86", linewidth=0.7)
+    ax.legend(loc="lower right", frameon=True, fontsize=8)
+    fig.tight_layout()
+    fig.savefig(output_dir / "clean_max_confidence_cdf.pdf", bbox_inches="tight")
+    fig.savefig(output_dir / "clean_max_confidence_cdf.png", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
 def write_csv(rows: list[dict[str, Any]], path: Path, fieldnames: list[str] | None = None) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if fieldnames is None:
@@ -665,6 +853,18 @@ def print_knotfree_summary(summary_rows: list[dict[str, Any]]) -> None:
             f"{parse_float(row['knotfree_images_with_predictions_mean']):5.1f}             "
             f"{parse_float(row['mean_predictions_per_knotfree_image_mean']):.3f}              "
             f"{parse_float(row['mean_confidence_mean']):.3f}"
+        )
+
+
+def print_clean_max_summary(summary_rows: list[dict[str, Any]]) -> None:
+    print("\nClean-wood per-image maximum confidence")
+    print("Variant              mean max conf      p90 max conf      p95 max conf")
+    for row in summary_rows:
+        print(
+            f"{row['variant_label']:<20s} "
+            f"{parse_float(row['mean_max_confidence_mean']):.3f}±{parse_float(row['mean_max_confidence_std']):.3f}        "
+            f"{parse_float(row['p90_max_confidence_mean']):.3f}±{parse_float(row['p90_max_confidence_std']):.3f}        "
+            f"{parse_float(row['p95_max_confidence_mean']):.3f}±{parse_float(row['p95_max_confidence_std']):.3f}"
         )
 
 
