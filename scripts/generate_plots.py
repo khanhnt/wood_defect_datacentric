@@ -30,6 +30,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--data-dir", type=Path, default=Path("results/negative_aware"))
     parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--dpi", type=int, default=300)
+    parser.add_argument(
+        "--annotate-operating-points",
+        action="store_true",
+        help="Annotate zero-FP operating points with variant names and recall values.",
+    )
     return parser.parse_args()
 
 
@@ -51,7 +56,15 @@ def main() -> None:
     paths = []
     paths.extend(plot_detection_performance(summary_rows, output_dir, dpi=args.dpi))
     paths.extend(plot_false_positive_behavior(summary_rows, output_dir, dpi=args.dpi))
-    paths.extend(plot_operational_selection(summary_rows, sweet_spots, output_dir, dpi=args.dpi))
+    paths.extend(
+        plot_operational_selection(
+            summary_rows,
+            sweet_spots,
+            output_dir,
+            dpi=args.dpi,
+            annotate_operating_points=args.annotate_operating_points,
+        )
+    )
     for path in paths:
         print(f"Wrote: {path}")
 
@@ -133,40 +146,46 @@ def plot_false_positive_behavior(rows: list[dict[str, str]], output_dir: Path, *
     return save_figure(fig, output_dir / "false_positive_behavior_vs_threshold", dpi=dpi)
 
 
-def plot_operational_selection(rows: list[dict[str, str]], sweet_spots: list[dict[str, str]], output_dir: Path, *, dpi: int) -> list[Path]:
+def plot_operational_selection(
+    rows: list[dict[str, str]],
+    sweet_spots: list[dict[str, str]],
+    output_dir: Path,
+    *,
+    dpi: int,
+    annotate_operating_points: bool = False,
+) -> list[Path]:
     import matplotlib.pyplot as plt
 
     by_variant = group_by_variant(rows)
     sweet_by_variant = {row["variant"]: row for row in sweet_spots}
     colors = variant_colors()
-    fig, axis_recall = plt.subplots(figsize=(7.0, 3.0))
+    fig, axis_recall = plt.subplots(figsize=(7.2, 3.25))
     axis_fp = axis_recall.twinx()
 
     recall_handles = []
-    fp_handles = []
     for variant, variant_rows in by_variant.items():
         color = colors[variant]
         x = [parse_float(row["threshold"]) for row in variant_rows]
         recall = [parse_float(row["recall_mean"]) for row in variant_rows]
         fp_rate = [parse_float(row["fp_image_rate_mean"]) for row in variant_rows]
         recall_line = axis_recall.plot(x, recall, color=color, linewidth=1.6, marker="o", markersize=2.5, label=VARIANT_LABELS.get(variant, variant))[0]
-        fp_line = axis_fp.plot(x, fp_rate, color=color, linewidth=1.2, linestyle="--", alpha=0.85)[0]
+        axis_fp.plot(x, fp_rate, color=color, linewidth=1.2, linestyle="--", alpha=0.85)
         recall_handles.append(recall_line)
-        fp_handles.append(fp_line)
 
         sweet = sweet_by_variant.get(variant)
         if sweet and sweet.get("zero_fp_threshold"):
             threshold = parse_float(sweet["zero_fp_threshold"])
             recall_value = parse_float(sweet["recall_at_that_threshold"])
-            axis_recall.scatter([threshold], [recall_value], s=34, color=color, edgecolor="black", linewidth=0.4, zorder=5)
-            axis_recall.annotate(
-                f"{VARIANT_LABELS.get(variant, variant)}\nR={recall_value:.2f}",
-                xy=(threshold, recall_value),
-                xytext=(4, 5),
-                textcoords="offset points",
-                fontsize=7,
-                color=color,
-            )
+            axis_recall.scatter([threshold], [recall_value], s=38, color=color, edgecolor="black", linewidth=0.5, zorder=5)
+            if annotate_operating_points:
+                axis_recall.annotate(
+                    f"{VARIANT_LABELS.get(variant, variant)}\nR={recall_value:.2f}",
+                    xy=(threshold, recall_value),
+                    xytext=(4, 5),
+                    textcoords="offset points",
+                    fontsize=7,
+                    color=color,
+                )
 
     axis_recall.set_xlabel("Confidence threshold")
     axis_recall.set_ylabel("Recall")
@@ -174,9 +193,24 @@ def plot_operational_selection(rows: list[dict[str, str]], sweet_spots: list[dic
     axis_recall.set_ylim(0.0, 1.02)
     axis_fp.set_ylim(bottom=0.0)
     axis_recall.set_xlim(0.05, 0.95)
-    axis_recall.legend(handles=recall_handles, loc="lower left", frameon=False, title="Recall")
-    axis_fp.legend(handles=fp_handles[:1], labels=["FP rate"], loc="upper right", frameon=False)
-    fig.tight_layout()
+    axis_recall.legend(
+        handles=recall_handles,
+        loc="upper right",
+        frameon=True,
+        framealpha=0.92,
+        edgecolor="0.85",
+        title="Variant",
+    )
+    fig.text(
+        0.08,
+        0.06,
+        "Note: solid lines = recall; dashed lines = FP image rate; black-edged markers = zero-FP operating point.",
+        ha="left",
+        va="bottom",
+        fontsize=7,
+        color="0.25",
+    )
+    fig.subplots_adjust(left=0.08, right=0.91, bottom=0.25, top=0.95)
     return save_figure(fig, output_dir / "operational_selection_recall_fp_tradeoff", dpi=dpi)
 
 
