@@ -222,6 +222,7 @@ def prepare_eval_yamls(args: argparse.Namespace, specs: list[VariantSpec]) -> di
             preprocessing=spec.preprocessing,
             output_root=args.eval_dataset_root.expanduser().resolve() / spec.dataset / spec.preprocessing,
             overwrite=bool(args.overwrite_eval_datasets),
+            splits=tuple(args.splits),
         )
 
     eval_yamls: dict[tuple[str, str], Path] = {}
@@ -233,7 +234,14 @@ def prepare_eval_yamls(args: argparse.Namespace, specs: list[VariantSpec]) -> di
     return eval_yamls
 
 
-def materialize_preprocessed_eval_dataset(*, source_yaml: Path, preprocessing: str, output_root: Path, overwrite: bool) -> Path:
+def materialize_preprocessed_eval_dataset(
+    *,
+    source_yaml: Path,
+    preprocessing: str,
+    output_root: Path,
+    overwrite: bool,
+    splits: tuple[str, ...],
+) -> Path:
     dataset_yaml = output_root / "dataset.yaml"
     if dataset_yaml.exists() and not overwrite:
         return dataset_yaml.resolve()
@@ -250,6 +258,8 @@ def materialize_preprocessed_eval_dataset(*, source_yaml: Path, preprocessing: s
         "jpg",
         "--jpg-quality",
         "95",
+        "--splits",
+        *splits,
     ]
     if overwrite:
         command.append("--overwrite")

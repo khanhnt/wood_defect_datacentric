@@ -39,6 +39,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--image-format", choices=("png", "jpg"), default="png")
     parser.add_argument("--jpg-quality", type=int, default=95)
+    parser.add_argument(
+        "--splits",
+        nargs="+",
+        choices=SPLITS,
+        default=list(SPLITS),
+        help="Dataset splits to materialize. Defaults to train val test.",
+    )
     return parser.parse_args()
 
 
@@ -67,7 +74,8 @@ def main() -> None:
         "warnings": [],
     }
 
-    for split in SPLITS:
+    requested_splits = tuple(args.splits)
+    for split in requested_splits:
         source_images_dir = resolve_split_dir(source_yaml, source, split)
         if source_images_dir is None or not source_images_dir.exists():
             report["warnings"].append(f"Missing split {split}: {source_images_dir}")
