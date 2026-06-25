@@ -22,7 +22,7 @@ augmentation/     Defect-preserving augmentation variants
 evaluation/       Negative-aware object detection evaluation
 scripts/          CLI entry points and dry-run launchers
 results/          Generated outputs; ignored by git except .gitkeep
-docs/             Audit notes, variant notes, and handoff context
+docs/             Dataset, transform, evaluation, and server run notes
 ```
 
 ## Setup
@@ -85,9 +85,9 @@ Run one experiment only after the server sanity check passes and the YOLO `datas
 python3 scripts/launch_yolo_experiment.py   --experiment-config configs/experiments/vn_t0_yolov8s_baseline_e50.yaml   --execute
 ```
 
-Run folders are written to `results/runs/<experiment_id>/` and store the resolved config, command, training log, validation status, validation metrics placeholder or parsed metrics, and expected checkpoint path.
+Run folders are written to `results/runs/<experiment_id>/` and store the resolved config, command, training log, validation status, parsed metrics when available, and expected checkpoint path.
 
-## Phase 1 Multi-GPU Multiseed Runs
+## Multi-GPU Multiseed Runs
 
 The Vast.ai two-GPU workflow for batch-size probing and the 36-job multiseed
 queue is documented in `docs/PHASE1_GPU_OPTIMIZATION_RUNBOOK.md`.
@@ -115,4 +115,3 @@ python3 scripts/run_negative_eval.py   --checkpoint results/runs/vn_t0_yolov8s_b
 ```
 
 Outputs are written under `results/negative_eval/` and summarized in `docs/negative_aware_evaluation.md`.
-

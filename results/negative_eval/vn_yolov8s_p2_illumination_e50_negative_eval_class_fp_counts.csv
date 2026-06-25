@@ -1,6 +1,0 @@
-threshold,class_name,false_positive_count_on_knot_free
-0.1,dead_knot,1
-0.1,live_knot,1
-0.25,,0
-0.5,,0
-0.75,,0

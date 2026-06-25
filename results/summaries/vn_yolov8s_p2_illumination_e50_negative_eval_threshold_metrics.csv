@@ -1,5 +1,0 @@
-threshold,AP50,mAP50_95,precision,recall,tp50,fp50,fn50,num_images,num_predictions,num_targets,num_knot_free_images,false_positive_images_knot_free,false_positive_image_rate_knot_free,mean_predictions_per_knot_free_image,mean_confidence_false_predictions_knot_free
-0.1,0.797453,0.407142,0.470395,0.922581,143,161,12,229,304,155,75,2,0.026667,0.026667,0.142308
-0.25,0.759837,0.389053,0.580786,0.858065,133,96,22,229,229,155,75,0,0.0,0.0,0.0
-0.5,0.549994,0.299525,0.855769,0.574194,89,15,66,229,104,155,75,0,0.0,0.0,0.0
-0.75,0.210526,0.150292,0.969697,0.206452,32,1,123,229,33,155,75,0,0.0,0.0,0.0

@@ -34,11 +34,16 @@ Thumbs.db
 
 # Generated outputs and training artifacts
 /results/
+/results [0-9]*/
 /runs/
 /weights/
 /checkpoints/
 /artifacts/
 /outputs/
+/tmp/
+/figures/
+/manuscript/
+export_test_best_v2.py
 *.log
 *.pt
 *.pth

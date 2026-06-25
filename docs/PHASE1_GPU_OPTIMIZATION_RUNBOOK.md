@@ -1,7 +1,7 @@
 # Phase 1 GPU Optimization and Parallel Launcher Runbook
 
-This runbook is for the Vast.ai server. Do not run the training commands on the
-local Codex development machine.
+This runbook is for the Vast.ai server. Do not run the training commands on a
+local workstation.
 
 ## Scope
 

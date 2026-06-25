@@ -122,7 +122,7 @@ Inspect preview images before running data-centric variants.
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python scripts/server_setup_sanity.py \
-  --output-dir results/server_setup_prompt_6_5_vast \
+  --output-dir results/server_setup_sanity_vast \
   --write-launcher-dry-run
 ```
 
@@ -131,7 +131,7 @@ This safely dry-runs:
 - `vsb_yolov8s_baseline_e50`
 - `vn_t0_yolov8s_baseline_e50`
 
-The dry-run metadata is kept under `results/server_setup_prompt_6_5_vast/` so it does not occupy real training run folders.
+The dry-run metadata is kept under `results/server_setup_sanity_vast/` so it does not occupy real training run folders.
 
 ## 9. Start tmux
 

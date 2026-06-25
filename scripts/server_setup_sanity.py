@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prompt 6.5 server setup and dataset sanity checks.
+"""Server setup and dataset sanity checks.
 
 This script is intentionally verification-only. It does not train models,
 materialize datasets, alter source datasets, or overwrite the standard project
@@ -56,7 +56,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=PROJECT_ROOT / "results" / "server_setup_prompt_6_5",
+        default=PROJECT_ROOT / "results" / "server_setup_sanity",
     )
     parser.add_argument(
         "--write-launcher-dry-run",

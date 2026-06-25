@@ -272,7 +272,7 @@ def write_empty_vn_test_summary_if_missing(results_dir: Path) -> None:
         print(f"Found existing VNWoodKnot test summary: {path}")
         return
     write_summary_csv(path, [])
-    print(f"WARNING: no VNWoodKnot test metrics found; wrote empty placeholder: {path}")
+    print(f"WARNING: no VNWoodKnot test metrics found; wrote empty CSV: {path}")
 
 
 def print_summary_table(dataset: str, rows: list[dict[str, str]]) -> None:

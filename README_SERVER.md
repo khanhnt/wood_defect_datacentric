@@ -87,7 +87,7 @@ PYTHONDONTWRITEBYTECODE=1 python scripts/materialize_yolo_from_manifest.py \
   --link-mode symlink
 ```
 
-For VSB, prefer an existing curated split. If the manifest has no split labels and you need a temporary server-ready YOLO folder, create a deterministic random split:
+For VSB, prefer an existing curated split. If the manifest has no split labels and you need a server-ready YOLO folder, create a deterministic random split:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python scripts/materialize_yolo_from_manifest.py \
@@ -139,11 +139,11 @@ Review the generated panels before training data-centric variants.
 
 ## 9. Run Baseline Dry-Runs
 
-Use the safe Prompt 6.5 sanity helper so dry-run metadata is kept away from real training run folders:
+Run the server sanity helper so dry-run metadata is kept away from real training run folders:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python scripts/server_setup_sanity.py \
-  --output-dir results/server_setup_prompt_6_5_vast \
+  --output-dir results/server_setup_sanity_vast \
   --write-launcher-dry-run
 ```
 

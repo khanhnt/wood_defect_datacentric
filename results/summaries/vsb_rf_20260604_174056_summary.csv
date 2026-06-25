@@ -1,5 +1,0 @@
-experiment_id,status,best_epoch,precision,recall,mAP50,mAP50-95
-vsb_rf_20260604_174056_a2_colorjitter_e50,ok,45,0.78305,0.78492,0.82523,0.47424
-vsb_rf_20260604_174056_baseline_e50,not_available_dry_run,,,,,
-vsb_rf_20260604_174056_p1_clahe_e50,ok,35,0.71148,0.67286,0.71923,0.36734
-vsb_rf_20260604_174056_p3_unsharp_e50,ok,46,0.79631,0.78185,0.82885,0.48229

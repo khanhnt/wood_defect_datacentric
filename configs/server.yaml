@@ -1,6 +1,5 @@
 server:
   profile: vast_rtx3090_24gb
-  prompt: "6.5_server_setup_and_sanity_verification"
   expected_gpu:
     model_contains: "RTX 3090"
     min_vram_gb: 24
@@ -48,4 +47,4 @@ training_recommendation:
   initial_batch_rtx3090_24gb: 16
   fallback_batch_if_oom: 8
   batch_to_try_after_successful_probe: 24
-  notes: "Start at batch 16 for Prompt 7, then increase only after a short single-experiment probe confirms VRAM headroom."
+  notes: "Start conservatively, then increase only after a short single-experiment probe confirms VRAM headroom."

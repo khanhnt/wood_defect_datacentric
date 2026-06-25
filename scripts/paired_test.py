@@ -13,7 +13,7 @@ Reads per-seed final-epoch mAP50 from:
   results/multiseed/{dataset}/per_seed/runs/{variant}_seed{seed}/ultralytics/train/results.csv
 Use the SAME column the paper tables use (final-epoch metrics/mAP50(B)).
 
-Fill the [TODO] p-values in main.tex from this script's output.
+Use the printed values when paired tests are reported in the manuscript.
 """
 import os, glob, csv, math, argparse
 from itertools import combinations
@@ -24,7 +24,7 @@ DATASETS = {
     "vsb_rarefirst": ["baseline","p1_clahe","p2_illumination","p3_unsharp",
                       "a1_crop","a2_colorjitter","p4_a4_combined"],
 }
-# Ultralytics column name for mAP50 (verify in your results.csv header)
+# Accepted Ultralytics column names for mAP50.
 MAP50_COL_CANDIDATES = ["metrics/mAP50(B)", "metrics/mAP_0.5", "metrics/mAP50"]
 
 def read_final_map50(results_csv):
