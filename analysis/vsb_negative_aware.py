@@ -69,6 +69,10 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=Path("/workspace/data/main_dataset/manifest.jsonl"))
     parser.add_argument("--images-root", type=Path, default=Path("/workspace/data/main_dataset/images"))
+    parser.add_argument("--clean-images-root", type=Path, default=None, help="Directory containing raw VSB defect-free source images.")
+    parser.add_argument("--clean-ids-file", type=Path, default=Path("configs/datasets/vsb_clean_source_ids.txt"))
+    parser.add_argument("--clean-tile-size", type=int, default=1024)
+    parser.add_argument("--clean-tile-overlap", type=int, default=128)
     parser.add_argument("--rare-first-manifest", type=Path, default=Path("/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first/manifest.jsonl"))
     parser.add_argument("--rare-first-yaml", type=Path, default=Path("/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/dataset.yaml"))
     parser.add_argument("--eval-map", type=Path, default=Path("results/corrected_common_eval_fixed/corrected_eval_dataset_map.csv"))
@@ -159,6 +163,9 @@ def print_reuse_report() -> None:
 
 
 def build_clean_yolo_dataset(args: argparse.Namespace) -> dict[str, Any]:
+    if args.clean_images_root is not None:
+        return build_clean_yolo_dataset_from_images(args)
+
     manifest = args.manifest.expanduser().resolve()
     images_root = args.images_root.expanduser().resolve()
     clean_output_root = args.clean_output_root.expanduser().resolve()
@@ -264,6 +271,203 @@ def build_clean_yolo_dataset(args: argparse.Namespace) -> dict[str, Any]:
     return report
 
 
+def build_clean_yolo_dataset_from_images(args: argparse.Namespace) -> dict[str, Any]:
+    clean_images_root = args.clean_images_root.expanduser().resolve()
+    clean_output_root = args.clean_output_root.expanduser().resolve()
+    ids_file = args.clean_ids_file.expanduser().resolve()
+    if not clean_images_root.exists():
+        raise SystemExit(f"Missing clean images root: {clean_images_root}")
+    if not ids_file.exists():
+        raise SystemExit(f"Missing VSB clean source ID file: {ids_file}")
+    clean_ids = load_clean_ids(ids_file)
+    candidates = find_clean_source_images(clean_images_root, clean_ids)
+    if not candidates:
+        raise SystemExit(f"No images in {clean_images_root} matched IDs from {ids_file}")
+
+    leakage = leakage_check_image_sources(set(candidates), args)
+    dataset_yaml = clean_output_root / "dataset.yaml"
+    reuse_existing = dataset_yaml.exists() and not args.overwrite_clean_set
+    materialized_rows: list[dict[str, Any]] = []
+    if reuse_existing:
+        existing_images = [
+            path
+            for path in (clean_output_root / "images" / "test").rglob("*")
+            if path.suffix.lower() in IMAGE_EXTENSIONS
+        ]
+        print(f"Reusing existing clean YOLO dataset: {dataset_yaml} ({len(existing_images)} test images)")
+    else:
+        prepare_output(clean_output_root, overwrite=bool(args.overwrite_clean_set))
+        materialized_rows = materialize_clean_images_from_root(
+            candidates=candidates,
+            output_root=clean_output_root,
+            tile_size=int(args.clean_tile_size),
+            overlap=int(args.clean_tile_overlap),
+            link_mode=str(args.link_mode),
+        )
+        dataset_yaml = write_clean_dataset_yaml(clean_output_root)
+        write_csv(materialized_rows, clean_output_root / "clean_materialized_samples.csv")
+
+    source_counts = {source_id: len(paths) for source_id, paths in candidates.items()}
+    report = {
+        "source": "clean_images_root",
+        "clean_images_root": str(clean_images_root),
+        "clean_ids_file": str(ids_file),
+        "output_root": str(clean_output_root),
+        "dataset_yaml": str(dataset_yaml),
+        "link_mode": args.link_mode,
+        "tile_size": int(args.clean_tile_size),
+        "tile_overlap": int(args.clean_tile_overlap),
+        "num_clean_ids": len(clean_ids),
+        "num_clean_source_images": len(candidates),
+        "num_clean_source_files": sum(len(paths) for paths in candidates.values()),
+        "num_clean_tiles": count_yolo_images(clean_output_root / "images" / "test") if reuse_existing else len(materialized_rows),
+        "source_split_tile_counts": {"test": count_yolo_images(clean_output_root / "images" / "test") if reuse_existing else len(materialized_rows)},
+        "missing_source_ids": sorted(clean_ids - set(candidates))[:100],
+        "num_missing_source_ids": len(clean_ids - set(candidates)),
+        "duplicate_source_file_counts": {key: value for key, value in sorted(source_counts.items()) if value > 1},
+        "leakage": leakage,
+        "note": "Clean set was materialized from raw defect-free VSB source images listed by empty annotation files.",
+    }
+    write_json(report, clean_output_root / "clean_set_report.json")
+    return report
+
+
+def load_clean_ids(path: Path) -> set[str]:
+    ids = {normalize_identifier(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()}
+    if not ids:
+        raise SystemExit(f"No clean source IDs found in: {path}")
+    return ids
+
+
+def find_clean_source_images(root: Path, clean_ids: set[str]) -> dict[str, list[Path]]:
+    candidates: dict[str, list[Path]] = defaultdict(list)
+    for path in sorted(item for item in root.rglob("*") if item.is_file() and item.suffix.lower() in IMAGE_EXTENSIONS):
+        source_id = clean_source_id_from_path(path)
+        if source_id in clean_ids:
+            candidates[source_id].append(path)
+    return dict(candidates)
+
+
+def clean_source_id_from_path(path: Path) -> str:
+    stem = path.stem
+    stripped = strip_tile_suffix(stem)
+    if stripped != stem:
+        stem = stripped
+    return normalize_identifier(stem.split("__", 1)[0])
+
+
+def materialize_clean_images_from_root(
+    *,
+    candidates: dict[str, list[Path]],
+    output_root: Path,
+    tile_size: int,
+    overlap: int,
+    link_mode: str,
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for source_id, paths in sorted(candidates.items()):
+        for source_path in sorted(paths):
+            if is_pre_tiled_name(source_path):
+                rel_image = Path("clean") / source_path.name
+                target_image = output_root / "images" / "test" / rel_image
+                target_label = output_root / "labels" / "test" / rel_image.with_suffix(".txt")
+                mat_yolo.place_image(source_path, target_image, mode=link_mode)
+                mat_yolo.write_label_file(target_label, [])
+                rows.append(
+                    {
+                        "source_id": source_id,
+                        "source_image": str(source_path),
+                        "target_image": str(target_image),
+                        "target_label": str(target_label),
+                        "tile_origin_x": "",
+                        "tile_origin_y": "",
+                        "mode": "linked_existing_tile",
+                    }
+                )
+                continue
+            rows.extend(
+                tile_clean_source_image(
+                    source_id=source_id,
+                    source_path=source_path,
+                    output_root=output_root,
+                    tile_size=tile_size,
+                    overlap=overlap,
+                )
+            )
+    return rows
+
+
+def tile_clean_source_image(
+    *,
+    source_id: str,
+    source_path: Path,
+    output_root: Path,
+    tile_size: int,
+    overlap: int,
+) -> list[dict[str, Any]]:
+    import cv2
+
+    image = cv2.imread(str(source_path), cv2.IMREAD_COLOR)
+    if image is None:
+        raise SystemExit(f"Could not read clean image: {source_path}")
+    height, width = image.shape[:2]
+    if height < tile_size or width < tile_size:
+        raise SystemExit(f"Clean image is smaller than tile size {tile_size}: {source_path} ({width}x{height})")
+    rows: list[dict[str, Any]] = []
+    for y in tile_positions(height, tile_size, overlap):
+        for x in tile_positions(width, tile_size, overlap):
+            tile = image[y : y + tile_size, x : x + tile_size]
+            rel_image = Path("clean") / f"{source_path.stem}__x{x:04d}_y{y:04d}{source_path.suffix.lower()}"
+            target_image = output_root / "images" / "test" / rel_image
+            target_label = output_root / "labels" / "test" / rel_image.with_suffix(".txt")
+            target_image.parent.mkdir(parents=True, exist_ok=True)
+            target_label.parent.mkdir(parents=True, exist_ok=True)
+            if target_image.suffix.lower() in {".jpg", ".jpeg"}:
+                ok = cv2.imwrite(str(target_image), tile, [int(cv2.IMWRITE_JPEG_QUALITY), 97])
+            else:
+                ok = cv2.imwrite(str(target_image), tile)
+            if not ok:
+                raise SystemExit(f"Could not write clean tile: {target_image}")
+            mat_yolo.write_label_file(target_label, [])
+            rows.append(
+                {
+                    "source_id": source_id,
+                    "source_image": str(source_path),
+                    "target_image": str(target_image),
+                    "target_label": str(target_label),
+                    "tile_origin_x": x,
+                    "tile_origin_y": y,
+                    "mode": "tiled_raw_source",
+                    "source_width": width,
+                    "source_height": height,
+                }
+            )
+    return rows
+
+
+def tile_positions(length: int, tile_size: int, overlap: int) -> list[int]:
+    if length <= tile_size:
+        return [0]
+    stride = tile_size - overlap
+    if stride <= 0:
+        raise SystemExit(f"Invalid tile overlap {overlap}; must be smaller than tile size {tile_size}")
+    positions = list(range(0, length - tile_size + 1, stride))
+    last = length - tile_size
+    if positions[-1] != last:
+        positions.append(last)
+    return positions
+
+
+def is_pre_tiled_name(path: Path) -> bool:
+    return bool(SOURCE_TILE_RE.match(path.stem))
+
+
+def count_yolo_images(path: Path) -> int:
+    if not path.exists():
+        return 0
+    return sum(1 for item in path.rglob("*") if item.is_file() and item.suffix.lower() in IMAGE_EXTENSIONS)
+
+
 def leakage_check(clean_rows: list[tuple[dict[str, Any], Path]], args: argparse.Namespace) -> dict[str, Any]:
     clean_sources = {source_key(row) for row, _ in clean_rows}
     clean_tiles = {tile_key(row) for row, _ in clean_rows}
@@ -285,6 +489,31 @@ def leakage_check(clean_rows: list[tuple[dict[str, Any], Path]], args: argparse.
         "test_tile_overlap": len(clean_tiles & test_tiles),
         "source_overlap_examples": source_overlap[:20],
         "tile_overlap_examples": tile_overlap[:20],
+    }
+
+
+def leakage_check_image_sources(clean_sources: set[str], args: argparse.Namespace) -> dict[str, Any]:
+    rare_sources_by_split, rare_tiles_by_split = load_rare_first_membership(args)
+    train_val_sources = set().union(*(rare_sources_by_split.get(split, set()) for split in ("train", "val")))
+    test_sources = rare_sources_by_split.get("test", set())
+    train_val_source_basenames = {basename_identifier(item) for item in train_val_sources}
+    test_source_basenames = {basename_identifier(item) for item in test_sources}
+    source_overlap = sorted(clean_sources & train_val_source_basenames)
+    test_overlap = sorted(clean_sources & test_source_basenames)
+    train_val_tiles = set().union(*(rare_tiles_by_split.get(split, set()) for split in ("train", "val")))
+    return {
+        "clean_source_images": len(clean_sources),
+        "clean_tiles": 0,
+        "rare_train_val_source_images": len(train_val_sources),
+        "rare_train_val_tiles": len(train_val_tiles),
+        "train_val_source_overlap": len(source_overlap),
+        "train_val_tile_overlap": 0,
+        "test_source_overlap": len(test_overlap),
+        "test_tile_overlap": 0,
+        "source_overlap_examples": source_overlap[:20],
+        "tile_overlap_examples": [],
+        "test_source_overlap_examples": test_overlap[:20],
+        "note": "Source overlap compares clean image basenames against VSB rare-first source basenames.",
     }
 
 
@@ -869,6 +1098,10 @@ def strip_tile_suffix(value: str) -> str:
 
 def normalize_identifier(value: str) -> str:
     return str(value).replace("\\", "/").strip().lower().strip("/")
+
+
+def basename_identifier(value: str) -> str:
+    return normalize_identifier(Path(str(value).replace("\\", "/")).stem)
 
 
 def clean_relative_image_path(row: dict[str, Any], source_image: Path, images_root: Path) -> Path:
