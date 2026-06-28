@@ -595,6 +595,7 @@ def export_predictions(
             raise SystemExit(f"Class names differ for {variant}: positive={pos_classes}, clean={clean_classes}")
         if tuple(pos_classes) != VSB_CLASSES:
             class_names = tuple(pos_classes)
+        pos_records = [record for record in pos_records if not record.is_knot_free]
         clean_records = [record for record in clean_records if record.is_knot_free]
         if not clean_records:
             raise SystemExit(f"No empty-label clean records for {variant}: {clean_eval_yamls[variant]}")
@@ -815,7 +816,7 @@ def load_vsb_prediction_sets(predictions_dir: Path, args: argparse.Namespace) ->
     for item in prediction_sets:
         key = (str(item["variant"]), int(item["seed"]))
         if key in wanted:
-            output.append(item)
+            output.append(filter_strict_vsb_clean_images(item))
     found = {(str(item["variant"]), int(item["seed"])) for item in output}
     missing = sorted(wanted - found, key=lambda item: (variant_order(item[0], args.variants), item[1]))
     if missing and not args.allow_missing:
@@ -826,6 +827,36 @@ def load_vsb_prediction_sets(predictions_dir: Path, args: argparse.Namespace) ->
         gt = sum(len(image.get("gt_boxes", [])) for image in positive)
         print(f"Prediction set {item['variant']}_seed{item['seed']}: positive={len(positive)} clean={len(negative)} gt={gt}")
     return sorted(output, key=prediction_sort_key)
+
+
+def filter_strict_vsb_clean_images(prediction_set: dict[str, Any]) -> dict[str, Any]:
+    images = []
+    dropped_empty = 0
+    for image in prediction_set.get("images", []):
+        is_empty = bool(image.get("is_knot_free", False))
+        if not is_empty:
+            images.append(image)
+            continue
+        image_path = str(image.get("image_path", ""))
+        if is_strict_clean_image_path(image_path):
+            images.append(image)
+        else:
+            dropped_empty += 1
+    if dropped_empty:
+        print(
+            f"Filtered {dropped_empty} non-strict empty rare-first tiles from "
+            f"{prediction_set['variant']}_seed{prediction_set['seed']}"
+        )
+    updated = dict(prediction_set)
+    updated["images"] = images
+    updated["num_images"] = len(images)
+    updated["num_positive_images"] = sum(1 for image in images if not bool(image.get("is_knot_free", False)))
+    updated["num_knot_free_images"] = sum(1 for image in images if bool(image.get("is_knot_free", False)))
+    return updated
+
+
+def is_strict_clean_image_path(image_path: str) -> bool:
+    return "/vsb_clean_wood_yolo/" in image_path or "/vsb_clean/" in image_path
 
 
 def evaluate_retained(prediction_set: dict[str, Any], *, threshold: float, iou_threshold: float) -> dict[str, Any]:
