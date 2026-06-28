@@ -30,10 +30,34 @@ Thumbs.db
 
 # Datasets and generated data. Keep source data out of GitHub.
 /datasets/
-/data/
+/data/*
+!/data/README.md
+!/data/prepare_vsb.py
+!/data/prepare_vnwoodknot.py
+!/data/processed/
+!/data/processed/*.jsonl
+!/data/vnwoodknot_split/
+!/data/vnwoodknot_split/**
+!/data/vsb_rarefirst_split/
+!/data/vsb_rarefirst_split/**
+!/data/vsb_clean_manifest/
+!/data/vsb_clean_manifest/**
+!/data/raw/
+!/data/raw/.gitkeep
+!/data/splits/
+!/data/splits/.gitkeep
 
 # Generated outputs and training artifacts
-/results/
+/results/*
+!/results/.gitkeep
+!/results/tables/
+!/results/tables/**
+!/results/figures/
+!/results/figures/**
+!/results/per_seed/
+!/results/per_seed/README.md
+!/results/_deprecated/
+!/results/_deprecated/README.md
 /results [0-9]*/
 /runs/
 /weights/
@@ -41,7 +65,9 @@ Thumbs.db
 /artifacts/
 /outputs/
 /tmp/
-/figures/
+/figures/*
+!/figures/*.pdf
+!/figures/*.png
 /manuscript/
 export_test_best_v2.py
 *.log

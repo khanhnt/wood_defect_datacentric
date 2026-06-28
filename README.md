@@ -1,117 +1,101 @@
-# Wood Defect Data-Centric Experiments
+# Beyond mAP: Negative-Aware Evaluation of Data-Centric Wood Knot Detection
 
-Independent experiment repository for the wood surface defect detection study.
+This repository contains the code, configurations, public-release manifests, tables, and figures for the IEEE Access paper:
 
-This study focuses on a research question: keep the detector fixed as YOLOv8s, then evaluate whether data-centric changes improve defect detection and reduce false positives on negative wood images.
+> Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection
 
-## Research Focus
+The study keeps the detector fixed as YOLOv8s and evaluates data-centric preprocessing and augmentation choices on two wood-defect datasets. The central result is that standard mAP alone hides operational differences that appear when false alarms on clean wood are measured explicitly.
 
-- Fixed detector: YOLOv8s.
-- Data-centric variants: defect-preserving preprocessing and augmentation.
-- Negative-aware evaluation: VNWoodKnot `knot_free` false positives and threshold sensitivity.
-- Datasets: VSB curated benchmark and VNWoodKnot, reused with the existing train/val/test splits.
+## What Is Included
 
-## Structure
+- Training and evaluation scripts for YOLOv8s experiments.
+- Variant configs for baseline, P1 CLAHE, P2 illumination normalization, P3 unsharp masking, A1 defect-preserving crop, A2 texture-aware colour jitter, and P4+A4 combined.
+- Split and tiling manifests needed to reconstruct the benchmark datasets from the original raw datasets.
+- CSV/JSON files behind the paper tables in `results/tables/`.
+- Final figure PDFs in `figures/` and mirrored figure assets in `results/figures/`.
+- Reproducibility commands in `REPRODUCE.md`.
 
-```text
-configs/          Experiment, preprocessing, augmentation, and project configs
-data/processed/   Small manifest metadata copied for independent audits
-datasets/         Dataset adapters and statistics helpers
-preprocessing/    Safe image preprocessing variants
-augmentation/     Defect-preserving augmentation variants
-evaluation/       Negative-aware object detection evaluation
-scripts/          CLI entry points and dry-run launchers
-results/          Generated outputs; ignored by git except .gitkeep
-docs/             Dataset, transform, evaluation, and server run notes
-```
+Raw images, YOLO materialized datasets, checkpoints, and large per-seed prediction JSON files are not committed to GitHub.
 
-## Setup
+## Datasets
+
+The raw datasets must be obtained from their original sources:
+
+- VNWoodKnot: Data in Brief, DOI `10.1016/j.dib.2025.112039`.
+- VSB/Kodytek large-scale wood surface defects: F1000Research, DOI `10.12688/f1000research.52903.x`.
+
+The VSB clean-wood set contains 1,992 defect-free source images identified by empty `*_anno.txt` files. These are tiled at 1024 px with 128 px overlap into 5,976 clean tiles. See `data/README.md`.
+
+## Environment
+
+The paper runs used:
+
+- Python 3.12
+- PyTorch 2.6.0 with CUDA 12.4 on the original Vast.ai instance for training
+- Ultralytics 8.4.60
+- 2x NVIDIA RTX 3090, 24 GB VRAM each
+- Seeds 42, 43, 44
+- Image size 1024
+- Batch size 40
+- 50 epochs
+
+Install:
 
 ```bash
-python3 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env
 ```
 
-The `.env` file is optional for local audit scripts, but useful on Vast.ai for overriding YOLO `dataset.yaml` paths.
+For CUDA-enabled PyTorch, install the wheel matching your driver from the official PyTorch index before installing the remaining requirements.
 
-## Smoke Test
+## Quick Reproduction Without Retraining
+
+The release tables can be regenerated from the released CSV/JSON artifacts:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/smoke_test.py
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/smoke_test.py --strict-optional
+python analysis/plot_ap50_vs_tolerance.py
+python scripts/release_integrity_check.py
 ```
 
-The default smoke test checks core imports and expected folders. `--strict-optional` also enforces CV/evaluation dependencies after `pip install -r requirements.txt`. It does not train models.
-
-## Dataset Audit
+If the large per-seed prediction JSON archive is downloaded separately, the corrected negative-aware analyses can be rerun without retraining:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/dataset_stats.py
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/verify_splits.py
+python analysis/retained_metrics.py
+python analysis/vsb_negative_aware.py --skip-inference --bootstrap-samples 10000
 ```
 
-The audit scripts are read-only. They preserve configured splits, retain negative/background-only images, and write reports under `results/` and `docs/`.
+See `REPRODUCE.md` for the full paper-artifact map.
 
-## Preview Preprocessing and Augmentation
+## Training From Scratch
+
+Full multiseed training is optional and GPU-intensive. The original experiments used the queue launcher:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/preview_preprocessing.py --dataset vnwoodknot --split test --num-samples 4
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/preview_augmentation.py --dataset vnwoodknot --split test --num-samples 4
+python scripts/run_all_experiments.py --batch-size 40 --gpus 0,1 --dataset all
 ```
 
-These previews do not alter original datasets. They write visual samples under `results/preprocessing_preview/` and `results/augmentation_preview/`.
+This runs 36 jobs: 15 VNWoodKnot jobs and 21 VSB rare-first jobs across seeds 42, 43, and 44. The launcher pins each job to one GPU with `CUDA_VISIBLE_DEVICES`.
 
-## YOLOv8s Training Pipeline
+## Main Analysis Entry Points
 
-Experiment configs live in `configs/experiments/`; the run list is `configs/experiment_matrix.csv`. The launcher is safe by default and only trains when `--execute` is explicitly provided.
+- `analysis/retained_metrics.py`: retained recall/AP50 at zero-FP operating points.
+- `analysis/vsb_negative_aware.py`: VSB clean-wood negative-aware analysis.
+- `analysis/inference_cost.py`: latency, model size, and preprocessing overhead.
+- `analysis/plot_ap50_vs_tolerance.py`: AP50-vs-FP-tolerance figure.
+- `scripts/threshold_analysis.py`: shared threshold-sweep and AP calculations.
+- `scripts/evaluate_corrected_common.py`: fair common-evaluation mapping.
 
-Dry-run all experiments, including optional copy-paste:
+## Integrity Check
+
+Run before release:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/launch_yolo_experiment.py   --matrix configs/experiment_matrix.csv   --dry-run   --include-optional
+python scripts/release_integrity_check.py
 ```
 
-Dry-run one experiment strictly:
+The check verifies paper-table values within rounding, strict VSB clean denominator 5,976, zero VSB clean leakage, the deprecated 6,252-denominator note, and absence of personal absolute paths or credential-like strings in tracked release files.
 
-```bash
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/launch_yolo_experiment.py   --matrix configs/experiment_matrix.csv   --experiment-id vn_t0_yolov8s_baseline_e50   --dry-run   --strict
-```
+## Citation
 
-Run one experiment only after the server sanity check passes and the YOLO `dataset.yaml` exists:
-
-```bash
-python3 scripts/launch_yolo_experiment.py   --experiment-config configs/experiments/vn_t0_yolov8s_baseline_e50.yaml   --execute
-```
-
-Run folders are written to `results/runs/<experiment_id>/` and store the resolved config, command, training log, validation status, parsed metrics when available, and expected checkpoint path.
-
-## Multi-GPU Multiseed Runs
-
-The Vast.ai two-GPU workflow for batch-size probing and the 36-job multiseed
-queue is documented in `docs/PHASE1_GPU_OPTIMIZATION_RUNBOOK.md`.
-
-Key entry points:
-
-```bash
-python scripts/batch_size_test.py
-python scripts/run_all_experiments.py --batch-size 32 --gpus 0,1 --dry-run
-bash scripts/setup_fresh_run.sh --timestamp
-```
-
-## Negative-Aware Evaluation
-
-Run threshold-sensitive VNWoodKnot evaluation from an existing prediction JSONL:
-
-```bash
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/run_negative_eval.py   --predictions-jsonl /path/to/predictions.jsonl   --experiment-name vn_t0_negative_eval   --split test
-```
-
-Run from a YOLO checkpoint when predictions are not already exported:
-
-```bash
-python3 scripts/run_negative_eval.py   --checkpoint results/runs/vn_t0_yolov8s_baseline_e50/ultralytics/train/weights/best.pt   --experiment-name vn_t0_yolov8s_baseline_e50_negative_eval   --split test   --save-predictions
-```
-
-Outputs are written under `results/negative_eval/` and summarized in `docs/negative_aware_evaluation.md`.
+Please cite the paper and this repository. A repository citation template is provided in `CITATION.cff`.

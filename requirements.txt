@@ -1,7 +1,10 @@
-numpy
-pandas
-pillow
-pyyaml
-opencv-python-headless
-ultralytics
-matplotlib
+# Python 3.12 was used for the reported experiments.
+torch==2.6.0
+torchvision==0.21.0
+ultralytics==8.4.60
+numpy==2.1.1
+pandas==2.2.3
+opencv-python-headless==4.10.0.84
+Pillow==11.0.0
+PyYAML==6.0.2
+matplotlib==3.10.0

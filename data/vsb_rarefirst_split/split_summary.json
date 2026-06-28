@@ -1,0 +1,11 @@
+{
+  "note": "The full train/val/test rare-first manifest is reconstructed with data/prepare_vsb.py from the source manifest. This file records the held-out test tiles used by released prediction JSONs.",
+  "test_tiles": 972,
+  "test_positive_tiles": 696,
+  "test_empty_tiles": 276,
+  "known_full_split_counts": {
+    "train": 7679,
+    "val": 977,
+    "test": 972
+  }
+}

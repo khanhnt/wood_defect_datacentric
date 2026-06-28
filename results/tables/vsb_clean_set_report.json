@@ -1,0 +1,35 @@
+{
+  "source": "clean_images_root",
+  "clean_images_root": "/workspace/data/clean_data",
+  "clean_ids_file": "/workspace/wood_defect_datacentric/configs/datasets/vsb_clean_source_ids.txt",
+  "output_root": "/workspace/data/main_dataset/benchmarks/vsb_clean_wood_yolo",
+  "dataset_yaml": "/workspace/data/main_dataset/benchmarks/vsb_clean_wood_yolo/dataset.yaml",
+  "link_mode": "symlink",
+  "tile_size": 1024,
+  "tile_overlap": 128,
+  "num_clean_ids": 1992,
+  "num_clean_source_images": 1992,
+  "num_clean_source_files": 1992,
+  "num_clean_tiles": 5976,
+  "source_split_tile_counts": {
+    "test": 5976
+  },
+  "missing_source_ids": [],
+  "num_missing_source_ids": 0,
+  "duplicate_source_file_counts": {},
+  "leakage": {
+    "clean_source_images": 1992,
+    "clean_tiles": 0,
+    "rare_train_val_source_images": 11896,
+    "rare_train_val_tiles": 8656,
+    "train_val_source_overlap": 0,
+    "train_val_tile_overlap": 0,
+    "test_source_overlap": 0,
+    "test_tile_overlap": 0,
+    "source_overlap_examples": [],
+    "tile_overlap_examples": [],
+    "test_source_overlap_examples": [],
+    "note": "Source overlap compares clean image basenames against VSB rare-first source basenames."
+  },
+  "note": "Clean set was materialized from raw defect-free VSB source images listed by empty annotation files."
+}

@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this code or released analysis artifacts, please cite the paper and this repository."
+title: "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection"
+type: software
+authors:
+  - family-names: Nguyen
+    given-names: Thanh Khanh
+repository-code: "https://github.com/khanhnt/wood_defect_datacentric"
+url: "https://github.com/khanhnt/wood_defect_datacentric"
+license: MIT
+version: "1.0.0"
+date-released: "2026-06-28"
+abstract: "Code, manifests, tables, and figures for a data-centric YOLOv8s wood-knot detection study with negative-aware evaluation."
+preferred-citation:
+  type: article
+  title: "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection"
+  authors:
+    - family-names: Nguyen
+      given-names: Thanh Khanh
+  journal: "IEEE Access"
+  year: 2026
+  doi: "TBD"
