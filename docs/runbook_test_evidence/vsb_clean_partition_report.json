@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "seed": 42,
+  "ratio": "996/996 (50/50 by source ID)",
+  "selection_source_count": 996,
+  "final_test_source_count": 996,
+  "source_overlap": 0,
+  "tiles_per_source": 3,
+  "selection_tiles_per_variant": 2988,
+  "final_test_tiles_per_variant": 2988,
+  "variant_counts": {
+    "baseline": {"val": 2988, "test": 2988},
+    "p1_clahe": {"val": 2988, "test": 2988},
+    "p2_illumination": {"val": 2988, "test": 2988},
+    "p3_unsharp": {"val": 2988, "test": 2988},
+    "a1_crop": {"val": 2988, "test": 2988},
+    "a2_colorjitter": {"val": 2988, "test": 2988},
+    "p4_a4_combined": {"val": 2988, "test": 2988}
+  },
+  "mode": "hardlink",
+  "reason": "Equal source-level halves balance threshold-selection precision and final-test power while keeping all tiles from one board in one partition."
+}

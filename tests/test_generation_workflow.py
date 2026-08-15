@@ -3,11 +3,20 @@ import json
 from pathlib import Path
 import tempfile
 
+import numpy as np
+import yaml
+
 from scripts.run_all_experiments import build_jobs, job_completed
 from scripts.split_vsb_clean_sources import partition_source_ids
 from scripts.stage_deprecated_checkpoints import DATASETS as DEPRECATED_DATASETS
 from scripts.stage_deprecated_checkpoints import SEEDS as DEPRECATED_SEEDS
 from scripts.stage_deprecated_checkpoints import VARIANTS as DEPRECATED_VARIANTS
+from scripts.verify_prediction_map_reproduction import (
+    box_iou,
+    confidence_greedy_match,
+    ultralytics_match,
+)
+from scripts.write_generation_provenance import environment
 
 
 class GenerationQueueTest(unittest.TestCase):
@@ -60,6 +69,28 @@ class GenerationQueueTest(unittest.TestCase):
             len(DEPRECATED_DATASETS) * len(DEPRECATED_VARIANTS) * len(DEPRECATED_SEEDS),
             18,
         )
+
+    def test_provenance_environment_is_yaml_serializable(self) -> None:
+        values = environment()
+        self.assertTrue(all(isinstance(value, str) for value in values.values()))
+        yaml.safe_dump(values)
+
+    def test_prediction_reproduction_matchers_accept_saved_export_shapes(self) -> None:
+        labels = np.asarray([[0.0, 0.0, 1.0, 1.0]], dtype=np.float32)
+        predictions = np.asarray(
+            [[0.0, 0.0, 1.0, 1.0], [2.0, 2.0, 3.0, 3.0]],
+            dtype=np.float32,
+        )
+        iou = box_iou(labels, predictions)
+        pred_classes = np.asarray([0.0, 0.0], dtype=np.float32)
+        true_classes = np.asarray([0.0], dtype=np.float32)
+        confidences = np.asarray([0.9, 0.8], dtype=np.float32)
+        primary = ultralytics_match(pred_classes, true_classes, iou)
+        alternate = confidence_greedy_match(pred_classes, true_classes, iou, confidences)
+        self.assertEqual(primary.shape, (2, 10))
+        self.assertTrue(np.array_equal(primary, alternate))
+        self.assertTrue(primary[0].all())
+        self.assertFalse(primary[1].any())
 
 
 if __name__ == "__main__":

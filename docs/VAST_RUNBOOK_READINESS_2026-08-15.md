@@ -56,33 +56,34 @@ and result transfer so diagnosis can continue offline.
 
 | Component | Status |
 |---|---|
-| `scripts/verify_generation_runtime.py` | Implemented; CLI smoke-tested |
-| `scripts/generation_checkpoint_registry.py` | Implemented; CLI smoke-tested |
-| `scripts/build_generation_eval_map.py` | Implemented; CLI smoke-tested |
-| `scripts/verify_prediction_map_reproduction.py` | Implemented; CLI smoke-tested |
-| `scripts/write_generation_provenance.py` | Implemented; CLI smoke-tested |
-| `scripts/generation_status.py` | Implemented; CLI smoke-tested |
-| `scripts/relocate_dataset_yamls.py` | Implemented; CLI smoke-tested |
-| `scripts/build_minimal_transfer_manifest.py` | Implemented; CLI smoke-tested |
+| `scripts/verify_generation_runtime.py` | Implemented; compile/CLI-tested; full gate is Vast-only |
+| `scripts/generation_checkpoint_registry.py` | Implemented; real Mac staging/registry test |
+| `scripts/build_generation_eval_map.py` | Implemented; real rebuilt-tree test |
+| `scripts/verify_prediction_map_reproduction.py` | Implemented; matcher unit-tested; full AP check is post-inference |
+| `scripts/write_generation_provenance.py` | Implemented; synthetic main+deprecated end-to-end test |
+| `scripts/generation_status.py` | Implemented; empty pre-training log tested |
+| `scripts/relocate_dataset_yamls.py` | Implemented; 33 real YAML copies tested |
+| `scripts/build_minimal_transfer_manifest.py` | Implemented; real 306,138-file manifest test |
 | `scripts/split_vsb_clean_sources.py` | Implemented; full Mac integration-tested |
 | `scripts/stage_deprecated_checkpoints.py` | Implemented; 18/18 Mac integration-tested |
-| `scripts/compare_deprecated_checkpoints.py` | Implemented; CLI smoke-tested |
-| `run_all_experiments.py --job-set corrected24` | Implemented; queue unit-tested |
-| `threshold_sweep_inference.py --split` | Implemented; CLI smoke-tested |
+| `scripts/compare_deprecated_checkpoints.py` | Implemented; synthetic three-seed integration test |
+| `run_all_experiments.py --job-set corrected24` | Implemented; queue unit-tested and 24-job dry run |
+| `threshold_sweep_inference.py --split` | Implemented; mapped validation dry run |
 
 Missing requested scripts/features: none.
 
 Tests completed on Mac:
 
 - Python compile check for the changed workflow scripts.
-- Eight unit tests passed.
+- Ten unit tests passed.
 - Eleven new script CLIs passed `--help` smoke tests.
 - VSB clean source split passed on the real rebuilt trees for all seven variants.
 - Deprecated staging passed for all 18 archived checkpoints with matching source and
   staged SHA-256 values.
 
-GPU-dependent full evaluation, prediction export, and provenance assembly remain to be
-run on Vast because the new generation does not yet exist.
+GPU-dependent full evaluation and prediction export remain to be run on Vast because
+the new generation does not yet exist. Provenance assembly itself passed a synthetic
+end-to-end Mac test; its final artifact set still depends on those Vast outputs.
 
 ## Transfer order
 

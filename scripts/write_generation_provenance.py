@@ -61,7 +61,7 @@ def environment() -> dict[str, str]:
     try:
         import torch
 
-        versions["torch_version"] = torch.__version__
+        versions["torch_version"] = str(torch.__version__)
         versions["torch_cuda_version"] = str(torch.version.cuda)
     except Exception:
         versions["torch_version"] = "unavailable"
@@ -69,7 +69,7 @@ def environment() -> dict[str, str]:
     try:
         import ultralytics
 
-        versions["ultralytics_version"] = ultralytics.__version__
+        versions["ultralytics_version"] = str(ultralytics.__version__)
     except Exception:
         versions["ultralytics_version"] = "unavailable"
     return versions
