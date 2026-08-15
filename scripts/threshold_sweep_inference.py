@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export low-confidence VNWoodKnot predictions for offline threshold analysis.
+"""Export low-confidence detection predictions for offline threshold analysis.
 
 This script is intended for the Vast.ai GPU server. The parent process only
 queues jobs. Each checkpoint is evaluated in a subprocess with
@@ -12,6 +12,7 @@ import argparse
 import csv
 from dataclasses import dataclass
 from datetime import datetime, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -40,6 +41,14 @@ DEFAULT_DATA_YAML = Path(
 VARIANTS = ("baseline", "p2_illumination", "a1_crop", "a2_colorjitter", "p4_a4_combined")
 SEEDS = (42, 43, 44)
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 RUN_RE = re.compile(r"^(?P<variant>.+)_seed(?P<seed>\d+)$")
 
 
@@ -89,6 +98,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--gpus", default="0,1", help="Comma-separated physical GPU IDs.")
     parser.add_argument("--checkpoint-root", type=Path, default=DEFAULT_CHECKPOINT_ROOT)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--log-dir", type=Path, help="Defaults to OUTPUT_DIR/logs.")
+    parser.add_argument("--dataset-name", default="vnwoodknot")
+    parser.add_argument("--split", choices=("train", "val", "test"), default="test")
     parser.add_argument(
         "--data-yaml",
         type=Path,
@@ -135,7 +147,7 @@ def main() -> None:
 
     gpus = parse_gpus(args.gpus)
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    log_dir = PROJECT_ROOT / "results" / "negative_aware" / "logs"
+    log_dir = (args.log_dir or (args.output_dir / "logs")).expanduser().resolve()
     log_dir.mkdir(parents=True, exist_ok=True)
     run_log = log_dir / "threshold_sweep_inference_log.csv"
     ensure_run_log(run_log)
@@ -145,7 +157,7 @@ def main() -> None:
         work_queue.put(job)
 
     state = RunnerState(run_log=run_log)
-    print(f"Starting {len(jobs)} VNWoodKnot inference jobs on GPUs: {', '.join(gpus)}")
+    print(f"Starting {len(jobs)} {args.dataset_name} {args.split} inference jobs on GPUs: {', '.join(gpus)}")
     print(f"Prediction output: {args.output_dir.resolve()}")
     threads = []
     for gpu_id in gpus:
@@ -169,7 +181,7 @@ def run_single_checkpoint(args: argparse.Namespace) -> None:
         return
 
     data_yaml = resolve_data_yaml(run_dir, args.data_yaml, parse_variant_data_yamls(args.variant_data_yaml), variant)
-    records, class_names = load_yolo_test_records(data_yaml)
+    records, class_names = load_yolo_split_records(data_yaml, args.split)
     predictions_by_key = predict_records(
         checkpoint=checkpoint,
         records=records,
@@ -183,12 +195,15 @@ def run_single_checkpoint(args: argparse.Namespace) -> None:
     )
 
     payload = {
+        "dataset": args.dataset_name,
         "checkpoint": f"{variant}_seed{seed}",
         "variant": variant,
         "seed": seed,
         "checkpoint_path": str(checkpoint),
+        "checkpoint_sha256": sha256(checkpoint),
         "dataset_yaml": str(data_yaml),
-        "split": "test",
+        "dataset_yaml_sha256": sha256(data_yaml),
+        "split": args.split,
         "base_confidence_threshold": float(args.conf),
         "class_names": list(class_names),
         "num_images": len(records),
@@ -261,7 +276,8 @@ def run_job(gpu_id: str, args: argparse.Namespace, job: InferenceJob, state: "Ru
         print_progress(count, job, gpu_id, "skipped_existing", started, finished)
         return
 
-    log_path = PROJECT_ROOT / "results" / "negative_aware" / "logs" / f"{job.job_id}_inference.log"
+    log_dir = (args.log_dir or (args.output_dir / "logs")).expanduser().resolve()
+    log_path = log_dir / f"{job.job_id}_inference.log"
     command = [
         sys.executable,
         str(Path(__file__).resolve()),
@@ -269,6 +285,10 @@ def run_job(gpu_id: str, args: argparse.Namespace, job: InferenceJob, state: "Ru
         str(job.run_dir),
         "--output-dir",
         str(args.output_dir),
+        "--dataset-name",
+        str(args.dataset_name),
+        "--split",
+        str(args.split),
         "--conf",
         str(args.conf),
         "--iou",
@@ -284,6 +304,8 @@ def run_job(gpu_id: str, args: argparse.Namespace, job: InferenceJob, state: "Ru
     ]
     if args.overwrite:
         command.append("--overwrite")
+    if args.log_dir:
+        command.extend(["--log-dir", str(args.log_dir)])
     if args.data_yaml:
         command.extend(["--data-yaml", str(args.data_yaml)])
     for item in args.variant_data_yaml:
@@ -345,23 +367,23 @@ def resolve_data_yaml(run_dir: Path, override: Path | None, variant_overrides: d
     raise FileNotFoundError(f"Could not resolve VNWoodKnot dataset YAML for run: {run_dir}")
 
 
-def load_yolo_test_records(data_yaml: Path) -> tuple[list[TestRecord], tuple[str, ...]]:
+def load_yolo_split_records(data_yaml: Path, split: str) -> tuple[list[TestRecord], tuple[str, ...]]:
     data = yaml.safe_load(data_yaml.read_text(encoding="utf-8")) or {}
     dataset_root = resolve_dataset_root(data_yaml, data)
     class_names = tuple(normalize_names(data.get("names")))
-    test_dirs = resolve_split_dirs(data_yaml, data, "test")
-    if not test_dirs:
-        raise ValueError(f"Dataset YAML has no test split: {data_yaml}")
+    split_dirs = resolve_split_dirs(data_yaml, data, split)
+    if not split_dirs:
+        raise ValueError(f"Dataset YAML has no {split} split: {data_yaml}")
 
     records: list[TestRecord] = []
-    for test_dir in test_dirs:
-        image_paths = sorted(path for path in test_dir.rglob("*") if path.suffix.lower() in IMAGE_EXTENSIONS)
+    for split_dir in split_dirs:
+        image_paths = sorted(path for path in split_dir.rglob("*") if path.suffix.lower() in IMAGE_EXTENSIONS)
         for image_path in image_paths:
-            label_path = label_for_image(image_path, dataset_root=dataset_root, split="test", split_dir=test_dir)
+            label_path = label_for_image(image_path, dataset_root=dataset_root, split=split, split_dir=split_dir)
             with Image.open(image_path) as image:
                 width, height = image.size
             boxes_xyxy, labels = load_yolo_label_file(label_path, width=width, height=height)
-            image_name = relative_image_name(image_path, dataset_root, test_dir)
+            image_name = relative_image_name(image_path, dataset_root, split_dir)
             records.append(
                 TestRecord(
                     image_path=image_path,
@@ -375,12 +397,17 @@ def load_yolo_test_records(data_yaml: Path) -> tuple[list[TestRecord], tuple[str
                 )
             )
     if not records:
-        raise ValueError(f"No test images found from dataset YAML: {data_yaml}")
+        raise ValueError(f"No {split} images found from dataset YAML: {data_yaml}")
     print(
-        f"Loaded test set: images={len(records)} knot_free={sum(record.is_knot_free for record in records)} "
+        f"Loaded {split} set: images={len(records)} empty_label={sum(record.is_knot_free for record in records)} "
         f"dataset={data_yaml}"
     )
     return records, class_names
+
+
+def load_yolo_test_records(data_yaml: Path) -> tuple[list[TestRecord], tuple[str, ...]]:
+    """Compatibility wrapper for existing analysis imports."""
+    return load_yolo_split_records(data_yaml, "test")
 
 
 def predict_records(
@@ -414,6 +441,7 @@ def predict_records(
             max_det=int(max_det),
             device=str(device),
             batch=len(batch_records),
+            augment=False,
             verbose=False,
         )
         for record, result in zip(batch_records, result_iter):

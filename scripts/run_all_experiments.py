@@ -63,8 +63,20 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--gpus", default="0,1", help="Comma-separated physical GPU IDs, e.g. 0,1.")
-    parser.add_argument("--resume", action="store_true", help="Skip jobs that already have best.pt and metrics.")
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Skip complete jobs and resume incomplete jobs from last.pt when available.",
+    )
     parser.add_argument("--dataset", choices=("vnwoodknot", "vsb", "all"), default="all")
+    parser.add_argument(
+        "--job-set",
+        choices=("legacy36", "corrected24", "full42"),
+        default="legacy36",
+        help="legacy36 reproduces the original matrix; corrected24 is the resubmission queue.",
+    )
+    parser.add_argument("--variants", help="Optional comma-separated variant IDs.")
+    parser.add_argument("--seeds", default="42,43,44", help="Comma-separated seeds.")
     parser.add_argument("--dry-run", action="store_true", help="Print the job list without materializing or training.")
     parser.add_argument("--workers", type=int, default=int(os.environ.get("WORKERS", "4")))
     parser.add_argument("--imgsz", type=int, default=1024)
@@ -73,6 +85,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--vsb-yaml", default=os.environ.get("WOOD_DC_VSB_BASELINE_DATASET_YAML", DEFAULT_VSB_YAML))
     parser.add_argument("--vn-yaml", default=os.environ.get("WOOD_DC_VN_BASELINE_DATASET_YAML", DEFAULT_VN_YAML))
     parser.add_argument("--generated-root", default=os.environ.get("GENERATED_DATA_ROOT", DEFAULT_GENERATED_ROOT))
+    parser.add_argument(
+        "--rebuilt-root",
+        type=Path,
+        help="Root of the verified rebuilt tree; when set, existing variant YAMLs are reused.",
+    )
+    parser.add_argument(
+        "--results-root",
+        type=Path,
+        default=PROJECT_ROOT / "results",
+        help="Isolated generation output root.",
+    )
     parser.add_argument("--jpg-quality", type=int, default=95)
     parser.add_argument("--overwrite-materialized", action="store_true")
     return parser.parse_args()
@@ -81,14 +104,19 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     gpu_ids = parse_gpus(args.gpus)
-    jobs = build_jobs(dataset_filter=args.dataset)
+    jobs = build_jobs(
+        dataset_filter=args.dataset,
+        job_set=args.job_set,
+        seeds=parse_seeds(args.seeds),
+        variants=parse_variants(args.variants),
+    )
 
     if args.dry_run:
         print_dry_run(args, jobs, gpu_ids)
         return
 
-    prepare_runtime_dirs()
-    run_log = PROJECT_ROOT / "results" / "gpu_optimization" / "run_log.csv"
+    prepare_runtime_dirs(args)
+    run_log = args.results_root.expanduser().resolve() / "gpu_optimization" / "run_log.csv"
     ensure_run_log(run_log)
 
     print(f"Starting {len(jobs)} jobs on GPUs: {', '.join(gpu_ids)}")
@@ -119,14 +147,48 @@ def parse_gpus(value: str) -> list[str]:
     return gpu_ids
 
 
-def build_jobs(*, dataset_filter: str) -> list[Job]:
+def parse_seeds(value: str) -> tuple[int, ...]:
+    seeds = tuple(int(item.strip()) for item in value.split(",") if item.strip())
+    if not seeds:
+        raise SystemExit("--seeds must contain at least one integer.")
+    return seeds
+
+
+def parse_variants(value: str | None) -> set[str] | None:
+    if not value:
+        return None
+    variants = {item.strip() for item in value.split(",") if item.strip()}
+    return variants or None
+
+
+def build_jobs(
+    *,
+    dataset_filter: str,
+    job_set: str,
+    seeds: tuple[int, ...],
+    variants: set[str] | None,
+) -> list[Job]:
     specs = []
     if dataset_filter in {"vnwoodknot", "all"}:
         specs.extend(vn_specs())
     if dataset_filter in {"vsb", "all"}:
         specs.extend(vsb_specs())
 
-    jobs_without_index = [(spec, seed) for spec in specs for seed in SEEDS]
+    if job_set == "legacy36":
+        specs = [spec for spec in specs if not (spec.dataset == "vnwoodknot" and spec.variant in {"p1_clahe", "p3_unsharp"})]
+    elif job_set == "corrected24":
+        selected = {
+            "vnwoodknot": {"p1_clahe", "p3_unsharp", "a1_crop", "a2_colorjitter", "p4_a4_combined"},
+            "vsb_rarefirst": {"a1_crop", "a2_colorjitter", "p4_a4_combined"},
+        }
+        specs = [spec for spec in specs if spec.variant in selected[spec.dataset]]
+    if variants is not None:
+        unknown = variants - {spec.variant for spec in specs}
+        if unknown:
+            raise SystemExit(f"Variants are not in the selected job set: {', '.join(sorted(unknown))}")
+        specs = [spec for spec in specs if spec.variant in variants]
+
+    jobs_without_index = [(spec, seed) for spec in specs for seed in seeds]
     total = len(jobs_without_index)
     return [Job(spec=spec, seed=seed, index=index + 1, total=total) for index, (spec, seed) in enumerate(jobs_without_index)]
 
@@ -136,11 +198,27 @@ def vn_specs() -> list[VariantSpec]:
         VariantSpec("vnwoodknot", "baseline", "Baseline", Path("configs/experiments/vn_t0_yolov8s_baseline_e50.yaml"), "baseline"),
         VariantSpec(
             "vnwoodknot",
+            "p1_clahe",
+            "P1 CLAHE",
+            Path("configs/experiments/vn_yolov8s_p1_clahe_e50.yaml"),
+            "preprocess",
+            preprocessing="P1_CLAHE_luminance",
+        ),
+        VariantSpec(
+            "vnwoodknot",
             "p2_illumination",
             "P2 illumination",
             Path("configs/experiments/vn_yolov8s_p2_illumination_e50.yaml"),
             "preprocess",
             preprocessing="P2_illumination_normalization",
+        ),
+        VariantSpec(
+            "vnwoodknot",
+            "p3_unsharp",
+            "P3 unsharp",
+            Path("configs/experiments/vn_yolov8s_p3_unsharp_e50.yaml"),
+            "preprocess",
+            preprocessing="P3_mild_unsharp",
         ),
         VariantSpec(
             "vnwoodknot",
@@ -230,7 +308,7 @@ def print_dry_run(args: argparse.Namespace, jobs: list[Job], gpu_ids: list[str])
     print(f"GPUs: {', '.join(gpu_ids)}")
     print(f"Batch size: {args.batch_size}")
     for job in jobs:
-        run_dir = run_dir_for(job)
+        run_dir = run_dir_for(job, args)
         planned_yaml = planned_dataset_yaml(job, args)
         print(
             f"{job.index:02d}/{job.total} | {job.spec.dataset} | {job.spec.variant} | "
@@ -238,13 +316,14 @@ def print_dry_run(args: argparse.Namespace, jobs: list[Job], gpu_ids: list[str])
         )
 
 
-def prepare_runtime_dirs() -> None:
+def prepare_runtime_dirs(args: argparse.Namespace) -> None:
+    results_root = args.results_root.expanduser().resolve()
     for path in [
-        PROJECT_ROOT / "results" / "gpu_optimization" / "job_logs",
-        PROJECT_ROOT / "results" / "gpu_optimization" / "generated_configs",
-        PROJECT_ROOT / "results" / "gpu_optimization" / "materialization_logs",
-        PROJECT_ROOT / "results" / "multiseed" / "vnwoodknot" / "per_seed",
-        PROJECT_ROOT / "results" / "multiseed" / "vsb_rarefirst" / "per_seed",
+        results_root / "gpu_optimization" / "job_logs",
+        results_root / "gpu_optimization" / "generated_configs",
+        results_root / "gpu_optimization" / "materialization_logs",
+        results_root / "multiseed" / "vnwoodknot" / "per_seed",
+        results_root / "multiseed" / "vsb_rarefirst" / "per_seed",
     ]:
         path.mkdir(parents=True, exist_ok=True)
 
@@ -284,10 +363,11 @@ def worker_loop(gpu_id: str, args: argparse.Namespace, work_queue: queue.Queue[J
 
 
 def run_job(gpu_id: str, args: argparse.Namespace, job: Job, state: RunnerState) -> None:
-    run_dir = run_dir_for(job)
+    run_dir = run_dir_for(job, args)
     first_started = utc_now()
+    require_last = args.job_set in {"corrected24", "full42"}
 
-    if args.resume and job_completed(run_dir):
+    if args.resume and job_completed(run_dir, require_last=require_last):
         finished = utc_now()
         row = base_log_row(job, gpu_id, args.batch_size, first_started, finished)
         row.update({"status": "skipped_completed", "mAP50": extract_map50(run_dir), "attempt": 0, "error": ""})
@@ -316,8 +396,16 @@ def run_job(gpu_id: str, args: argparse.Namespace, job: Job, state: RunnerState)
         try:
             data_yaml = ensure_dataset_for_job(job, args, state)
             config_path = write_job_config(job, data_yaml=data_yaml, batch_size=current_batch, args=args, attempt=attempt)
-            log_path = job_log_path(job, attempt=attempt)
-            status, error = launch_training(job, config_path=config_path, gpu_id=gpu_id, log_path=log_path)
+            log_path = job_log_path(job, args=args, attempt=attempt)
+            resume_checkpoint = args.resume and (run_dir / "ultralytics" / "train" / "weights" / "last.pt").exists()
+            status, error = launch_training(
+                job,
+                args=args,
+                config_path=config_path,
+                gpu_id=gpu_id,
+                log_path=log_path,
+                resume=resume_checkpoint,
+            )
             finished = utc_now()
             map50 = extract_map50(run_dir)
             row = base_log_row(job, gpu_id, current_batch, started, finished)
@@ -416,7 +504,7 @@ def materialize_preprocess(job: Job, args: argparse.Namespace, *, output_root: P
     ]
     if args.overwrite_materialized:
         command.append("--overwrite")
-    run_materialization_command(job, command, output_root)
+    run_materialization_command(job, args, command, output_root)
 
 
 def materialize_augment(job: Job, args: argparse.Namespace, *, source_yaml: Path, output_root: Path) -> None:
@@ -437,14 +525,23 @@ def materialize_augment(job: Job, args: argparse.Namespace, *, source_yaml: Path
         "jpg",
         "--jpg-quality",
         str(args.jpg_quality),
+        "--splits",
+        "train",
+        "--passthrough-mode",
+        "hardlink",
     ]
     if args.overwrite_materialized:
         command.append("--overwrite")
-    run_materialization_command(job, command, output_root)
+    run_materialization_command(job, args, command, output_root)
 
 
-def run_materialization_command(job: Job, command: list[str], output_root: Path) -> None:
-    log_dir = PROJECT_ROOT / "results" / "gpu_optimization" / "materialization_logs"
+def run_materialization_command(
+    job: Job,
+    args: argparse.Namespace,
+    command: list[str],
+    output_root: Path,
+) -> None:
+    log_dir = args.results_root.expanduser().resolve() / "gpu_optimization" / "materialization_logs"
     log_dir.mkdir(parents=True, exist_ok=True)
     log_path = log_dir / f"{job.job_id}_{output_root.name}.log"
     env = os.environ.copy()
@@ -462,7 +559,15 @@ def run_materialization_command(job: Job, command: list[str], output_root: Path)
         raise RuntimeError(f"Materialization failed for {job.job_id}. See {log_path}")
 
 
-def launch_training(job: Job, *, config_path: Path, gpu_id: str, log_path: Path) -> tuple[str, str]:
+def launch_training(
+    job: Job,
+    *,
+    args: argparse.Namespace,
+    config_path: Path,
+    gpu_id: str,
+    log_path: Path,
+    resume: bool,
+) -> tuple[str, str]:
     command = [
         sys.executable,
         "scripts/launch_yolo_experiment.py",
@@ -471,6 +576,8 @@ def launch_training(job: Job, *, config_path: Path, gpu_id: str, log_path: Path)
         "--strict",
         "--execute",
     ]
+    if resume:
+        command.append("--resume")
     env = os.environ.copy()
     env["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
     env["DEVICE"] = "0"
@@ -478,7 +585,7 @@ def launch_training(job: Job, *, config_path: Path, gpu_id: str, log_path: Path)
     env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
     log_path.parent.mkdir(parents=True, exist_ok=True)
-    with log_path.open("w", encoding="utf-8") as log_handle:
+    with log_path.open("a" if resume else "w", encoding="utf-8") as log_handle:
         completed = subprocess.run(
             command,
             cwd=PROJECT_ROOT,
@@ -488,7 +595,10 @@ def launch_training(job: Job, *, config_path: Path, gpu_id: str, log_path: Path)
             check=False,
         )
 
-    if completed.returncode == 0 and job_completed(run_dir_for(job)):
+    if completed.returncode == 0 and job_completed(
+        run_dir_for(job, args),
+        require_last=args.job_set in {"corrected24", "full42"},
+    ):
         return "ok", ""
 
     text = log_path.read_text(encoding="utf-8", errors="replace")
@@ -509,10 +619,11 @@ def write_job_config(job: Job, *, data_yaml: Path, batch_size: int, args: argpar
     config["training"]["epochs"] = int(args.epochs)
     config["training"]["workers"] = int(args.workers)
     config["training"]["deterministic"] = True
-    config.setdefault("outputs", {})["output_root"] = str(output_root_for(job.spec.dataset))
+    config["training"]["amp"] = True
+    config.setdefault("outputs", {})["output_root"] = str(output_root_for(job.spec.dataset, args))
     config["description"] = f"{config.get('description', '').strip()} Multiseed {job.spec.dataset} {job.spec.variant} seed {job.seed}."
 
-    config_dir = PROJECT_ROOT / "results" / "gpu_optimization" / "generated_configs"
+    config_dir = args.results_root.expanduser().resolve() / "gpu_optimization" / "generated_configs"
     config_dir.mkdir(parents=True, exist_ok=True)
     path = config_dir / f"{job.job_id}_attempt{attempt}.yaml"
     path.write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8")
@@ -522,6 +633,16 @@ def write_job_config(job: Job, *, data_yaml: Path, batch_size: int, args: argpar
 def planned_dataset_yaml(job: Job, args: argparse.Namespace) -> Path:
     if job.spec.kind == "baseline":
         return base_dataset_yaml(job.spec.dataset, args)
+    if args.rebuilt_root:
+        root = args.rebuilt_root.expanduser().resolve()
+        if job.spec.kind == "preprocess":
+            return root / "variants" / job.spec.dataset / "preprocessing" / str(job.spec.preprocessing) / "dataset.yaml"
+        variant_name = (
+            str(job.spec.augmentation)
+            if job.spec.kind == "augment"
+            else f"{job.spec.preprocessing}__{job.spec.augmentation}"
+        )
+        return root / "variants" / job.spec.dataset / "augmentation" / f"seed{job.seed}" / variant_name / "dataset.yaml"
     root = Path(args.generated_root).expanduser()
     if job.spec.kind == "preprocess":
         return root / job.spec.dataset / "shared" / str(job.spec.preprocessing) / "dataset.yaml"
@@ -546,24 +667,25 @@ def base_dataset_yaml(dataset: str, args: argparse.Namespace) -> Path:
     raise ValueError(f"Unknown dataset: {dataset}")
 
 
-def output_root_for(dataset: str) -> Path:
-    return PROJECT_ROOT / "results" / "multiseed" / dataset / "per_seed"
+def output_root_for(dataset: str, args: argparse.Namespace) -> Path:
+    return args.results_root.expanduser().resolve() / "multiseed" / dataset / "per_seed"
 
 
-def run_dir_for(job: Job) -> Path:
+def run_dir_for(job: Job, args: argparse.Namespace) -> Path:
     # launch_yolo_experiment.py always appends "runs/<experiment_id>" to
     # outputs.output_root, so mirror that layout when checking completion.
-    return output_root_for(job.spec.dataset) / "runs" / job.run_id
+    return output_root_for(job.spec.dataset, args) / "runs" / job.run_id
 
 
-def job_log_path(job: Job, *, attempt: int) -> Path:
-    return PROJECT_ROOT / "results" / "gpu_optimization" / "job_logs" / f"{job.job_id}_attempt{attempt}.log"
+def job_log_path(job: Job, *, args: argparse.Namespace, attempt: int) -> Path:
+    return args.results_root.expanduser().resolve() / "gpu_optimization" / "job_logs" / f"{job.job_id}_attempt{attempt}.log"
 
 
-def job_completed(run_dir: Path) -> bool:
+def job_completed(run_dir: Path, *, require_last: bool = False) -> bool:
     best = run_dir / "ultralytics" / "train" / "weights" / "best.pt"
+    last = run_dir / "ultralytics" / "train" / "weights" / "last.pt"
     metrics = run_dir / "validation_metrics.json"
-    if not best.exists() or not metrics.exists():
+    if not best.exists() or not metrics.exists() or (require_last and not last.exists()):
         return False
     try:
         data = json.loads(metrics.read_text(encoding="utf-8"))

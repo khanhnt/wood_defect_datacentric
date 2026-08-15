@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 import shutil
 import sys
@@ -44,6 +45,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--image-format", choices=("png", "jpg"), default="png")
     parser.add_argument("--jpg-quality", type=int, default=95)
+    parser.add_argument(
+        "--splits",
+        nargs="+",
+        choices=SPLITS,
+        default=["train"],
+        help="Splits that receive augmentation. Defaults to train only.",
+    )
+    parser.add_argument(
+        "--passthrough-mode",
+        choices=("hardlink", "symlink", "copy"),
+        default="hardlink",
+        help="How to mirror non-augmented splits from the canonical dataset.",
+    )
     return parser.parse_args()
 
 
@@ -67,27 +81,45 @@ def main() -> None:
         "output_root": str(output_root),
         "variant": variant.name,
         "seed": args.seed,
+        "augmentation_policy": "selected_splits_only",
+        "augmented_splits": list(args.splits),
+        "passthrough_splits": [split for split in SPLITS if split not in set(args.splits)],
+        "passthrough_mode": args.passthrough_mode,
         "splits": {},
         "warnings": [],
     }
 
+    augmented_splits = set(args.splits)
     for split in SPLITS:
         source_images_dir = resolve_split_dir(source_yaml, source, split)
         if source_images_dir is None or not source_images_dir.exists():
             report["warnings"].append(f"Missing split {split}: {source_images_dir}")
             report["splits"][split] = {"images": 0, "labels": 0, "missing_labels": 0, "changed_label_files": 0}
             continue
-        counts = materialize_split(
-            source_images_dir=source_images_dir,
-            source_root=source_root,
-            output_root=output_root,
-            split=split,
-            names=names,
-            variant=variant,
-            seed=args.seed,
-            image_format=args.image_format,
-            jpg_quality=args.jpg_quality,
-        )
+        if split in augmented_splits:
+            counts = materialize_split(
+                source_images_dir=source_images_dir,
+                source_root=source_root,
+                output_root=output_root,
+                split=split,
+                names=names,
+                variant=variant,
+                seed=args.seed,
+                image_format=args.image_format,
+                jpg_quality=args.jpg_quality,
+            )
+            counts["mode"] = "augmented"
+            counts["augmentation_applied"] = True
+        else:
+            counts = materialize_passthrough_split(
+                source_images_dir=source_images_dir,
+                source_root=source_root,
+                output_root=output_root,
+                split=split,
+                mode=args.passthrough_mode,
+            )
+            counts["mode"] = f"passthrough_{args.passthrough_mode}"
+            counts["augmentation_applied"] = False
         report["splits"][split] = counts
 
     dataset_yaml = output_root / "dataset.yaml"
@@ -196,6 +228,44 @@ def materialize_split(
         if len(lines) != len(labels):
             counts["changed_label_files"] += 1
     return counts
+
+
+def materialize_passthrough_split(
+    *,
+    source_images_dir: Path,
+    source_root: Path,
+    output_root: Path,
+    split: str,
+    mode: str,
+) -> dict[str, int]:
+    image_paths = sorted(path for path in source_images_dir.rglob("*") if path.suffix.lower() in IMAGE_EXTENSIONS)
+    counts = {"images": 0, "labels": 0, "missing_labels": 0, "changed_label_files": 0}
+    for source_image in image_paths:
+        rel_image = source_image.relative_to(source_images_dir)
+        source_label = label_for_image(source_image, source_root)
+        output_image = output_root / "images" / split / rel_image
+        output_label = (output_root / "labels" / split / rel_image).with_suffix(".txt")
+
+        place_passthrough_file(source_image, output_image, mode=mode)
+        if source_label.exists():
+            place_passthrough_file(source_label, output_label, mode=mode)
+        else:
+            output_label.parent.mkdir(parents=True, exist_ok=True)
+            output_label.write_text("", encoding="utf-8")
+            counts["missing_labels"] += 1
+        counts["images"] += 1
+        counts["labels"] += 1
+    return counts
+
+
+def place_passthrough_file(source: Path, target: Path, *, mode: str) -> None:
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if mode == "copy":
+        shutil.copy2(source, target)
+    elif mode == "symlink":
+        target.symlink_to(source.resolve())
+    else:
+        os.link(source, target)
 
 
 def stable_variant_offset(name: str) -> int:

@@ -32,12 +32,20 @@ from wood_defect_datacentric.datasets.adapters import normalize_split, read_json
 
 IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff")
 VALID_SPLITS = ("train", "val", "test")
+ImageIndex = dict[tuple[str, str], tuple[Path, ...]]
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--images-root", type=Path, required=True)
+    parser.add_argument(
+        "--additional-images-root",
+        type=Path,
+        action="append",
+        default=[],
+        help="Additional split-organized image root. May be repeated.",
+    )
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--dataset-name", required=True)
     parser.add_argument("--classes", nargs="+", required=True)
@@ -74,6 +82,12 @@ def parse_args() -> argparse.Namespace:
         default=20,
         help="Number of missing-image examples to store in the report.",
     )
+    parser.add_argument(
+        "--exclude-image-id",
+        action="append",
+        default=[],
+        help="Manifest image_id to exclude explicitly and record in the report. May be repeated.",
+    )
     return parser.parse_args()
 
 
@@ -81,13 +95,16 @@ def main() -> None:
     args = parse_args()
     manifest = args.manifest.expanduser().resolve()
     images_root = args.images_root.expanduser().resolve()
+    additional_images_roots = [path.expanduser().resolve() for path in args.additional_images_root]
+    images_roots = [images_root, *additional_images_roots]
     output_root = args.output_root.expanduser().resolve()
     class_to_id = {class_name: index for index, class_name in enumerate(args.classes)}
+    excluded_image_ids = {normalize_image_id(value) for value in args.exclude_image_id}
 
-    validate_args(args, manifest, images_root, output_root)
+    validate_args(args, manifest, images_roots, output_root)
     prepare_output_root(output_root, overwrite=args.overwrite)
 
-    image_index = build_image_index(images_root)
+    image_index = build_image_indexes(images_roots)
     raw_records = list(read_jsonl(manifest))
     records = assign_splits(raw_records, args)
 
@@ -95,6 +112,7 @@ def main() -> None:
     split_counts: Counter[str] = Counter()
     class_box_counts: Counter[str] = Counter()
     missing_examples: list[dict[str, str]] = []
+    excluded_records: list[dict[str, str]] = []
     written_rows: list[dict[str, Any]] = []
 
     for raw in records:
@@ -102,6 +120,18 @@ def main() -> None:
         split = normalize_split(raw.get("split"))
         if split not in VALID_SPLITS:
             counters["skipped_missing_split"] += 1
+            continue
+        image_id = normalize_image_id(raw.get("image_id"))
+        if image_id in excluded_image_ids:
+            counters["excluded_image_id"] += 1
+            excluded_records.append(
+                {
+                    "image_id": image_id,
+                    "image_path": str(raw.get("image_path", "")),
+                    "split": split,
+                    "reason": "explicit_exclude_image_id",
+                }
+            )
             continue
 
         labels, label_status = yolo_labels_from_annotations(
@@ -114,14 +144,16 @@ def main() -> None:
         if label_status.get("skip_record", 0):
             continue
 
-        source_image = resolve_image_path(raw, image_index)
+        source_image, resolution_status = resolve_image_path_with_status(raw, image_index)
         if source_image is None:
-            counters["skipped_missing_image"] += 1
+            counter_key = "skipped_ambiguous_image" if resolution_status == "ambiguous" else "skipped_missing_image"
+            counters[counter_key] += 1
             if len(missing_examples) < args.max_missing_examples:
                 missing_examples.append(
                     {
                         "image_id": str(raw.get("image_id", "")),
                         "image_path": str(raw.get("image_path", "")),
+                        "resolution_status": resolution_status,
                     }
                 )
             continue
@@ -152,6 +184,7 @@ def main() -> None:
     report = {
         "manifest": str(manifest),
         "images_root": str(images_root),
+        "images_roots": [str(path) for path in images_roots],
         "output_root": str(output_root),
         "dataset_yaml": str(dataset_yaml),
         "dataset_name": args.dataset_name,
@@ -162,6 +195,7 @@ def main() -> None:
         "split_counts": dict(sorted(split_counts.items())),
         "class_box_counts": dict(sorted(class_box_counts.items())),
         "missing_image_examples": missing_examples,
+        "excluded_records": excluded_records,
     }
     report_path = output_root / "materialization_report.json"
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
@@ -172,10 +206,11 @@ def main() -> None:
     print(f"Wrote report: {report_path}")
     print(f"records_seen={counters['records_seen']} records_written={counters['records_written']}")
     print(f"split_counts={dict(sorted(split_counts.items()))}")
-    if counters["skipped_missing_image"] or counters["skipped_missing_split"] or counters["skipped_unknown_class_record"] or counters["skipped_invalid_box_record"]:
+    if counters["skipped_missing_image"] or counters["skipped_ambiguous_image"] or counters["skipped_missing_split"] or counters["skipped_unknown_class_record"] or counters["skipped_invalid_box_record"]:
         print("Warnings:")
         for key in (
             "skipped_missing_image",
+            "skipped_ambiguous_image",
             "skipped_missing_split",
             "skipped_unknown_class_record",
             "skipped_invalid_box_record",
@@ -184,16 +219,18 @@ def main() -> None:
                 print(f"- {key}={counters[key]}")
 
 
-def validate_args(args: argparse.Namespace, manifest: Path, images_root: Path, output_root: Path) -> None:
+def validate_args(args: argparse.Namespace, manifest: Path, images_roots: list[Path], output_root: Path) -> None:
     if not manifest.exists():
         raise SystemExit(f"Manifest does not exist: {manifest}")
-    if not images_root.exists():
-        raise SystemExit(f"Images root does not exist: {images_root}")
+    for images_root in images_roots:
+        if not images_root.exists():
+            raise SystemExit(f"Images root does not exist: {images_root}")
     total = args.train_ratio + args.val_ratio + args.test_ratio
     if args.split_strategy == "random" and abs(total - 1.0) > 1e-6:
         raise SystemExit(f"Random split ratios must sum to 1.0, got {total}")
-    if output_root == images_root or images_root in output_root.parents:
-        raise SystemExit("Refusing to place YOLO output inside images-root.")
+    for images_root in images_roots:
+        if output_root == images_root or images_root in output_root.parents:
+            raise SystemExit("Refusing to place YOLO output inside images-root.")
 
 
 def prepare_output_root(output_root: Path, *, overwrite: bool) -> None:
@@ -204,21 +241,41 @@ def prepare_output_root(output_root: Path, *, overwrite: bool) -> None:
     output_root.mkdir(parents=True, exist_ok=True)
 
 
-def build_image_index(images_root: Path) -> dict[str, Path]:
-    index: dict[str, Path] = {}
-    stem_candidates: dict[str, list[Path]] = defaultdict(list)
-    for path in images_root.rglob("*"):
+def build_image_index(images_root: Path) -> ImageIndex:
+    candidates: dict[tuple[str, str], list[Path]] = defaultdict(list)
+    for path in sorted(images_root.rglob("*")):
         if not path.is_file() or path.suffix.lower() not in IMAGE_EXTENSIONS:
             continue
-        rel = path.relative_to(images_root).as_posix()
-        rel_no_suffix = path.relative_to(images_root).with_suffix("").as_posix()
-        index.setdefault(rel, path)
-        index.setdefault(rel_no_suffix, path)
-        stem_candidates[path.stem].append(path)
-    for stem, paths in stem_candidates.items():
-        if len(paths) == 1:
-            index.setdefault(stem, paths[0])
-    return index
+        relative_path = path.relative_to(images_root)
+        parts = relative_path.parts
+        split = normalize_split(parts[0]) if parts else ""
+        if split not in VALID_SPLITS:
+            continue
+
+        aliases = {
+            path.as_posix(),
+            path.with_suffix("").as_posix(),
+            relative_path.as_posix(),
+            relative_path.with_suffix("").as_posix(),
+            path.name,
+            path.stem,
+        }
+        for alias in aliases:
+            candidates[(split, alias)].append(path)
+
+    return {key: tuple(paths) for key, paths in candidates.items()}
+
+
+def build_image_indexes(images_roots: list[Path]) -> ImageIndex:
+    combined: dict[tuple[str, str], list[Path]] = defaultdict(list)
+    for images_root in images_roots:
+        for key, paths in build_image_index(images_root).items():
+            combined[key].extend(paths)
+    return {key: tuple(paths) for key, paths in combined.items()}
+
+
+def normalize_image_id(value: Any) -> str:
+    return str(value or "").strip().replace("\\", "/")
 
 
 def assign_splits(raw_records: list[dict[str, Any]], args: argparse.Namespace) -> list[dict[str, Any]]:
@@ -283,11 +340,10 @@ def yolo_labels_from_annotations(
     return labels, status
 
 
-def resolve_image_path(raw: dict[str, Any], image_index: dict[str, Path]) -> Path | None:
-    raw_path = Path(str(raw.get("image_path") or "")).expanduser()
-    if raw_path.exists():
-        return raw_path
-
+def resolve_image_path_with_status(raw: dict[str, Any], image_index: ImageIndex) -> tuple[Path | None, str]:
+    split = normalize_split(raw.get("split"))
+    if split not in VALID_SPLITS:
+        return None, "unresolved"
     candidates: list[str] = []
 
     def add_path_candidates(value: Any) -> None:
@@ -315,9 +371,17 @@ def resolve_image_path(raw: dict[str, Any], image_index: dict[str, Path]) -> Pat
     add_path_candidates(raw.get("image_path"))
 
     for key in candidates:
-        if key in image_index:
-            return image_index[key]
-    return None
+        matches = image_index.get((split, key), ())
+        if len(matches) == 1:
+            return matches[0], "resolved"
+        if len(matches) > 1:
+            return None, "ambiguous"
+    return None, "unresolved"
+
+
+def resolve_image_path(raw: dict[str, Any], image_index: ImageIndex) -> Path | None:
+    path, _ = resolve_image_path_with_status(raw, image_index)
+    return path
 
 
 def output_relative_image_path(raw: dict[str, Any], source_image: Path, split: str) -> Path:
@@ -328,6 +392,9 @@ def output_relative_image_path(raw: dict[str, Any], source_image: Path, split: s
         rel = Path(*parts[2:]) if len(parts) > 2 else Path(source_image.stem)
     elif parts and normalize_split(parts[0]) == split:
         rel = Path(*parts[1:]) if len(parts) > 1 else Path(source_image.stem)
+    source_category = str(raw.get("source_category") or "").strip()
+    if source_category and len(rel.parts) > 1 and rel.parts[0].isdigit():
+        rel = Path(source_category, *rel.parts[1:])
     if rel.suffix.lower() not in IMAGE_EXTENSIONS:
         rel = rel.with_suffix(source_image.suffix.lower())
     return rel

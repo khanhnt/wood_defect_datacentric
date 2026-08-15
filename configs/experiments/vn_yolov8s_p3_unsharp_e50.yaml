@@ -1,0 +1,25 @@
+experiment_id: vn_yolov8s_p3_unsharp_e50
+description: VNWoodKnot preprocessing candidate using mild unsharp masking.
+dataset:
+  key: vnwoodknot
+  data_yaml: ${WOOD_DC_VN_P3_DATASET_YAML:-/workspace/data/wood_defect_datacentric/generated_yolo/vnwoodknot/P3_mild_unsharp/dataset.yaml}
+  split_protocol: existing_vnwoodknot_train_val_test_with_knot_free_retained
+transforms:
+  preprocessing: P3_mild_unsharp
+  augmentation: A0_default
+  materialized_dataset_required: true
+training:
+  model: yolov8s
+  epochs: 50
+  imgsz: ${IMG_SIZE:-1024}
+  batch: ${BATCH_SIZE:-32}
+  workers: ${WORKERS:-4}
+  seed: 42
+  patience: 30
+  device: "${DEVICE:-0}"
+  optimizer: auto
+  pretrained: true
+  deterministic: true
+  single_cls: false
+outputs:
+  output_root: results

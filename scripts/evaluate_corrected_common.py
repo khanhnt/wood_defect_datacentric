@@ -39,7 +39,9 @@ class VariantSpec:
 
 SPECS = (
     VariantSpec("vnwoodknot", "baseline", "Baseline"),
+    VariantSpec("vnwoodknot", "p1_clahe", "P1 CLAHE", "P1_CLAHE_luminance"),
     VariantSpec("vnwoodknot", "p2_illumination", "P2 illumination", "P2_illumination_normalization"),
+    VariantSpec("vnwoodknot", "p3_unsharp", "P3 unsharp", "P3_mild_unsharp"),
     VariantSpec("vnwoodknot", "a1_crop", "A1 crop"),
     VariantSpec("vnwoodknot", "a2_colorjitter", "A2 color jitter"),
     VariantSpec("vnwoodknot", "p4_a4_combined", "P4+A4 combined", "P4_combined_safe"),
@@ -81,6 +83,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--rebuild-vsb-canonical", action="store_true")
     parser.add_argument("--overwrite-vsb-canonical", action="store_true")
     parser.add_argument("--overwrite-eval-datasets", action="store_true")
+    parser.add_argument(
+        "--eval-map-csv",
+        type=Path,
+        help="Use an explicit dataset,variant,data_yaml map instead of materializing eval trees.",
+    )
     parser.add_argument("--dataset", choices=("all", "vnwoodknot", "vsb_rarefirst"), default="all")
     parser.add_argument("--variants", nargs="+", default=None)
     parser.add_argument("--seeds", nargs="+", type=int, default=list(SEEDS))
@@ -150,6 +157,10 @@ def main() -> None:
                     device=str(args.device),
                     plots=False,
                     verbose=False,
+                    augment=False,
+                    project=str(args.output_csv.parent / "ultralytics"),
+                    name=f"{spec.dataset}_{run}_{split}",
+                    exist_ok=True,
                 )
                 row = {
                     "dataset": spec.dataset,
@@ -157,6 +168,7 @@ def main() -> None:
                     "variant": spec.variant,
                     "seed": seed,
                     "split": split,
+                    "data_yaml": str(data_yaml),
                     "n_images": n_images,
                     "n_instances": n_instances,
                     "precision": f"{float(result.box.mp):.6f}",
@@ -180,6 +192,7 @@ def main() -> None:
                 "variant",
                 "seed",
                 "split",
+                "data_yaml",
                 "n_images",
                 "n_instances",
                 "precision",
@@ -202,6 +215,8 @@ def selected_specs(args: argparse.Namespace) -> list[VariantSpec]:
 
 
 def prepare_eval_yamls(args: argparse.Namespace, specs: list[VariantSpec]) -> dict[tuple[str, str], Path]:
+    if args.eval_map_csv:
+        return load_eval_yaml_manifest(args.eval_map_csv, specs)
     canonical = {
         "vnwoodknot": args.vn_canonical_yaml.expanduser().resolve(),
         "vsb_rarefirst": args.vsb_canonical_yaml.expanduser().resolve(),
@@ -232,6 +247,24 @@ def prepare_eval_yamls(args: argparse.Namespace, specs: list[VariantSpec]) -> di
         else:
             eval_yamls[(spec.dataset, spec.variant)] = canonical[spec.dataset]
     return eval_yamls
+
+
+def load_eval_yaml_manifest(path: Path, specs: list[VariantSpec]) -> dict[tuple[str, str], Path]:
+    path = path.expanduser().resolve()
+    if not path.exists():
+        raise SystemExit(f"Missing evaluation map: {path}")
+    mapping: dict[tuple[str, str], Path] = {}
+    with path.open("r", newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            key = (str(row["dataset"]).strip(), str(row["variant"]).strip())
+            data_yaml = Path(str(row["data_yaml"])).expanduser().resolve()
+            if not data_yaml.exists():
+                raise SystemExit(f"Evaluation YAML in map does not exist: {data_yaml}")
+            mapping[key] = data_yaml
+    missing = [(spec.dataset, spec.variant) for spec in specs if (spec.dataset, spec.variant) not in mapping]
+    if missing:
+        raise SystemExit("Evaluation map is missing: " + ", ".join(f"{dataset}:{variant}" for dataset, variant in missing))
+    return {key: mapping[key] for key in [(spec.dataset, spec.variant) for spec in specs]}
 
 
 def materialize_preprocessed_eval_dataset(

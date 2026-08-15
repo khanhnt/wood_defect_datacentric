@@ -62,7 +62,10 @@ PREPROCESSING = {
     "p4_a4_combined": "P4_combined_safe",
 }
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
-SOURCE_TILE_RE = re.compile(r"(?P<source>.+?)(?:__x\d+_y\d+|_x\d+_y\d+)$", re.IGNORECASE)
+SOURCE_TILE_RE = re.compile(
+    r"(?P<source>.+?)(?:__x\d+_y\d+(?:_w\d+_h\d+)?|_x\d+_y\d+(?:_w\d+_h\d+)?)$",
+    re.IGNORECASE,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -89,6 +92,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--overwrite-eval-datasets", action="store_true")
     parser.add_argument("--overwrite-predictions", action="store_true")
     parser.add_argument("--skip-inference", action="store_true", help="Reuse existing prediction JSONs.")
+    parser.add_argument("--clean-set-only", action="store_true", help="Build and verify only the canonical clean dataset.")
     parser.add_argument("--prepare-only", action="store_true", help="Build clean data and eval YAMLs, then stop.")
     parser.add_argument("--allow-leakage", action="store_true", help="Do not abort when train/val overlap is detected.")
     parser.add_argument("--allow-missing", action="store_true")
@@ -120,6 +124,9 @@ def main() -> None:
     if clean_report["leakage"]["train_val_source_overlap"] or clean_report["leakage"]["train_val_tile_overlap"]:
         if not args.allow_leakage:
             raise SystemExit("Leakage check failed. Use --allow-leakage only for debugging.")
+    if args.clean_set_only:
+        print("Prepared canonical clean dataset only.")
+        return
 
     positive_eval_yamls = resolve_positive_eval_yamls(args)
     clean_eval_yamls = resolve_clean_eval_yamls(args, Path(clean_report["dataset_yaml"]))
@@ -295,6 +302,10 @@ def build_clean_yolo_dataset_from_images(args: argparse.Namespace) -> dict[str, 
             if path.suffix.lower() in IMAGE_EXTENSIONS
         ]
         print(f"Reusing existing clean YOLO dataset: {dataset_yaml} ({len(existing_images)} test images)")
+        samples_path = clean_output_root / "clean_materialized_samples.csv"
+        if samples_path.exists():
+            with samples_path.open("r", encoding="utf-8", newline="") as handle:
+                materialized_rows = list(csv.DictReader(handle))
     else:
         prepare_output(clean_output_root, overwrite=bool(args.overwrite_clean_set))
         materialized_rows = materialize_clean_images_from_root(
@@ -308,27 +319,35 @@ def build_clean_yolo_dataset_from_images(args: argparse.Namespace) -> dict[str, 
         write_csv(materialized_rows, clean_output_root / "clean_materialized_samples.csv")
 
     source_counts = {source_id: len(paths) for source_id, paths in candidates.items()}
+    num_clean_tiles = count_yolo_images(clean_output_root / "images" / "test") if reuse_existing else len(materialized_rows)
+    leakage["clean_tiles"] = num_clean_tiles
+    mode_counts = Counter(str(row.get("mode", "unknown")) for row in materialized_rows)
     report = {
         "source": "clean_images_root",
         "clean_images_root": str(clean_images_root),
         "clean_ids_file": str(ids_file),
         "output_root": str(clean_output_root),
         "dataset_yaml": str(dataset_yaml),
-        "link_mode": args.link_mode,
+        "materialization_mode_counts": dict(sorted(mode_counts.items())),
+        "existing_tile_link_mode": args.link_mode,
         "tile_size": int(args.clean_tile_size),
         "tile_overlap": int(args.clean_tile_overlap),
         "num_clean_ids": len(clean_ids),
         "num_clean_source_images": len(candidates),
         "num_clean_source_files": sum(len(paths) for paths in candidates.values()),
-        "num_clean_tiles": count_yolo_images(clean_output_root / "images" / "test") if reuse_existing else len(materialized_rows),
-        "source_split_tile_counts": {"test": count_yolo_images(clean_output_root / "images" / "test") if reuse_existing else len(materialized_rows)},
+        "num_clean_tiles": num_clean_tiles,
+        "source_split_tile_counts": {"test": num_clean_tiles},
+        "empty_label_counts": {"test": num_clean_tiles},
+        "box_counts": {"test": 0},
         "missing_source_ids": sorted(clean_ids - set(candidates))[:100],
         "num_missing_source_ids": len(clean_ids - set(candidates)),
         "duplicate_source_file_counts": {key: value for key, value in sorted(source_counts.items()) if value > 1},
         "leakage": leakage,
+        "actual_tile_geometry": summarize_tile_geometry(materialized_rows) if materialized_rows else {},
         "note": "Clean set was materialized from raw defect-free VSB source images listed by empty annotation files.",
     }
     write_json(report, clean_output_root / "clean_set_report.json")
+    write_json(report, clean_output_root / "materialization_report.json")
     return report
 
 
@@ -414,8 +433,10 @@ def tile_clean_source_image(
     if height < tile_size or width < tile_size:
         raise SystemExit(f"Clean image is smaller than tile size {tile_size}: {source_path} ({width}x{height})")
     rows: list[dict[str, Any]] = []
-    for y in tile_positions(height, tile_size, overlap):
-        for x in tile_positions(width, tile_size, overlap):
+    y_positions = tile_positions(height, tile_size, overlap)
+    x_positions = tile_positions(width, tile_size, overlap)
+    for y_index, y in enumerate(y_positions):
+        for x_index, x in enumerate(x_positions):
             tile = image[y : y + tile_size, x : x + tile_size]
             rel_image = Path("clean") / f"{source_path.stem}__x{x:04d}_y{y:04d}{source_path.suffix.lower()}"
             target_image = output_root / "images" / "test" / rel_image
@@ -437,12 +458,41 @@ def tile_clean_source_image(
                     "target_label": str(target_label),
                     "tile_origin_x": x,
                     "tile_origin_y": y,
+                    "tile_index_x": x_index,
+                    "tile_index_y": y_index,
+                    "previous_origin_x": x_positions[x_index - 1] if x_index else "",
+                    "previous_origin_y": y_positions[y_index - 1] if y_index else "",
+                    "overlap_with_previous_x": tile_size - (x - x_positions[x_index - 1]) if x_index else "",
+                    "overlap_with_previous_y": tile_size - (y - y_positions[y_index - 1]) if y_index else "",
                     "mode": "tiled_raw_source",
                     "source_width": width,
                     "source_height": height,
                 }
             )
     return rows
+
+
+def summarize_tile_geometry(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    source_widths: Counter[int] = Counter()
+    origin_sequences: Counter[str] = Counter()
+    overlap_x: Counter[int] = Counter()
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        grouped[(str(row.get("source_id", "")), str(row.get("source_image", "")))].append(row)
+        if row.get("overlap_with_previous_x") != "":
+            overlap_x[int(row["overlap_with_previous_x"])] += 1
+    for source_rows in grouped.values():
+        first = source_rows[0]
+        source_widths[int(first["source_width"])] += 1
+        origins = sorted({int(row["tile_origin_x"]) for row in source_rows})
+        origin_sequences[",".join(str(value) for value in origins)] += 1
+    return {
+        "tile_size": 1024,
+        "source_width_distribution": {str(key): value for key, value in sorted(source_widths.items())},
+        "x_origin_sequence_distribution": dict(sorted(origin_sequences.items())),
+        "horizontal_overlap_distribution": {str(key): value for key, value in sorted(overlap_x.items())},
+        "note": "Overlap is recorded against the immediately preceding tile; first tiles have no preceding overlap.",
+    }
 
 
 def tile_positions(length: int, tile_size: int, overlap: int) -> list[int]:
@@ -1100,12 +1150,11 @@ def source_key(row: dict[str, Any]) -> str:
 
 def source_key_from_tile_text(value: str) -> str:
     text = Path(str(value).replace("\\", "/")).with_suffix("").as_posix()
-    stem = Path(text).name
-    stripped = strip_tile_suffix(stem)
-    if stripped != stem:
-        return normalize_identifier(stripped)
-    parts = [part for part in Path(text).parts if part not in {"images", "train", "val", "test"}]
-    return normalize_identifier("/".join(parts[:-1] + [stripped]) if len(parts) > 1 else stripped)
+    path = Path(text)
+    stem = path.name
+    stripped_stem = strip_tile_suffix(stem)
+    parts = [part for part in path.parent.parts if part not in {"images", "train", "val", "test"}]
+    return normalize_identifier("/".join([*parts, stripped_stem]) if parts else stripped_stem)
 
 
 def tile_key(row: dict[str, Any]) -> str:

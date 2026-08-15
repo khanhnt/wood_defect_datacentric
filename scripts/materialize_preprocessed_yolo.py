@@ -70,6 +70,8 @@ def main() -> None:
         "source_root": str(source_root),
         "output_root": str(output_root),
         "variant": variant.name,
+        "preprocessing_policy": "all_requested_splits",
+        "processed_splits": list(args.splits),
         "splits": {},
         "warnings": [],
     }

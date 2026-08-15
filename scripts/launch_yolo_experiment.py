@@ -204,6 +204,7 @@ def build_ultralytics_command(config: dict[str, Any], run_dir: Path, *, resume: 
         f"pretrained={bool(training.get('pretrained', True))}",
         f"deterministic={bool(training.get('deterministic', True))}",
         f"single_cls={bool(training.get('single_cls', False))}",
+        "save=True",
     ]
     return command
 
@@ -279,6 +280,8 @@ def execute_training(config: dict[str, Any], run_dir: Path, *, resume: bool) -> 
         "pretrained": bool(training.get("pretrained", True)),
         "deterministic": bool(training.get("deterministic", True)),
         "single_cls": bool(training.get("single_cls", False)),
+        "amp": bool(training.get("amp", True)),
+        "save": True,
         "verbose": True,
     }
     if resume:
@@ -293,6 +296,11 @@ def execute_training(config: dict[str, Any], run_dir: Path, *, resume: bool) -> 
     with log_path.open("a", encoding="utf-8") as log_handle:
         with contextlib.redirect_stdout(log_handle), contextlib.redirect_stderr(log_handle):
             result = model.train(**train_kwargs)
+
+    weights_dir = project_dir / train_name / "weights"
+    missing_checkpoints = [name for name in ("best.pt", "last.pt") if not (weights_dir / name).exists()]
+    if missing_checkpoints:
+        raise RuntimeError(f"Training completed without required checkpoints: {', '.join(missing_checkpoints)}")
 
     metrics = collect_metrics(project_dir / train_name)
     (run_dir / "validation_metrics.json").write_text(json.dumps(metrics, indent=2) + "\n", encoding="utf-8")
