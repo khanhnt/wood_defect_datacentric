@@ -1,4 +1,7 @@
 import unittest
+import argparse
+from contextlib import redirect_stdout
+import io
 import json
 from pathlib import Path
 import tempfile
@@ -6,7 +9,7 @@ import tempfile
 import numpy as np
 import yaml
 
-from scripts.run_all_experiments import build_jobs, job_completed
+from scripts.run_all_experiments import build_jobs, job_completed, print_dry_run
 from scripts.split_vsb_clean_sources import partition_source_ids
 from scripts.stage_deprecated_checkpoints import DATASETS as DEPRECATED_DATASETS
 from scripts.stage_deprecated_checkpoints import SEEDS as DEPRECATED_SEEDS
@@ -39,6 +42,41 @@ class GenerationQueueTest(unittest.TestCase):
             variants={"a1_crop"},
         )
         self.assertEqual([job.job_id for job in jobs], ["vnwoodknot_a1_crop_seed42"])
+
+    def test_corrected_dry_run_prints_effective_settings(self) -> None:
+        jobs = build_jobs(
+            dataset_filter="all",
+            job_set="corrected24",
+            seeds=(42, 43, 44),
+            variants=None,
+        )
+        args = argparse.Namespace(
+            batch_size=40,
+            epochs=50,
+            imgsz=1024,
+            rebuilt_root=Path("/workspace/data/datasets_rebuilt"),
+            results_root=Path("/workspace/generations/access_r1_g1"),
+            vn_yaml="/workspace/data/datasets_rebuilt/canonical/vnwoodknot/dataset.yaml",
+            vsb_yaml="/workspace/data/datasets_rebuilt/canonical/vsb_rarefirst/dataset.yaml",
+            generated_root="/unused",
+        )
+        output = io.StringIO()
+        with redirect_stdout(output):
+            print_dry_run(args, jobs, ["0", "1"])
+        text = output.getvalue()
+        self.assertIn("data_yaml\tbatch\tepochs\timgsz\toutput_path", text)
+        self.assertIn(
+            "vnwoodknot\tp1_clahe\t42\t"
+            "/workspace/data/datasets_rebuilt/variants/vnwoodknot/preprocessing/"
+            "P1_CLAHE_luminance/dataset.yaml\t40\t50\t1024\t",
+            text,
+        )
+        self.assertIn(
+            "vsb_rarefirst\ta1_crop\t42\t"
+            "/workspace/data/datasets_rebuilt/variants/vsb_rarefirst/augmentation/"
+            "seed42/A1_defect_preserving_crop/dataset.yaml\t40\t50\t1024\t",
+            text,
+        )
 
     def test_corrected_completion_requires_last_checkpoint(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

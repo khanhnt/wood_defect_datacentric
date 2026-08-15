@@ -306,13 +306,13 @@ def vsb_specs() -> list[VariantSpec]:
 def print_dry_run(args: argparse.Namespace, jobs: list[Job], gpu_ids: list[str]) -> None:
     print(f"Dry run: {len(jobs)} jobs")
     print(f"GPUs: {', '.join(gpu_ids)}")
-    print(f"Batch size: {args.batch_size}")
+    print("dataset\tvariant\tseed\tdata_yaml\tbatch\tepochs\timgsz\toutput_path")
     for job in jobs:
         run_dir = run_dir_for(job, args)
         planned_yaml = planned_dataset_yaml(job, args)
         print(
-            f"{job.index:02d}/{job.total} | {job.spec.dataset} | {job.spec.variant} | "
-            f"seed={job.seed} | run_dir={run_dir} | data={planned_yaml}"
+            f"{job.spec.dataset}\t{job.spec.variant}\t{job.seed}\t{planned_yaml}\t"
+            f"{args.batch_size}\t{args.epochs}\t{args.imgsz}\t{run_dir}"
         )
 
 

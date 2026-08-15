@@ -477,6 +477,17 @@ test -s "$SMOKE/multiseed/vnwoodknot/per_seed/runs/a1_crop_seed42/ultralytics/tr
 
 ### 6.1 Vast: final dry run
 
+For `corrected24`, every queued job is a preprocessing, augmentation, or combined
+variant. With `--rebuilt-root "$DATA"`, the launcher derives each variant YAML from the
+rebuilt tree and overwrites the template config's `dataset.data_yaml`. It also writes
+the integer supplied by `--batch-size` into every generated job config. Therefore the
+old `${WOOD_DC_*}` template defaults and `${BATCH_SIZE:-32}` fallback are not used by
+this queue; no P1/P3 environment-variable export is required.
+
+The dry run prints the effective values for every job. Preserve it as provenance and
+verify that all rows show batch 40, epochs 50, image size 1024, `$DATA/variants/...`
+dataset YAMLs, and `$GEN/multiseed/...` output paths:
+
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python scripts/run_all_experiments.py \
   --job-set corrected24 \
@@ -490,7 +501,7 @@ PYTHONDONTWRITEBYTECODE=1 python scripts/run_all_experiments.py \
   --vn-yaml "$DATA/canonical/vnwoodknot/dataset.yaml" \
   --vsb-yaml "$DATA/canonical/vsb_rarefirst/dataset.yaml" \
   --results-root "$GEN" \
-  --dry-run
+  --dry-run | tee "$GEN/provenance/corrected24_dry_run.tsv"
 ```
 
 The dry run must print exactly 24 jobs: 15 VN and 9 VSB.
