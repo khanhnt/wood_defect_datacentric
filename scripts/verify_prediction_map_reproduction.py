@@ -104,13 +104,32 @@ def image_arrays(image: dict, class_ids: dict[str, int]) -> tuple[np.ndarray, ..
     return gt_boxes, gt_classes, pred_boxes, pred_classes, confidences
 
 
+def validator_tp_rows(predictions: list[dict]) -> np.ndarray | None:
+    if not all(isinstance(prediction.get("validator_tp_mask"), int) for prediction in predictions):
+        return None
+    return np.asarray(
+        [
+            [bool(int(prediction["validator_tp_mask"]) & (1 << bit)) for bit in range(10)]
+            for prediction in predictions
+        ],
+        dtype=bool,
+    ).reshape(-1, 10)
+
+
 def build_stats(payload: dict, *, alternate: bool = False) -> tuple[np.ndarray, ...]:
     tp_rows, confidences, pred_classes, target_classes = [], [], [], []
     class_ids = {name: index for index, name in enumerate(payload["class_names"])}
     for image in payload["images"]:
         gt_boxes, gt_classes, pred_boxes, pred_cls, pred_conf = image_arrays(image, class_ids)
         iou = box_iou(gt_boxes, pred_boxes)
-        matcher = confidence_greedy_match(pred_cls, gt_classes, iou, pred_conf) if alternate else ultralytics_match(pred_cls, gt_classes, iou)
+        predictions = image.get("predictions", [])
+        saved_tp = validator_tp_rows(predictions)
+        if alternate:
+            matcher = confidence_greedy_match(pred_cls, gt_classes, iou, pred_conf)
+        elif saved_tp is not None:
+            matcher = saved_tp
+        else:
+            matcher = ultralytics_match(pred_cls, gt_classes, iou)
         tp_rows.append(matcher)
         confidences.append(pred_conf)
         pred_classes.append(pred_cls)
@@ -127,9 +146,11 @@ def per_image_differences(payload: dict, key: tuple[str, str, int, str]) -> list
     for image in payload["images"]:
         gt_boxes, gt_classes, pred_boxes, pred_cls, pred_conf = image_arrays(image, class_ids)
         iou = box_iou(gt_boxes, pred_boxes)
-        primary = ultralytics_match(pred_cls, gt_classes, iou)[:, 0]
+        offline = ultralytics_match(pred_cls, gt_classes, iou)[:, 0]
         alternate = confidence_greedy_match(pred_cls, gt_classes, iou, pred_conf)[:, 0]
-        if np.array_equal(primary, alternate):
+        saved_rows = validator_tp_rows(image.get("predictions", []))
+        validator = saved_rows[:, 0] if saved_rows is not None else offline
+        if np.array_equal(validator, offline) and np.array_equal(offline, alternate):
             continue
         rows.append(
             {
@@ -140,7 +161,8 @@ def per_image_differences(payload: dict, key: tuple[str, str, int, str]) -> list
                 "image": image.get("image", image.get("canonical_id", "")),
                 "num_gt": len(gt_boxes),
                 "num_predictions": len(pred_boxes),
-                "ultralytics_style_tp50": int(primary.sum()),
+                "validator_tp50": int(validator.sum()),
+                "offline_ultralytics_style_tp50": int(offline.sum()),
                 "confidence_greedy_tp50": int(alternate.sum()),
             }
         )
@@ -197,6 +219,8 @@ def main() -> None:
         alternate_map = float(np.mean(alternate[5][:, 0]))
         reported = float(fair["mAP50"])
         residual = recomputed - reported
+        validator_map = float((payload.get("validator_metrics") or {}).get("mAP50", "nan"))
+        validator_residual = validator_map - reported
 
         expected_checkpoint_hash = registry.get(key[:3], "")
         payload_checkpoint_hash = str(payload.get("checkpoint_sha256", ""))
@@ -205,20 +229,45 @@ def main() -> None:
         fair_yaml_hash = sha256(fair_yaml) if fair_yaml.exists() else ""
         yaml_match = bool(fair_yaml_hash and payload.get("dataset_yaml_sha256") == fair_yaml_hash)
         image_count_match = int(payload["num_images"]) == int(fair["n_images"])
+        image_loader_match = payload.get("image_loader") == "ultralytics_yolo_dataset_opencv"
+        inference_geometry_match = (
+            payload.get("inference_path") == "ultralytics_detection_validator"
+            and payload.get("validation_rect") is True
+            and float(payload.get("validation_pad", -1)) == 0.5
+            and payload.get("validation_scaleup") is False
+        )
+        tp_source_match = payload.get("tp_source") == "ultralytics_detection_validator_process_batch"
         differences = per_image_differences(payload, key)
         diagnostic_rows.extend(differences)
-        provenance_consistent = checkpoint_match and yaml_match and image_count_match
+        provenance_consistent = (
+            checkpoint_match
+            and yaml_match
+            and image_count_match
+            and image_loader_match
+            and inference_geometry_match
+            and tp_source_match
+        )
 
-        if abs(residual) <= args.exact_tolerance and provenance_consistent:
+        if (
+            abs(residual) <= args.exact_tolerance
+            and abs(validator_residual) <= args.exact_tolerance
+            and provenance_consistent
+        ):
             status = "EXACT_PASS"
             diagnosis = "same_generation_and_within_exact_tolerance"
-        elif abs(residual) <= args.review_tolerance and provenance_consistent:
+        elif (
+            abs(residual) <= args.review_tolerance
+            and abs(validator_residual) <= args.review_tolerance
+            and provenance_consistent
+        ):
             status = "METHOD_REVIEW"
             diagnosis = "matching_convention_candidate" if differences else "export_rounding_or_ap_interpolation_candidate"
         else:
             status = "INVESTIGATE"
             if not provenance_consistent:
                 diagnosis = "generation_or_input_mismatch"
+            elif abs(validator_residual) > args.review_tolerance:
+                diagnosis = "validator_metric_differs_from_fair_evaluation"
             elif differences:
                 diagnosis = "matching_difference_exceeds_review_tolerance"
             else:
@@ -232,6 +281,8 @@ def main() -> None:
                 "prediction_path": str(path),
                 "num_images": int(payload["num_images"]),
                 "reported_mAP50": reported,
+                "export_validator_mAP50": validator_map,
+                "validator_residual": validator_residual,
                 "recomputed_mAP50": recomputed,
                 "confidence_greedy_mAP50": alternate_map,
                 "residual": residual,
@@ -239,6 +290,9 @@ def main() -> None:
                 "checkpoint_hash_match": checkpoint_match,
                 "dataset_yaml_hash_match": yaml_match,
                 "image_count_match": image_count_match,
+                "image_loader_match": image_loader_match,
+                "inference_geometry_match": inference_geometry_match,
+                "tp_source_match": tp_source_match,
                 "matching_difference_images": len(differences),
                 "diagnosis": diagnosis,
                 "status": status,
@@ -250,7 +304,7 @@ def main() -> None:
     write_csv(args.output_csv.expanduser().resolve(), rows, list(rows[0]))
     diagnostic_fields = [
         "dataset", "variant", "seed", "split", "image", "num_gt", "num_predictions",
-        "ultralytics_style_tp50", "confidence_greedy_tp50",
+        "validator_tp50", "offline_ultralytics_style_tp50", "confidence_greedy_tp50",
     ]
     write_csv(args.diagnostics_csv.expanduser().resolve(), diagnostic_rows, diagnostic_fields)
     counts = {status: sum(row["status"] == status for row in rows) for status in ("EXACT_PASS", "METHOD_REVIEW", "INVESTIGATE")}

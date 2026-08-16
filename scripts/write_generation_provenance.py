@@ -85,6 +85,17 @@ def git_commit() -> str:
     return completed.stdout.strip() if completed.returncode == 0 else "unavailable"
 
 
+def training_git_commit(generation_root: Path) -> str:
+    preflight = generation_root / "provenance" / "runtime_preflight.json"
+    if not preflight.exists():
+        return "unavailable"
+    try:
+        payload = json.loads(preflight.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return "unavailable"
+    return str(payload.get("git_commit") or "unavailable")
+
+
 def main() -> None:
     args = parse_args()
     generation_root = args.generation_root.expanduser().resolve()
@@ -143,7 +154,8 @@ def main() -> None:
         manifest_inventory.append({"role": "extra", "source": str(source), "copy": str(target), "sha256": sha256(target)})
     (output_root / "manifest_inventory.json").write_text(json.dumps(manifest_inventory, indent=2) + "\n", encoding="utf-8")
     env = environment()
-    commit = git_commit()
+    analysis_commit = git_commit()
+    training_commit = training_git_commit(generation_root)
     timestamp = datetime.now(timezone.utc).isoformat()
     pretrained = args.pretrained_weights.expanduser().resolve()
     if not pretrained.exists():
@@ -291,7 +303,13 @@ def main() -> None:
                 }
             )
 
-    common = {"git_commit": commit, "timestamp_utc": timestamp, **env}
+    common = {
+        "git_commit": analysis_commit,
+        "training_git_commit": training_commit,
+        "analysis_git_commit": analysis_commit,
+        "timestamp_utc": timestamp,
+        **env,
+    }
     records = [{**record, **common} for record in records]
     if not records:
         raise SystemExit("No provenance artifacts found.")

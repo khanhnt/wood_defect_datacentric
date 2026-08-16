@@ -720,8 +720,13 @@ checkpoint is labelled `DEPRECATED_augmented_validation_selection` in provenance
 
 ## 8. Low-confidence prediction exports
 
-The exporter now accepts `--split`; every command below sets `augment=False`,
-`conf=0.001`, `iou=0.7`, and `imgsz=1024`.
+The exporter accepts `--split`; every command below sets `augment=False`, `conf=0.001`,
+`iou=0.7`, and `imgsz=1024`. It runs the Ultralytics `DetectionValidator` itself, using
+the same YAML split, OpenCV dataset loader, rectangular batches, validation letterbox,
+NMS, and matching path as `model.val()`. Each prediction stores the validator's ten TP
+flags for IoU 0.50 through 0.95 as a compact bitmask. Passing path lists to
+`model.predict()` is prohibited because that path uses different loading and letterbox
+behavior and does not reproduce validation AP.
 
 Set reusable paths:
 
@@ -862,9 +867,11 @@ python scripts/verify_prediction_map_reproduction.py \
 ```
 
 This is a diagnostic gate, not a reason to leave paid GPUs idle. The script verifies
-checkpoint hash, dataset-YAML hash, and image count first, then compares an
-Ultralytics-style IoU-priority matcher with the confidence-ordered greedy matcher used
-by the offline analysis.
+checkpoint hash, dataset-YAML hash, image count, loader, validation geometry, and TP
+source. It checks both the mAP50 returned by the export-time `DetectionValidator` and
+the mAP50 reconstructed from its saved per-detection TP bitmasks. A separate diagnostic
+still compares rematching from serialized boxes with the confidence-ordered greedy
+matcher used by older offline analyses.
 
 - `abs residual <= 0.002`: `EXACT_PASS`, accepted as direct reproduction.
 - `0.002 < abs residual <= 0.005`: `METHOD_REVIEW`, acceptable only when all provenance

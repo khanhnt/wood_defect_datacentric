@@ -182,8 +182,10 @@ def run_single_checkpoint(args: argparse.Namespace) -> None:
 
     data_yaml = resolve_data_yaml(run_dir, args.data_yaml, parse_variant_data_yamls(args.variant_data_yaml), variant)
     records, class_names = load_yolo_split_records(data_yaml, args.split)
-    predictions_by_key = predict_records(
+    predictions_by_key, validation_metadata = export_validation_predictions(
         checkpoint=checkpoint,
+        data_yaml=data_yaml,
+        split=args.split,
         records=records,
         class_names=class_names,
         imgsz=args.imgsz,
@@ -192,6 +194,8 @@ def run_single_checkpoint(args: argparse.Namespace) -> None:
         conf=args.conf,
         iou=args.iou,
         device=args.device,
+        validation_project=output_path.parent / "ultralytics_validator",
+        validation_name=output_path.stem,
     )
 
     payload = {
@@ -205,6 +209,7 @@ def run_single_checkpoint(args: argparse.Namespace) -> None:
         "dataset_yaml_sha256": sha256(data_yaml),
         "split": args.split,
         "base_confidence_threshold": float(args.conf),
+        **validation_metadata,
         "class_names": list(class_names),
         "num_images": len(records),
         "num_knot_free_images": sum(1 for record in records if record.is_knot_free),
@@ -408,6 +413,130 @@ def load_yolo_split_records(data_yaml: Path, split: str) -> tuple[list[TestRecor
 def load_yolo_test_records(data_yaml: Path) -> tuple[list[TestRecord], tuple[str, ...]]:
     """Compatibility wrapper for existing analysis imports."""
     return load_yolo_split_records(data_yaml, "test")
+
+
+def export_validation_predictions(
+    *,
+    checkpoint: Path,
+    data_yaml: Path,
+    split: str,
+    records: list[TestRecord],
+    class_names: tuple[str, ...],
+    imgsz: int,
+    batch: int,
+    max_det: int,
+    conf: float,
+    iou: float,
+    device: str,
+    validation_project: Path,
+    validation_name: str,
+) -> tuple[dict[str, list[dict[str, Any]]], dict[str, Any]]:
+    """Export detections from the same DetectionValidator path used for fair metrics."""
+    try:
+        import ultralytics
+        from ultralytics import YOLO
+        from ultralytics.models.yolo.detect.val import DetectionValidator
+    except ImportError as exc:
+        raise ImportError("ultralytics is required for threshold-sweep inference on Vast.") from exc
+
+    if ultralytics.__version__ != "8.4.60":
+        raise RuntimeError(f"Expected Ultralytics 8.4.60, found {ultralytics.__version__}")
+
+    record_by_path = {record.image_path.resolve(): record for record in records}
+    predictions_by_key: dict[str, list[dict[str, Any]]] = {}
+    tensor_shapes: set[tuple[int, int]] = set()
+
+    class ExportingDetectionValidator(DetectionValidator):
+        def update_metrics(self, preds, batch_data) -> None:
+            tensor_shapes.add(tuple(int(value) for value in batch_data["img"].shape[-2:]))
+            for sample_index, pred in enumerate(preds):
+                prepared_batch = self._prepare_batch(sample_index, batch_data)
+                prepared_pred = self._prepare_pred(pred)
+                correct = self._process_batch(prepared_pred, prepared_batch)["tp"]
+                native_pred = self.scale_preds(prepared_pred, prepared_batch)
+                image_path = Path(prepared_batch["im_file"]).resolve()
+                record = record_by_path.get(image_path)
+                if record is None:
+                    raise RuntimeError(f"Validator returned an unexpected image: {image_path}")
+
+                boxes = native_pred["bboxes"].detach().cpu().numpy().astype(np.float32).reshape(-1, 4)
+                scores = native_pred["conf"].detach().cpu().numpy().astype(np.float32)
+                labels = native_pred["cls"].detach().cpu().numpy().astype(np.int64)
+                ious = (
+                    box_iou(boxes, record.boxes_xyxy)
+                    if len(record.boxes_xyxy)
+                    else np.zeros((len(boxes), 0), dtype=np.float32)
+                )
+                rows: list[dict[str, Any]] = []
+                for pred_index, (box, score, label, row_ious) in enumerate(zip(boxes, scores, labels, ious)):
+                    x1, y1, x2, y2 = [float(value) for value in box]
+                    class_id = int(label)
+                    class_name = (
+                        class_names[class_id]
+                        if 0 <= class_id < len(class_names)
+                        else f"class_{class_id}"
+                    )
+                    rows.append(
+                        {
+                            "bbox": [x1, y1, x2 - x1, y2 - y1],
+                            "conf": float(score),
+                            "class": class_name,
+                            "class_id": class_id,
+                            "max_iou_gt": float(np.max(row_ious)) if row_ious.size else 0.0,
+                            "validator_tp_mask": sum(
+                                int(bool(value)) << bit for bit, value in enumerate(correct[pred_index])
+                            ),
+                        }
+                    )
+                predictions_by_key[record.canonical_id] = rows
+            super().update_metrics(preds, batch_data)
+
+    model = YOLO(str(checkpoint))
+    metrics = model.val(
+        validator=ExportingDetectionValidator,
+        data=str(data_yaml),
+        split=str(split),
+        imgsz=int(imgsz),
+        batch=int(batch),
+        conf=float(conf),
+        iou=float(iou),
+        max_det=int(max_det),
+        device=str(device),
+        plots=False,
+        verbose=False,
+        augment=False,
+        save_json=False,
+        save_txt=False,
+        project=str(validation_project),
+        name=str(validation_name),
+        exist_ok=True,
+    )
+    missing = sorted(record.canonical_id for record in records if record.canonical_id not in predictions_by_key)
+    if missing:
+        raise RuntimeError(f"Validator export missed {len(missing)} images; first={missing[0]}")
+    if len(predictions_by_key) != len(records):
+        raise RuntimeError(
+            f"Validator image count mismatch: expected {len(records)}, got {len(predictions_by_key)}"
+        )
+
+    metadata = {
+        "image_loader": "ultralytics_yolo_dataset_opencv",
+        "inference_path": "ultralytics_detection_validator",
+        "tp_source": "ultralytics_detection_validator_process_batch",
+        "requested_imgsz": int(imgsz),
+        "validation_rect": True,
+        "validation_pad": 0.5,
+        "validation_scaleup": False,
+        "validation_tensor_shapes": [list(shape) for shape in sorted(tensor_shapes)],
+        "validator_metrics": {
+            "precision": float(metrics.box.mp),
+            "recall": float(metrics.box.mr),
+            "mAP50": float(metrics.box.map50),
+            "mAP50_95": float(metrics.box.map),
+        },
+        "ultralytics_version": str(ultralytics.__version__),
+    }
+    return predictions_by_key, metadata
 
 
 def predict_records(

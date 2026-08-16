@@ -16,10 +16,11 @@ from scripts.stage_deprecated_checkpoints import SEEDS as DEPRECATED_SEEDS
 from scripts.stage_deprecated_checkpoints import VARIANTS as DEPRECATED_VARIANTS
 from scripts.verify_prediction_map_reproduction import (
     box_iou,
+    build_stats,
     confidence_greedy_match,
     ultralytics_match,
 )
-from scripts.write_generation_provenance import environment
+from scripts.write_generation_provenance import environment, training_git_commit
 from scripts.verify_generation_runtime import EXPECTED, MINIMUM_DRIVER
 
 
@@ -137,6 +138,38 @@ class GenerationQueueTest(unittest.TestCase):
         self.assertTrue(np.array_equal(primary, alternate))
         self.assertTrue(primary[0].all())
         self.assertFalse(primary[1].any())
+
+    def test_reproduction_prefers_validator_tp_flags(self) -> None:
+        payload = {
+            "class_names": ["defect"],
+            "images": [
+                {
+                    "gt_boxes": [[0.0, 0.0, 10.0, 10.0, "defect"]],
+                    "predictions": [
+                        {
+                            "bbox": [50.0, 50.0, 5.0, 5.0],
+                            "conf": 0.9,
+                            "class_id": 0,
+                            "validator_tp_mask": 1023,
+                        }
+                    ],
+                }
+            ],
+        }
+        tp, confidence, pred_class, target_class = build_stats(payload)
+        self.assertEqual(tp.shape, (1, 10))
+        self.assertTrue(tp.all())
+        self.assertAlmostEqual(float(confidence[0]), 0.9, places=6)
+        self.assertEqual(pred_class.tolist(), [0.0])
+        self.assertEqual(target_class.tolist(), [0.0])
+
+    def test_training_commit_comes_from_runtime_preflight(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            preflight = root / "provenance" / "runtime_preflight.json"
+            preflight.parent.mkdir(parents=True)
+            preflight.write_text(json.dumps({"git_commit": "training-sha"}), encoding="utf-8")
+            self.assertEqual(training_git_commit(root), "training-sha")
 
 
 if __name__ == "__main__":
