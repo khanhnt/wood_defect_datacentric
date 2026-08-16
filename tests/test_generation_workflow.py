@@ -20,6 +20,7 @@ from scripts.verify_prediction_map_reproduction import (
     ultralytics_match,
 )
 from scripts.write_generation_provenance import environment
+from scripts.verify_generation_runtime import EXPECTED, MINIMUM_DRIVER
 
 
 class GenerationQueueTest(unittest.TestCase):
@@ -112,6 +113,13 @@ class GenerationQueueTest(unittest.TestCase):
         values = environment()
         self.assertTrue(all(isinstance(value, str) for value in values.values()))
         yaml.safe_dump(values)
+
+    def test_runtime_pins_one_opencv_distribution(self) -> None:
+        requirements = Path("requirements.txt").read_text(encoding="utf-8").splitlines()
+        opencv = [line for line in requirements if line.startswith("opencv-")]
+        self.assertEqual(opencv, ["opencv-python==4.10.0.84"])
+        self.assertEqual(EXPECTED["opencv"], "4.10.0")
+        self.assertEqual(MINIMUM_DRIVER, (525, 60, 13))
 
     def test_prediction_reproduction_matchers_accept_saved_export_shapes(self) -> None:
         labels = np.asarray([[0.0, 0.0, 1.0, 1.0]], dtype=np.float32)

@@ -11,7 +11,7 @@ import subprocess
 
 
 EXPECTED_PYTHON_PREFIX = "3.12."
-MINIMUM_DRIVER = (550, 54)
+MINIMUM_DRIVER = (525, 60, 13)
 EXPECTED = {
     "torch": "2.6.0",
     "torchvision": "0.21.0",
@@ -88,7 +88,7 @@ def main() -> None:
         mismatches["gpu_count"] = {"expected": args.expected_gpus, "observed": gpu_count}
     driver_version = nvidia_driver_version()
     if version_tuple(driver_version) < MINIMUM_DRIVER:
-        mismatches["nvidia_driver"] = {"expected": ">=550.54", "observed": driver_version}
+        mismatches["nvidia_driver"] = {"expected": ">=525.60.13", "observed": driver_version}
     completed = subprocess.run(["git", "rev-parse", "HEAD"], text=True, capture_output=True, check=False)
     report = {
         "status": "PASS" if not mismatches else "FAIL",

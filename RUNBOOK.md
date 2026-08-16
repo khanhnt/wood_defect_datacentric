@@ -203,7 +203,8 @@ Choose an **on-demand**, not interruptible, offer with:
 - at least 16 vCPU and 64 GB RAM;
 - 300 GB local NVMe recommended, 250 GB minimum;
 - host reliability at least 0.98 and strong measured upload/download bandwidth;
-- NVIDIA driver 550.54 or newer, and both GPUs visible to the container.
+- NVIDIA driver 525.60.13 or newer for CUDA 12.x minor-version compatibility, and
+  both GPUs visible to the container.
 
 The training queue is resumable, but an interruptible instance can lose the local
 source, 78 GiB derived tree, and unreturned checkpoints. The small spot discount is not
