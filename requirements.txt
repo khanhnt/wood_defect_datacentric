@@ -8,3 +8,4 @@ opencv-python==4.10.0.84
 Pillow==11.0.0
 PyYAML==6.0.2
 matplotlib==3.10.0
+scipy==1.14.1

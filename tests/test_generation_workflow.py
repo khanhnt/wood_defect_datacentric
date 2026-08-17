@@ -9,6 +9,8 @@ import tempfile
 import numpy as np
 import yaml
 
+from analysis.analyze_generation import compute_ap_ultralytics_8460, evaluate_detection_payload
+from analysis.reviewer_offline_analysis import binomial_intervals, clean_units
 from scripts.run_all_experiments import build_jobs, job_completed, print_dry_run
 from scripts.split_vsb_clean_sources import partition_source_ids
 from scripts.stage_deprecated_checkpoints import DATASETS as DEPRECATED_DATASETS
@@ -20,11 +22,63 @@ from scripts.verify_prediction_map_reproduction import (
     confidence_greedy_match,
     ultralytics_match,
 )
-from scripts.write_generation_provenance import environment, training_git_commit
+from scripts.write_generation_provenance import (
+    checkpoint_dataset_for_evaluation,
+    environment,
+    training_git_commit,
+)
 from scripts.verify_generation_runtime import EXPECTED, MINIMUM_DRIVER
 
 
 class GenerationQueueTest(unittest.TestCase):
+    def test_exact_binomial_interval_crosschecks(self) -> None:
+        cp_low, cp_high, wilson_low, wilson_high = binomial_intervals(0, 75)
+        self.assertEqual(cp_low, 0.0)
+        self.assertAlmostEqual(cp_high, 0.0479950641, places=9)
+        self.assertAlmostEqual(wilson_low, 0.0, places=12)
+        self.assertAlmostEqual(wilson_high, 0.0487238425, places=9)
+
+        cp_low, cp_high, _, _ = binomial_intervals(5, 75)
+        self.assertAlmostEqual(cp_low, 0.0219992525, places=9)
+        self.assertAlmostEqual(cp_high, 0.1487604792, places=9)
+
+    def test_vsb_source_units_group_three_tiles(self) -> None:
+        payload = {
+            "images": [
+                {"canonical_id": f"images/test/clean/source_a__x{x:04d}_y0000.bmp", "is_knot_free": True}
+                for x in (0, 896, 1776)
+            ]
+        }
+        units = clean_units(payload, level="source")
+        self.assertEqual(list(units), ["source_a"])
+        self.assertEqual(len(units["source_a"]), 3)
+
+    def test_generation_analysis_uses_ultralytics_101_point_ap(self) -> None:
+        ap = compute_ap_ultralytics_8460(
+            np.asarray([1.0], dtype=float),
+            np.asarray([1.0], dtype=float),
+        )
+        self.assertAlmostEqual(ap, 0.995, places=9)
+
+    def test_locked_ap_truncates_saved_validator_ranking(self) -> None:
+        payload = {
+            "class_names": ["defect"],
+            "images": [
+                {
+                    "gt_boxes": [[0.0, 0.0, 10.0, 10.0, "defect"]],
+                    "predictions": [
+                        {"class_id": 0, "conf": 0.9, "validator_tp_mask": 1},
+                        {"class_id": 0, "conf": 0.2, "validator_tp_mask": 0},
+                    ],
+                }
+            ],
+        }
+        retained = evaluate_detection_payload(payload, threshold=0.5, iou=0.5)
+        self.assertEqual(retained["n_retained"], 1)
+        self.assertEqual(retained["tp50"], 1)
+        self.assertEqual(retained["fp50"], 0)
+        self.assertAlmostEqual(retained["mAP50"], 0.995, places=9)
+
     def test_corrected_queue_contains_exactly_24_runs(self) -> None:
         jobs = build_jobs(
             dataset_filter="all",
@@ -114,6 +168,10 @@ class GenerationQueueTest(unittest.TestCase):
         values = environment()
         self.assertTrue(all(isinstance(value, str) for value in values.values()))
         yaml.safe_dump(values)
+
+    def test_strict_clean_predictions_use_vsb_checkpoint_registry(self) -> None:
+        self.assertEqual(checkpoint_dataset_for_evaluation("vsb_strict_clean"), "vsb_rarefirst")
+        self.assertEqual(checkpoint_dataset_for_evaluation("vnwoodknot"), "vnwoodknot")
 
     def test_runtime_pins_one_opencv_distribution(self) -> None:
         requirements = Path("requirements.txt").read_text(encoding="utf-8").splitlines()

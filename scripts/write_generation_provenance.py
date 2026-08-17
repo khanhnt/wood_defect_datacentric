@@ -96,6 +96,10 @@ def training_git_commit(generation_root: Path) -> str:
     return str(payload.get("git_commit") or "unavailable")
 
 
+def checkpoint_dataset_for_evaluation(dataset: str) -> str:
+    return "vsb_rarefirst" if dataset == "vsb_strict_clean" else dataset
+
+
 def main() -> None:
     args = parse_args()
     generation_root = args.generation_root.expanduser().resolve()
@@ -203,7 +207,7 @@ def main() -> None:
         dataset = str(payload["dataset"])
         variant = str(payload["variant"])
         seed = int(payload["seed"])
-        checkpoint = checkpoints.get(("vsb_rarefirst" if dataset == "vsb_strict_clean" else dataset, variant, seed))
+        checkpoint = checkpoints.get((checkpoint_dataset_for_evaluation(dataset), variant, seed))
         if not checkpoint:
             raise SystemExit(f"Prediction has no registered checkpoint: {prediction}")
         yaml_source = Path(str(payload["dataset_yaml"])).expanduser().resolve()
@@ -271,7 +275,9 @@ def main() -> None:
             dataset = str(payload["dataset"])
             variant = str(payload["variant"])
             seed = int(payload["seed"])
-            checkpoint = deprecated_checkpoints.get((dataset, variant, seed))
+            checkpoint = deprecated_checkpoints.get(
+                (checkpoint_dataset_for_evaluation(dataset), variant, seed)
+            )
             if not checkpoint:
                 raise SystemExit(f"Deprecated prediction has no registered checkpoint: {prediction}")
             yaml_source = Path(str(payload["dataset_yaml"])).expanduser().resolve()
