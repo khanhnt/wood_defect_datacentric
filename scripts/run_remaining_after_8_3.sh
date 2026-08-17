@@ -92,6 +92,27 @@ for dataset in vnwoodknot vsb_rarefirst; do
   done
 done
 
+echo "[8.4] exporting deprecated VSB checkpoints on source-disjoint strict-clean views"
+for split in val test; do
+  "$PYTHON_BIN" scripts/threshold_sweep_inference.py \
+    --dataset-name vsb_strict_clean \
+    --split "$split" \
+    --checkpoint-root "$DEPRECATED_ROOT/vsb_rarefirst/per_seed/runs" \
+    --output-dir "$GEN/deprecated_audit/predictions/vsb_strict_clean/$split" \
+    --gpus "$GPU_LIST" \
+    --variants a1_crop a2_colorjitter p4_a4_combined \
+    --seeds 42 43 44 \
+    --conf 0.001 \
+    --iou 0.7 \
+    --imgsz 1024 \
+    --batch 32 \
+    --max-det 300 \
+    --variant-data-yaml "a1_crop=$DATA/eval_views/vsb_strict_clean/a1_crop/dataset.yaml" \
+    --variant-data-yaml "a2_colorjitter=$DATA/eval_views/vsb_strict_clean/a2_colorjitter/dataset.yaml" \
+    --variant-data-yaml "p4_a4_combined=$DATA/eval_views/vsb_strict_clean/p4_a4_combined/dataset.yaml" \
+    --overwrite
+done
+
 echo "[8.4] validating deprecated export count and metadata"
 "$PYTHON_BIN" - "$GEN" <<'PY'
 import json
@@ -107,7 +128,7 @@ for path in files:
         bad.append(str(path))
 print("deprecated_json:", len(files))
 print("invalid_exporter:", len(bad))
-if len(files) != 36 or bad:
+if len(files) != 54 or bad:
     raise SystemExit("Deprecated prediction export verification failed.")
 PY
 

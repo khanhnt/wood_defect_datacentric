@@ -838,9 +838,30 @@ for dataset in vnwoodknot vsb_rarefirst; do
 done
 ```
 
+Export the nine deprecated VSB augmentation checkpoints on the same source-disjoint
+strict-clean views used by the primary generation. These additional 18 files close the
+clean-wood comparison without using the contaminated 276 empty rare-first tiles:
+
+```bash
+export CLEAN_MAP_ROOT="$DATA/eval_views/vsb_strict_clean"
+for split in val test; do
+  python scripts/threshold_sweep_inference.py \
+    --dataset-name vsb_strict_clean --split "$split" \
+    --checkpoint-root "$DEPRECATED_ROOT/vsb_rarefirst/per_seed/runs" \
+    --output-dir "$GEN/deprecated_audit/predictions/vsb_strict_clean/$split" \
+    --gpus 0,1 \
+    --variants a1_crop a2_colorjitter p4_a4_combined \
+    --seeds 42 43 44 \
+    --conf 0.001 --iou 0.7 --imgsz 1024 --batch 32 --max-det 300 \
+    --variant-data-yaml "a1_crop=$CLEAN_MAP_ROOT/a1_crop/dataset.yaml" \
+    --variant-data-yaml "a2_colorjitter=$CLEAN_MAP_ROOT/a2_colorjitter/dataset.yaml" \
+    --variant-data-yaml "p4_a4_combined=$CLEAN_MAP_ROOT/p4_a4_combined/dataset.yaml"
+done
+```
+
 Expected primary predictions: 42 VN, 42 VSB rare-first, and 42 VSB strict-clean,
-for 126 JSON exports. Expected deprecated predictions: 36 JSON exports in the separate
-audit namespace.
+for 126 JSON exports. Expected deprecated predictions: 54 JSON exports in the separate
+audit namespace (36 positive/mixed-split exports plus 18 VSB strict-clean exports).
 
 ## 9. Reproduction and provenance gates
 
@@ -951,7 +972,7 @@ Expected counts:
 - 42 `best.pt` files;
 - 24 `last.pt` files (surviving archived runs did not retain `last.pt`);
 - 18 separately registered deprecated `best.pt` files;
-- 126 primary prediction JSON files and 36 deprecated audit prediction JSON files;
+- 126 primary prediction JSON files and 54 deprecated audit prediction JSON files;
 - 85 lines in `fair_metrics.csv` (header + 84 rows);
 - 37 lines in the deprecated fair-metrics CSV (header + 36 rows);
 - 85 and 37 lines in the primary and deprecated reproduction CSVs;
@@ -974,12 +995,13 @@ run logs, not from a generic estimate.
 | VSB A1/A2/P4+A4 retraining | 9 | 12.340 | about 6.2 h |
 | **Training total** | **24** | **15.686** | **about 7.8 h** |
 
-The deprecated audit adds no training. Its 36 fair-evaluation jobs and 36 low-confidence
-exports are expected to add roughly 0.8-1.5 GPU-hours, or about 25-50 minutes with two
-RTX 3090s. The comparison script is CPU-only and should finish in seconds.
+The deprecated audit adds no training. Its 36 fair-evaluation jobs and 54 low-confidence
+exports (including 18 source-disjoint VSB strict-clean exports) are expected to add
+roughly 1.1-1.8 GPU-hours, or about 35-55 minutes with two RTX 3090s. The comparison
+script is CPU-only and should finish in seconds.
 
 Allow 11-13 rented hours for source transfer, 25-60 minutes of materialization, smoke,
-training, primary and deprecated fair evaluation, 162 prediction exports, hashing, and
+training, primary and deprecated fair evaluation, 180 prediction exports, hashing, and
 one retry margin. The 16 GiB clean-data upload runs in parallel with the 7.8-hour
 training window and normally adds no critical-path time.
 
