@@ -1,6 +1,7 @@
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 
@@ -8,9 +9,29 @@ from analysis.fasterrcnn_prediction_adapter import adapt_fasterrcnn_image
 from second_detector.data import read_dataset_yaml, split_paths
 from second_detector.metrics import encode_tp_masks, match_predictions
 from second_detector.protocol import build_jobs, locked_config
+from scripts.train_fasterrcnn import parse_args as parse_train_args
 
 
 class FasterRCNNProtocolTest(unittest.TestCase):
+    def test_training_cli_maps_device_to_engine_keyword(self) -> None:
+        argv = [
+            "train_fasterrcnn.py",
+            "--data-yaml",
+            "/datasets/dataset.yaml",
+            "--output-dir",
+            "/generation/run",
+            "--variant",
+            "baseline",
+            "--seed",
+            "42",
+            "--device",
+            "cuda:1",
+        ]
+        with patch("sys.argv", argv):
+            args = parse_train_args()
+        self.assertEqual(args.device_name, "cuda:1")
+        self.assertFalse(hasattr(args, "device"))
+
     def test_matrix_has_exactly_nine_jobs(self) -> None:
         jobs = build_jobs(rebuilt_root=Path("/datasets"), results_root=Path("/generation"))
         self.assertEqual(len(jobs), 9)

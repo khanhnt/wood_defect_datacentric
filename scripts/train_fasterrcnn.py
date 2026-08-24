@@ -21,7 +21,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--variant", choices=("baseline", "a1_crop", "a2_colorjitter"), required=True)
     parser.add_argument("--seed", type=int, choices=(42, 43, 44), required=True)
-    parser.add_argument("--device", default="cuda:0")
+    parser.add_argument("--device", dest="device_name", default="cuda:0")
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--workers", type=int, default=4)
