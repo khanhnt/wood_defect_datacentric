@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "python": "3.12.13",
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "torchvision": "0.21.0+cu124",
+    "ultralytics": "8.4.60",
+    "numpy": "2.1.1",
+    "pandas": "2.2.3",
+    "opencv": "4.10.0",
+    "Pillow": "11.0.0",
+    "PyYAML": "6.0.2",
+    "matplotlib": "3.10.0"
+  },
+  "package_paths": {
+    "ultralytics": "/venv/main/lib/python3.12/site-packages/ultralytics/__init__.py",
+    "torch": "/venv/main/lib/python3.12/site-packages/torch/__init__.py"
+  },
+  "torch_cuda": "12.4",
+  "nvidia_driver": "580.95.05",
+  "cuda_available": true,
+  "gpu_count": 2,
+  "gpus": [
+    "NVIDIA GeForce RTX 3090",
+    "NVIDIA GeForce RTX 3090"
+  ],
+  "git_commit": "97a52f1b292e7334942fc46dfef1894a35a589ac",
+  "mismatches": {}
+}

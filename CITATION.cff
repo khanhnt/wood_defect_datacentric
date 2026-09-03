@@ -8,9 +8,9 @@ authors:
 repository-code: "https://github.com/khanhnt/wood_defect_datacentric"
 url: "https://github.com/khanhnt/wood_defect_datacentric"
 license: MIT
-version: "1.0.0"
-date-released: "2026-06-28"
-abstract: "Code, manifests, tables, and figures for a data-centric YOLOv8s wood-knot detection study with negative-aware evaluation."
+version: "1.1.0"
+date-released: "2026-09-02"
+abstract: "Code, manifests, tables, and figures for a data-centric wood-knot detection study with negative-aware evaluation and a second-detector robustness experiment."
 preferred-citation:
   type: article
   title: "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection"
@@ -19,4 +19,3 @@ preferred-citation:
       given-names: Thanh Khanh
   journal: "IEEE Access"
   year: 2026
-  doi: "TBD"

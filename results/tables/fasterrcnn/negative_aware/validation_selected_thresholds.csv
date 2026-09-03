@@ -1,0 +1,13 @@
+variant,variant_label,epsilon,validation_selected_threshold,validation_FP_rate_mean,validation_FP_rate_std,selection_rule
+baseline,Baseline,0.00,0.75,0.000000,0.000000,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+baseline,Baseline,0.01,0.70,0.004444,0.007698,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+baseline,Baseline,0.02,0.25,0.017778,0.020367,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+baseline,Baseline,0.05,0.05,0.048889,0.063011,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+a1_crop,A1 crop,0.00,0.90,0.000000,0.000000,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+a1_crop,A1 crop,0.01,0.35,0.008889,0.007698,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+a1_crop,A1 crop,0.02,0.30,0.017778,0.020367,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+a1_crop,A1 crop,0.05,0.10,0.048889,0.050479,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+a2_colorjitter,A2 colour jitter,0.00,0.95,0.000000,0.000000,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+a2_colorjitter,A2 colour jitter,0.01,0.70,0.008889,0.007698,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+a2_colorjitter,A2 colour jitter,0.02,0.10,0.017778,0.007698,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon
+a2_colorjitter,A2 colour jitter,0.05,0.05,0.022222,0.007698,lowest_grid_threshold_with_seed_mean_validation_FP_rate_at_or_below_epsilon

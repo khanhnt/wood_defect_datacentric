@@ -1,0 +1,128 @@
+{
+  "status": "PASS",
+  "tile_size": 1024,
+  "num_source_images": 1992,
+  "num_tiles": 5976,
+  "source_width_distribution": {
+    "2725": 1,
+    "2730": 1,
+    "2754": 1,
+    "2756": 1,
+    "2765": 1,
+    "2766": 1,
+    "2767": 1,
+    "2773": 1,
+    "2790": 1,
+    "2793": 1,
+    "2794": 1,
+    "2798": 1,
+    "2800": 1980
+  },
+  "x_origin_sequence_distribution": {
+    "0,896,1701": 1,
+    "0,896,1706": 1,
+    "0,896,1730": 1,
+    "0,896,1732": 1,
+    "0,896,1741": 1,
+    "0,896,1742": 1,
+    "0,896,1743": 1,
+    "0,896,1749": 1,
+    "0,896,1766": 1,
+    "0,896,1769": 1,
+    "0,896,1770": 1,
+    "0,896,1774": 1,
+    "0,896,1776": 1980
+  },
+  "horizontal_overlap_distribution": {
+    "128": 1992,
+    "144": 1980,
+    "146": 1,
+    "150": 1,
+    "151": 1,
+    "154": 1,
+    "171": 1,
+    "177": 1,
+    "178": 1,
+    "179": 1,
+    "188": 1,
+    "190": 1,
+    "214": 1,
+    "219": 1
+  },
+  "nonstandard_source_count": 12,
+  "nonstandard_sources": [
+    {
+      "source_id": "100000024",
+      "source_width": 2766,
+      "final_origin_x": 1742,
+      "final_overlap_with_previous_x": 178
+    },
+    {
+      "source_id": "103900026",
+      "source_width": 2793,
+      "final_origin_x": 1769,
+      "final_overlap_with_previous_x": 151
+    },
+    {
+      "source_id": "106600024",
+      "source_width": 2730,
+      "final_origin_x": 1706,
+      "final_overlap_with_previous_x": 214
+    },
+    {
+      "source_id": "110900007",
+      "source_width": 2765,
+      "final_origin_x": 1741,
+      "final_overlap_with_previous_x": 179
+    },
+    {
+      "source_id": "143600058",
+      "source_width": 2790,
+      "final_origin_x": 1766,
+      "final_overlap_with_previous_x": 154
+    },
+    {
+      "source_id": "144100064",
+      "source_width": 2754,
+      "final_origin_x": 1730,
+      "final_overlap_with_previous_x": 190
+    },
+    {
+      "source_id": "145000040",
+      "source_width": 2794,
+      "final_origin_x": 1770,
+      "final_overlap_with_previous_x": 150
+    },
+    {
+      "source_id": "152700004",
+      "source_width": 2725,
+      "final_origin_x": 1701,
+      "final_overlap_with_previous_x": 219
+    },
+    {
+      "source_id": "155000073",
+      "source_width": 2773,
+      "final_origin_x": 1749,
+      "final_overlap_with_previous_x": 171
+    },
+    {
+      "source_id": "167000068",
+      "source_width": 2756,
+      "final_origin_x": 1732,
+      "final_overlap_with_previous_x": 188
+    },
+    {
+      "source_id": "170400050",
+      "source_width": 2767,
+      "final_origin_x": 1743,
+      "final_overlap_with_previous_x": 177
+    },
+    {
+      "source_id": "175900010",
+      "source_width": 2798,
+      "final_origin_x": 1774,
+      "final_overlap_with_previous_x": 146
+    }
+  ],
+  "note": "Tiles use x=0, x=896, and x=source_width-1024. Overlap is measured against the immediately preceding tile."
+}

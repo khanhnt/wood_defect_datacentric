@@ -1,0 +1,57 @@
+dataset,variant,variant_label,epsilon,selected_threshold,validation_fp_rate_mean,validation_fp_rate_std,selection_rule
+vnwoodknot,baseline,Baseline,0.0,0.1,0.0,0.0,all_seeds_zero
+vnwoodknot,baseline,Baseline,0.01,0.05,0.004444444552063942,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,baseline,Baseline,0.02,0.05,0.004444444552063942,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,baseline,Baseline,0.05,0.05,0.004444444552063942,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,p1_clahe,P1 CLAHE,0.0,0.1,0.0,0.0,all_seeds_zero
+vnwoodknot,p1_clahe,P1 CLAHE,0.01,0.05,0.004444444552063942,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,p1_clahe,P1 CLAHE,0.02,0.05,0.004444444552063942,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,p1_clahe,P1 CLAHE,0.05,0.05,0.004444444552063942,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,p2_illumination,P2 illumination,0.0,0.15,0.0,0.0,all_seeds_zero
+vnwoodknot,p2_illumination,P2 illumination,0.01,0.05,0.004444444552063942,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,p2_illumination,P2 illumination,0.02,0.05,0.004444444552063942,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,p2_illumination,P2 illumination,0.05,0.05,0.004444444552063942,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,p3_unsharp,P3 unsharp,0.0,0.05,0.0,0.0,all_seeds_zero
+vnwoodknot,p3_unsharp,P3 unsharp,0.01,0.05,0.0,0.0,seed_mean_le_epsilon
+vnwoodknot,p3_unsharp,P3 unsharp,0.02,0.05,0.0,0.0,seed_mean_le_epsilon
+vnwoodknot,p3_unsharp,P3 unsharp,0.05,0.05,0.0,0.0,seed_mean_le_epsilon
+vnwoodknot,a1_crop,A1 crop,0.0,0.25,0.0,0.0,all_seeds_zero
+vnwoodknot,a1_crop,A1 crop,0.01,0.1,0.008888889104127884,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,a1_crop,A1 crop,0.02,0.1,0.008888889104127884,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,a1_crop,A1 crop,0.05,0.05,0.022222222139437992,0.020367002768942138,seed_mean_le_epsilon
+vnwoodknot,a2_colorjitter,A2 colour jitter,0.0,0.05,0.0,0.0,all_seeds_zero
+vnwoodknot,a2_colorjitter,A2 colour jitter,0.01,0.05,0.0,0.0,seed_mean_le_epsilon
+vnwoodknot,a2_colorjitter,A2 colour jitter,0.02,0.05,0.0,0.0,seed_mean_le_epsilon
+vnwoodknot,a2_colorjitter,A2 colour jitter,0.05,0.05,0.0,0.0,seed_mean_le_epsilon
+vnwoodknot,p4_a4_combined,P4+A4 combined,0.0,0.7,0.0,0.0,all_seeds_zero
+vnwoodknot,p4_a4_combined,P4+A4 combined,0.01,0.05,0.008888889104127884,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,p4_a4_combined,P4+A4 combined,0.02,0.05,0.008888889104127884,0.0076980037755974475,seed_mean_le_epsilon
+vnwoodknot,p4_a4_combined,P4+A4 combined,0.05,0.05,0.008888889104127884,0.0076980037755974475,seed_mean_le_epsilon
+vsb_rarefirst,baseline,Baseline,0.0,0.85,0.0,0.0,all_seeds_zero
+vsb_rarefirst,baseline,Baseline,0.01,0.55,0.009370816250642141,0.0038011433294808917,seed_mean_le_epsilon
+vsb_rarefirst,baseline,Baseline,0.02,0.5,0.013833110531171164,0.003701620007283725,seed_mean_le_epsilon
+vsb_rarefirst,baseline,Baseline,0.05,0.3,0.043730478733778,0.006861456205839468,seed_mean_le_epsilon
+vsb_rarefirst,p1_clahe,P1 CLAHE,0.0,0.8,0.0,0.0,all_seeds_zero
+vsb_rarefirst,p1_clahe,P1 CLAHE,0.01,0.6,0.008255242990950743,0.0024669057091918755,seed_mean_le_epsilon
+vsb_rarefirst,p1_clahe,P1 CLAHE,0.02,0.5,0.018630075578888256,0.0030367373666494776,seed_mean_le_epsilon
+vsb_rarefirst,p1_clahe,P1 CLAHE,0.05,0.3,0.04451137905319532,0.002526717270849841,seed_mean_le_epsilon
+vsb_rarefirst,p2_illumination,P2 illumination,0.0,0.75,0.0,0.0,all_seeds_zero
+vsb_rarefirst,p2_illumination,P2 illumination,0.01,0.6,0.006135653704404831,0.001843229863903823,seed_mean_le_epsilon
+vsb_rarefirst,p2_illumination,P2 illumination,0.02,0.5,0.017068273077408474,0.000885459493138165,seed_mean_le_epsilon
+vsb_rarefirst,p2_illumination,P2 illumination,0.05,0.3,0.04618473971883456,0.005259783882348891,seed_mean_le_epsilon
+vsb_rarefirst,p3_unsharp,P3 unsharp,0.0,0.8,0.0,0.0,all_seeds_zero
+vsb_rarefirst,p3_unsharp,P3 unsharp,0.01,0.6,0.006135653704404831,0.0016844789104269447,seed_mean_le_epsilon
+vsb_rarefirst,p3_unsharp,P3 unsharp,0.02,0.5,0.017737617405752342,0.0052597832897625105,seed_mean_le_epsilon
+vsb_rarefirst,p3_unsharp,P3 unsharp,0.05,0.3,0.043618919948736824,0.005895676122613169,seed_mean_le_epsilon
+vsb_rarefirst,a1_crop,A1 crop,0.0,0.8,0.0,0.0,all_seeds_zero
+vsb_rarefirst,a1_crop,A1 crop,0.01,0.65,0.005912539083510637,0.003418463637167808,seed_mean_le_epsilon
+vsb_rarefirst,a1_crop,A1 crop,0.02,0.6,0.012382864796866974,0.0070281124540737695,seed_mean_le_epsilon
+vsb_rarefirst,a1_crop,A1 crop,0.05,0.4,0.047523426512877144,0.014993156967332017,seed_mean_le_epsilon
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,0.0,0.8,0.0,0.0,all_seeds_zero
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,0.01,0.6,0.00602409631634752,0.0031925674814222782,seed_mean_le_epsilon
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,0.02,0.45,0.019857206692298252,0.005952397214288129,seed_mean_le_epsilon
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,0.05,0.3,0.0431726910173893,0.0018633746616497134,seed_mean_le_epsilon
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,0.0,0.8,0.0,0.0,all_seeds_zero
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,0.01,0.65,0.007251226964096229,0.005603466438526257,seed_mean_le_epsilon
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,0.02,0.6,0.013609995289395252,0.010246285072674367,seed_mean_le_epsilon
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,0.05,0.45,0.04730031142632166,0.018706736876165118,seed_mean_le_epsilon

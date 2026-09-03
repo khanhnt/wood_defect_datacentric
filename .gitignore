@@ -59,6 +59,13 @@ Thumbs.db
 !/results/_deprecated/
 !/results/_deprecated/README.md
 /results [0-9]*/
+/revised/
+/figures_new/
+/figures_old_backup/
+/make_figures.py
+/docs/CLAUDE_INVENTORY_REPORT_*.md
+/docs/DATA_RESTORE_AUDIT_*.md
+/docs/MATERIALIZATION_DIAGNOSIS_*.md
 /runs/
 /weights/
 /checkpoints/

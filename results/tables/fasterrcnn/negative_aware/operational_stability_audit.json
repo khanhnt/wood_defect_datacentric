@@ -1,0 +1,34 @@
+{
+  "single_clean_image_binding": {
+    "definition": "exactly_one_seed_image_pair_blocks_the_grid_point_immediately_below_epsilon0_threshold",
+    "count": 2,
+    "total_variants": 3,
+    "variants": [
+      "baseline",
+      "a2_colorjitter"
+    ]
+  },
+  "test_fp_positive_variant_seed_pairs_at_epsilon0": {
+    "count": 3,
+    "total_pairs": 9,
+    "pairs": [
+      "baseline_seed43",
+      "a1_crop_seed43",
+      "a1_crop_seed44"
+    ]
+  },
+  "spearman_epsilon0_vs_epsilon001": {
+    "metric": "retained_AP50_mean",
+    "rho": 0.5,
+    "epsilon0_order": [
+      "baseline",
+      "a2_colorjitter",
+      "a1_crop"
+    ],
+    "epsilon001_order": [
+      "a2_colorjitter",
+      "baseline",
+      "a1_crop"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+epsilon,metric,rank,variant,variant_label,value
+0.00,retained_AP50_mean,1,baseline,Baseline,0.796980
+0.00,retained_AP50_mean,2,a2_colorjitter,A2 colour jitter,0.759273
+0.00,retained_AP50_mean,3,a1_crop,A1 crop,0.576767
+0.01,retained_AP50_mean,1,a2_colorjitter,A2 colour jitter,0.821261
+0.01,retained_AP50_mean,2,baseline,Baseline,0.805239
+0.01,retained_AP50_mean,3,a1_crop,A1 crop,0.671536

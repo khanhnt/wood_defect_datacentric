@@ -1,4 +1,7 @@
-# v1.0.0 Release Notes
+# v1.0.0 Release Notes (Superseded Draft)
+
+This draft described the initial YOLOv8s-only package. The authoritative revision
+release is documented in `docs/RELEASE_NOTES_REVISION.md`.
 
 Initial public reproducibility release for the IEEE Access paper "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection".
 

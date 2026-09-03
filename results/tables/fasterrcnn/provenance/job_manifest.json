@@ -1,0 +1,98 @@
+{
+  "status": "PASS",
+  "protocol": {
+    "architecture": "fasterrcnn_mobilenet_v3_large_fpn",
+    "initialization": "torchvision COCO DEFAULT weights",
+    "num_foreground_classes": 2,
+    "trainable_backbone_layers": 3,
+    "image_size": 1024,
+    "epochs": 50,
+    "batch_size": 4,
+    "workers": 4,
+    "optimizer": "SGD",
+    "learning_rate": 0.005,
+    "momentum": 0.9,
+    "weight_decay": 0.0005,
+    "lr_scheduler": "MultiStepLR",
+    "lr_milestones": [
+      35,
+      45
+    ],
+    "lr_gamma": 0.1,
+    "amp": true,
+    "best_metric": "mAP50_95",
+    "score_threshold": 0.001,
+    "nms_threshold": 0.7,
+    "max_detections": 300,
+    "rpn_score_threshold": 0.05,
+    "online_augmentation": "none",
+    "deterministic": true
+  },
+  "jobs": [
+    {
+      "variant": "baseline",
+      "seed": 42,
+      "data_yaml": "/workspace/data/datasets_frcnn_rebuilt/canonical/vnwoodknot/dataset.yaml",
+      "output_dir": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/vnwoodknot/per_seed/runs/baseline_seed42",
+      "job_id": "vnwoodknot_baseline_seed42"
+    },
+    {
+      "variant": "baseline",
+      "seed": 43,
+      "data_yaml": "/workspace/data/datasets_frcnn_rebuilt/canonical/vnwoodknot/dataset.yaml",
+      "output_dir": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/vnwoodknot/per_seed/runs/baseline_seed43",
+      "job_id": "vnwoodknot_baseline_seed43"
+    },
+    {
+      "variant": "baseline",
+      "seed": 44,
+      "data_yaml": "/workspace/data/datasets_frcnn_rebuilt/canonical/vnwoodknot/dataset.yaml",
+      "output_dir": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/vnwoodknot/per_seed/runs/baseline_seed44",
+      "job_id": "vnwoodknot_baseline_seed44"
+    },
+    {
+      "variant": "a1_crop",
+      "seed": 42,
+      "data_yaml": "/workspace/data/datasets_frcnn_rebuilt/variants/vnwoodknot/augmentation/seed42/A1_defect_preserving_crop/dataset.yaml",
+      "output_dir": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/vnwoodknot/per_seed/runs/a1_crop_seed42",
+      "job_id": "vnwoodknot_a1_crop_seed42"
+    },
+    {
+      "variant": "a1_crop",
+      "seed": 43,
+      "data_yaml": "/workspace/data/datasets_frcnn_rebuilt/variants/vnwoodknot/augmentation/seed43/A1_defect_preserving_crop/dataset.yaml",
+      "output_dir": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/vnwoodknot/per_seed/runs/a1_crop_seed43",
+      "job_id": "vnwoodknot_a1_crop_seed43"
+    },
+    {
+      "variant": "a1_crop",
+      "seed": 44,
+      "data_yaml": "/workspace/data/datasets_frcnn_rebuilt/variants/vnwoodknot/augmentation/seed44/A1_defect_preserving_crop/dataset.yaml",
+      "output_dir": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/vnwoodknot/per_seed/runs/a1_crop_seed44",
+      "job_id": "vnwoodknot_a1_crop_seed44"
+    },
+    {
+      "variant": "a2_colorjitter",
+      "seed": 42,
+      "data_yaml": "/workspace/data/datasets_frcnn_rebuilt/variants/vnwoodknot/augmentation/seed42/A2_texture_aware_color_jitter/dataset.yaml",
+      "output_dir": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/vnwoodknot/per_seed/runs/a2_colorjitter_seed42",
+      "job_id": "vnwoodknot_a2_colorjitter_seed42"
+    },
+    {
+      "variant": "a2_colorjitter",
+      "seed": 43,
+      "data_yaml": "/workspace/data/datasets_frcnn_rebuilt/variants/vnwoodknot/augmentation/seed43/A2_texture_aware_color_jitter/dataset.yaml",
+      "output_dir": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/vnwoodknot/per_seed/runs/a2_colorjitter_seed43",
+      "job_id": "vnwoodknot_a2_colorjitter_seed43"
+    },
+    {
+      "variant": "a2_colorjitter",
+      "seed": 44,
+      "data_yaml": "/workspace/data/datasets_frcnn_rebuilt/variants/vnwoodknot/augmentation/seed44/A2_texture_aware_color_jitter/dataset.yaml",
+      "output_dir": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/vnwoodknot/per_seed/runs/a2_colorjitter_seed44",
+      "job_id": "vnwoodknot_a2_colorjitter_seed44"
+    }
+  ],
+  "verification_rows": 27,
+  "failures": []
+}

@@ -99,7 +99,7 @@ transfer it in a single hardlink-preserving operation. This selects full trainin
 only where needed and only val/test from preprocessing trees used for evaluation:
 
 ```bash
-cd /Users/ntkhanh/PycharmProjects/wood_defect_datacentric
+cd <REPO_ROOT>
 python scripts/build_minimal_transfer_manifest.py \
   --rebuilt-root revised/datasets_rebuilt \
   --output-list revised/minimal_transfer_files.txt \
@@ -124,7 +124,7 @@ compare those values with Section 1 before starting the transfer.
 Review all changes before committing; do not commit dataset pixels or old results.
 
 ```bash
-cd /Users/ntkhanh/PycharmProjects/wood_defect_datacentric
+cd <REPO_ROOT>
 git status --short
 git diff -- RUNBOOK.md analysis/vsb_negative_aware.py scripts configs tests
 git add RUNBOOK.md analysis/vsb_negative_aware.py scripts tests \
@@ -144,7 +144,7 @@ normal sizes of 22,600,739-22,604,771 bytes. The known truncated file is in anot
 snapshot and is not selected.
 
 ```bash
-cd /Users/ntkhanh/PycharmProjects/wood_defect_datacentric
+cd <REPO_ROOT>
 export BUNDLE=/tmp/${GENERATION_TAG}_survivors
 python scripts/generation_checkpoint_registry.py \
   --generation-root "$BUNDLE" \
@@ -175,7 +175,7 @@ download of the file that previously returned `appNotAuthorizedToFile`, then che
 against the restored local copy:
 
 ```bash
-cd /Users/ntkhanh/PycharmProjects/wood_defect_datacentric
+cd <REPO_ROOT>
 rclone version
 rclone config reconnect gdrive:
 
@@ -323,7 +323,7 @@ rclone copy \
 Replace `<VAST_SSH>` with the configured ssh host/alias:
 
 ```bash
-cd /Users/ntkhanh/PycharmProjects/wood_defect_datacentric
+cd <REPO_ROOT>
 rsync -avh --partial --info=progress2 \
   "$BUNDLE/" \
   <VAST_SSH>:/workspace/generations/$GENERATION_TAG/
@@ -536,7 +536,7 @@ This transfer is independent of training and must not block STOP 2. Start it fro
 second Mac terminal immediately after the 24-job queue is running:
 
 ```bash
-cd /Users/ntkhanh/PycharmProjects/wood_defect_datacentric
+cd <REPO_ROOT>
 export CLEAN_UPLOAD_LOG="/tmp/${GENERATION_TAG}_clean_upload.log"
 nohup rsync -avh --partial --info=progress2 \
   revised/data/clean_data/ \
@@ -938,7 +938,7 @@ threshold.
 ### 10.1 Mac: copy the complete generation
 
 ```bash
-cd /Users/ntkhanh/PycharmProjects/wood_defect_datacentric
+cd <REPO_ROOT>
 mkdir -p "revised/generations/$GENERATION_TAG"
 rsync -avzh --partial --info=progress2 \
   <VAST_SSH>:/workspace/generations/$GENERATION_TAG/ \
@@ -953,7 +953,7 @@ caches, or the smoke directory; the corresponding pixels already exist locally.
 ### 10.2 Mac: verify before destroying Vast
 
 ```bash
-cd "/Users/ntkhanh/PycharmProjects/wood_defect_datacentric/revised/generations/$GENERATION_TAG"
+cd "<REPO_ROOT>/revised/generations/$GENERATION_TAG"
 shasum -a 256 -c provenance/SHA256SUMS
 
 find multiseed -path '*/weights/best.pt' -size +10M | wc -l
@@ -1025,7 +1025,7 @@ preserved. The safest simple fallback is the complete rebuilt tree (about 78 GiB
 because it can run both verification gates without rematerializing pixels:
 
 ```bash
-cd /Users/ntkhanh/PycharmProjects/wood_defect_datacentric/revised
+cd <REPO_ROOT>/revised
 rsync -aHh --partial --info=progress2 \
   datasets_rebuilt/ \
   <VAST_SSH>:/workspace/data/datasets_rebuilt/

@@ -1,0 +1,4 @@
+variant,variant_label,epsilon,selected_threshold,previous_grid_threshold,binding_seed_image_pairs,binding_unique_clean_images,single_binding_pair,binding_details
+baseline,Baseline,0.00,0.75,0.70,1,1,True,seed43:knot_free/img_4919.jpg@0.710987
+a1_crop,A1 crop,0.00,0.90,0.85,2,2,False,seed42:knot_free/IMG_4860.jpg@0.887085;seed43:knot_free/img_4468.jpg@0.885997
+a2_colorjitter,A2 colour jitter,0.00,0.95,0.90,1,1,True,seed42:knot_free/img_5009.jpg@0.920944

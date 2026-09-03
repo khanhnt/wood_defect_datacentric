@@ -1,0 +1,1597 @@
+dataset,variant,variant_label,seed,split,threshold,n_clean_images,fp_images,fp_image_rate,n_predictions,mean_predictions_per_clean_image,mean_false_confidence
+vnwoodknot,baseline,Baseline,42,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,42,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.05,75,1,0.013333333656191826,2,0.02666666666666667,0.06055167689919472
+vnwoodknot,baseline,Baseline,43,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.05,75,2,0.02666666731238365,4,0.05333333333333334,0.1666203737258911
+vnwoodknot,baseline,Baseline,43,test,0.1,75,1,0.013333333656191826,2,0.02666666666666667,0.2536039501428604
+vnwoodknot,baseline,Baseline,43,test,0.15,75,1,0.013333333656191826,2,0.02666666666666667,0.2536039501428604
+vnwoodknot,baseline,Baseline,43,test,0.2,75,1,0.013333333656191826,2,0.02666666666666667,0.2536039501428604
+vnwoodknot,baseline,Baseline,43,test,0.25,75,1,0.013333333656191826,1,0.013333333333333334,0.29327064752578735
+vnwoodknot,baseline,Baseline,43,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,43,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.05,75,2,0.02666666731238365,2,0.02666666666666667,0.07254119962453842
+vnwoodknot,baseline,Baseline,44,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,baseline,Baseline,44,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.0846613198518753
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.05,75,2,0.02666666731238365,2,0.02666666666666667,0.22176353633403778
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.1,75,1,0.013333333656191826,1,0.013333333333333334,0.3474579453468323
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.15,75,1,0.013333333656191826,1,0.013333333333333334,0.3474579453468323
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.2,75,1,0.013333333656191826,1,0.013333333333333334,0.3474579453468323
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.25,75,1,0.013333333656191826,1,0.013333333333333334,0.3474579453468323
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.3,75,1,0.013333333656191826,1,0.013333333333333334,0.3474579453468323
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,42,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,43,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.13276953995227814
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.1,75,1,0.013333333656191826,1,0.013333333333333334,0.13276953995227814
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p1_clahe,P1 CLAHE,44,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.05,75,1,0.013333333656191826,2,0.02666666666666667,0.09024649858474731
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.1,75,1,0.013333333656191826,1,0.013333333333333334,0.11170769482851028
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,42,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.1433931589126587
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.1,75,1,0.013333333656191826,1,0.013333333333333334,0.1433931589126587
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,43,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.08925993740558624
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p2_illumination,P2 illumination,44,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.05,75,2,0.02666666731238365,2,0.02666666666666667,0.07066510803997517
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,42,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,43,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.0821995735168457
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p3_unsharp,P3 unsharp,44,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.05,75,2,0.02666666731238365,2,0.02666666666666667,0.14617223292589188
+vnwoodknot,a1_crop,A1 crop,42,val,0.1,75,1,0.013333333656191826,1,0.013333333333333334,0.2057083696126938
+vnwoodknot,a1_crop,A1 crop,42,val,0.15,75,1,0.013333333656191826,1,0.013333333333333334,0.2057083696126938
+vnwoodknot,a1_crop,A1 crop,42,val,0.2,75,1,0.013333333656191826,1,0.013333333333333334,0.2057083696126938
+vnwoodknot,a1_crop,A1 crop,42,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,42,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.0800381526350975
+vnwoodknot,a1_crop,A1 crop,43,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,43,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.05,75,3,0.03999999910593033,4,0.05333333333333334,0.0906500294804573
+vnwoodknot,a1_crop,A1 crop,44,val,0.1,75,1,0.013333333656191826,1,0.013333333333333334,0.1169263944029808
+vnwoodknot,a1_crop,A1 crop,44,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.05,75,2,0.02666666731238365,3,0.04,0.21922857935229936
+vnwoodknot,a1_crop,A1 crop,44,test,0.1,75,1,0.013333333656191826,2,0.02666666666666667,0.29861822724342346
+vnwoodknot,a1_crop,A1 crop,44,test,0.15,75,1,0.013333333656191826,1,0.013333333333333334,0.4477958381175995
+vnwoodknot,a1_crop,A1 crop,44,test,0.2,75,1,0.013333333656191826,1,0.013333333333333334,0.4477958381175995
+vnwoodknot,a1_crop,A1 crop,44,test,0.25,75,1,0.013333333656191826,1,0.013333333333333334,0.4477958381175995
+vnwoodknot,a1_crop,A1 crop,44,test,0.3,75,1,0.013333333656191826,1,0.013333333333333334,0.4477958381175995
+vnwoodknot,a1_crop,A1 crop,44,test,0.35,75,1,0.013333333656191826,1,0.013333333333333334,0.4477958381175995
+vnwoodknot,a1_crop,A1 crop,44,test,0.4,75,1,0.013333333656191826,1,0.013333333333333334,0.4477958381175995
+vnwoodknot,a1_crop,A1 crop,44,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a1_crop,A1 crop,44,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.18161293864250183
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.1,75,1,0.013333333656191826,1,0.013333333333333334,0.18161293864250183
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.15,75,1,0.013333333656191826,1,0.013333333333333334,0.18161293864250183
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,42,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.07367062568664551
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,43,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.059548862278461456
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,a2_colorjitter,A2 colour jitter,44,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.1,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.15,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.2,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.25,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.3,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.35,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.4,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.45,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.5,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.55,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.6,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.65,75,1,0.013333333656191826,1,0.013333333333333334,0.6696608662605286
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.16289310157299042
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.1,75,1,0.013333333656191826,1,0.013333333333333334,0.16289310157299042
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.15,75,1,0.013333333656191826,1,0.013333333333333334,0.16289310157299042
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,42,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.05,75,1,0.013333333656191826,1,0.013333333333333334,0.050679873675107956
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,43,test,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,val,0.95,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.05,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.1,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.15,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.2,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.25,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.3,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.35,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.4,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.45,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.5,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.55,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.6,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.65,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.7,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.75,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.8,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.85,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.9,75,0,0.0,0,0.0,nan
+vnwoodknot,p4_a4_combined,P4+A4 combined,44,test,0.95,75,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,42,val,0.05,2988,295,0.098728246986866,522,0.1746987951807229,0.19594352306990787
+vsb_rarefirst,baseline,Baseline,42,val,0.1,2988,230,0.07697456330060959,331,0.1107764390896921,0.26828188512170426
+vsb_rarefirst,baseline,Baseline,42,val,0.15,2988,184,0.06157965213060379,245,0.0819946452476573,0.31879666909879567
+vsb_rarefirst,baseline,Baseline,42,val,0.2,2988,149,0.04986613243818283,186,0.06224899598393574,0.36531156878317556
+vsb_rarefirst,baseline,Baseline,42,val,0.25,2988,127,0.042503345757722855,150,0.050200803212851405,0.3990648569663366
+vsb_rarefirst,baseline,Baseline,42,val,0.3,2988,107,0.03580990806221962,119,0.03982597054886212,0.431838919134701
+vsb_rarefirst,baseline,Baseline,42,val,0.35,2988,80,0.026773761957883835,89,0.029785809906291833,0.47006720237517624
+vsb_rarefirst,baseline,Baseline,42,val,0.4,2988,61,0.020414993166923523,66,0.02208835341365462,0.5038772780786861
+vsb_rarefirst,baseline,Baseline,42,val,0.45,2988,46,0.015394913032650948,48,0.01606425702811245,0.5348513685166836
+vsb_rarefirst,baseline,Baseline,42,val,0.5,2988,31,0.010374832898378372,31,0.010374832663989291,0.5677219783106158
+vsb_rarefirst,baseline,Baseline,42,val,0.55,2988,15,0.005020080134272575,15,0.0050200803212851405,0.611587659517924
+vsb_rarefirst,baseline,Baseline,42,val,0.6,2988,6,0.00200803205370903,6,0.002008032128514056,0.6635673940181732
+vsb_rarefirst,baseline,Baseline,42,val,0.65,2988,4,0.0013386880746111274,4,0.0013386880856760374,0.6808032840490341
+vsb_rarefirst,baseline,Baseline,42,val,0.7,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.719288170337677
+vsb_rarefirst,baseline,Baseline,42,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,42,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,42,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,42,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,42,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,42,test,0.05,2988,310,0.10374832898378372,564,0.18875502008032127,0.21912126485522546
+vsb_rarefirst,baseline,Baseline,42,test,0.1,2988,250,0.08366800844669342,372,0.12449799196787148,0.2957639213531248
+vsb_rarefirst,baseline,Baseline,42,test,0.15,2988,210,0.07028112560510635,281,0.09404283801874164,0.35164171913340425
+vsb_rarefirst,baseline,Baseline,42,test,0.2,2988,172,0.05756358802318573,216,0.07228915662650602,0.40408106058560034
+vsb_rarefirst,baseline,Baseline,42,test,0.25,2988,143,0.0478581003844738,172,0.05756358768406961,0.45024474588937535
+vsb_rarefirst,baseline,Baseline,42,test,0.3,2988,120,0.0401606410741806,141,0.04718875502008032,0.4885094294734035
+vsb_rarefirst,baseline,Baseline,42,test,0.35,2988,99,0.03313253074884415,112,0.03748326639892905,0.5307902278644698
+vsb_rarefirst,baseline,Baseline,42,test,0.4,2988,87,0.029116466641426086,95,0.03179384203480589,0.5594818372475473
+vsb_rarefirst,baseline,Baseline,42,test,0.45,2988,72,0.024096384644508362,77,0.025769745649263723,0.5905710234270467
+vsb_rarefirst,baseline,Baseline,42,test,0.5,2988,60,0.0200803205370903,63,0.02108433734939759,0.614441556589944
+vsb_rarefirst,baseline,Baseline,42,test,0.55,2988,44,0.01472556870430708,47,0.01572958500669344,0.6453926220853278
+vsb_rarefirst,baseline,Baseline,42,test,0.6,2988,27,0.009036144241690636,30,0.010040160642570281,0.6847914576530456
+vsb_rarefirst,baseline,Baseline,42,test,0.65,2988,19,0.006358768325299025,19,0.006358768406961178,0.7206327350516069
+vsb_rarefirst,baseline,Baseline,42,test,0.7,2988,12,0.00401606410741806,12,0.004016064257028112,0.7430943101644516
+vsb_rarefirst,baseline,Baseline,42,test,0.75,2988,6,0.00200803205370903,6,0.002008032128514056,0.7688159247239431
+vsb_rarefirst,baseline,Baseline,42,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,42,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,42,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,42,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,43,val,0.05,2988,338,0.11311914026737213,597,0.19979919678714858,0.21701512188717748
+vsb_rarefirst,baseline,Baseline,43,val,0.1,2988,259,0.08668005466461182,388,0.12985274431057564,0.29589042827947853
+vsb_rarefirst,baseline,Baseline,43,val,0.15,2988,223,0.07463186234235764,304,0.10174029451137885,0.34251533433991044
+vsb_rarefirst,baseline,Baseline,43,val,0.2,2988,195,0.06526104360818863,251,0.08400267737617136,0.3787335134834882
+vsb_rarefirst,baseline,Baseline,43,val,0.25,2988,164,0.05488621070981026,202,0.06760374832663989,0.41659580967803994
+vsb_rarefirst,baseline,Baseline,43,val,0.3,2988,143,0.0478581003844738,169,0.056559571619812586,0.4459413418755729
+vsb_rarefirst,baseline,Baseline,43,val,0.35,2988,117,0.03915662690997124,131,0.043842034805890225,0.48203619563852557
+vsb_rarefirst,baseline,Baseline,43,val,0.4,2988,94,0.03145917132496834,100,0.03346720214190094,0.5158612841367721
+vsb_rarefirst,baseline,Baseline,43,val,0.45,2988,65,0.02175368182361126,69,0.023092369477911646,0.5556167407312255
+vsb_rarefirst,baseline,Baseline,43,val,0.5,2988,40,0.013386880978941917,42,0.014056224899598393,0.6092965688024249
+vsb_rarefirst,baseline,Baseline,43,val,0.55,2988,33,0.011044176295399666,34,0.011378848728246318,0.6287029052481932
+vsb_rarefirst,baseline,Baseline,43,val,0.6,2988,17,0.005689424462616444,18,0.006024096385542169,0.6760522855652703
+vsb_rarefirst,baseline,Baseline,43,val,0.65,2988,11,0.00368139217607677,11,0.003681392235609103,0.7065008824521845
+vsb_rarefirst,baseline,Baseline,43,val,0.7,2988,4,0.0013386880746111274,4,0.0013386880856760374,0.7698319405317307
+vsb_rarefirst,baseline,Baseline,43,val,0.75,2988,3,0.001004016026854515,3,0.001004016064257028,0.7832488020261129
+vsb_rarefirst,baseline,Baseline,43,val,0.8,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.8011909127235413
+vsb_rarefirst,baseline,Baseline,43,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,43,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,43,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,43,test,0.05,2988,345,0.11546184867620468,644,0.21552878179384202,0.24285633899618564
+vsb_rarefirst,baseline,Baseline,43,test,0.1,2988,286,0.0957162007689476,442,0.14792503346720215,0.32166742285654554
+vsb_rarefirst,baseline,Baseline,43,test,0.15,2988,248,0.08299866318702698,353,0.1181392235609103,0.3724181744515389
+vsb_rarefirst,baseline,Baseline,43,test,0.2,2988,218,0.07295849919319153,289,0.0967202141900937,0.4167278099121932
+vsb_rarefirst,baseline,Baseline,43,test,0.25,2988,192,0.06425702571868896,246,0.0823293172690763,0.45043631079720287
+vsb_rarefirst,baseline,Baseline,43,test,0.3,2988,167,0.05589022859930992,203,0.0679384203480589,0.4866876564002389
+vsb_rarefirst,baseline,Baseline,43,test,0.35,2988,143,0.0478581003844738,168,0.05622489959839357,0.520686998253777
+vsb_rarefirst,baseline,Baseline,43,test,0.4,2988,121,0.040495313704013824,137,0.045850066934404285,0.5550442146558832
+vsb_rarefirst,baseline,Baseline,43,test,0.45,2988,100,0.03346720337867737,114,0.03815261044176707,0.5817473201375258
+vsb_rarefirst,baseline,Baseline,43,test,0.5,2988,83,0.02777777798473835,86,0.028781793842034806,0.6181425868078719
+vsb_rarefirst,baseline,Baseline,43,test,0.55,2988,64,0.021419009193778038,66,0.02208835341365462,0.6462274853027228
+vsb_rarefirst,baseline,Baseline,43,test,0.6,2988,48,0.01606425642967224,48,0.01606425702811245,0.672616571187973
+vsb_rarefirst,baseline,Baseline,43,test,0.65,2988,31,0.010374832898378372,31,0.010374832663989291,0.6991025151744965
+vsb_rarefirst,baseline,Baseline,43,test,0.7,2988,12,0.00401606410741806,12,0.004016064257028112,0.7405342111984888
+vsb_rarefirst,baseline,Baseline,43,test,0.75,2988,5,0.0016733601223677397,5,0.0016733601070950468,0.7641459345817566
+vsb_rarefirst,baseline,Baseline,43,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,43,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,43,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,43,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,44,val,0.05,2988,356,0.11914324015378952,645,0.21586345381526104,0.21863269382553507
+vsb_rarefirst,baseline,Baseline,44,val,0.1,2988,276,0.09236947447061539,432,0.14457831325301204,0.2911020509243287
+vsb_rarefirst,baseline,Baseline,44,val,0.15,2988,236,0.07898259907960892,333,0.11144578313253012,0.3408504808181757
+vsb_rarefirst,baseline,Baseline,44,val,0.2,2988,202,0.06760375201702118,260,0.08701472556894244,0.38712324156210975
+vsb_rarefirst,baseline,Baseline,44,val,0.25,2988,169,0.056559570133686066,206,0.06894243641231593,0.4301333731239282
+vsb_rarefirst,baseline,Baseline,44,val,0.3,2988,142,0.04752342775464058,166,0.05555555555555555,0.46724800226918184
+vsb_rarefirst,baseline,Baseline,44,val,0.35,2988,123,0.04116465896368027,140,0.04685408299866131,0.49360827590738027
+vsb_rarefirst,baseline,Baseline,44,val,0.4,2988,96,0.03212851285934448,111,0.03714859437751004,0.5240924833594142
+vsb_rarefirst,baseline,Baseline,44,val,0.45,2988,76,0.0254350733011961,86,0.028781793842034806,0.5509984933359678
+vsb_rarefirst,baseline,Baseline,44,val,0.5,2988,53,0.0177376177161932,60,0.020080321285140562,0.5829527348279953
+vsb_rarefirst,baseline,Baseline,44,val,0.55,2988,36,0.012048192322254181,39,0.013052208835341365,0.6152051106477395
+vsb_rarefirst,baseline,Baseline,44,val,0.6,2988,20,0.006693440489470959,20,0.006693440428380187,0.6499055057764054
+vsb_rarefirst,baseline,Baseline,44,val,0.65,2988,8,0.0026773761492222548,8,0.002677376171352075,0.6994667202234268
+vsb_rarefirst,baseline,Baseline,44,val,0.7,2988,3,0.001004016026854515,3,0.001004016064257028,0.7343388597170512
+vsb_rarefirst,baseline,Baseline,44,val,0.75,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.7576128244400024
+vsb_rarefirst,baseline,Baseline,44,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,44,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,44,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,44,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,44,test,0.05,2988,352,0.11780454963445663,661,0.2212182061579652,0.23483513844581308
+vsb_rarefirst,baseline,Baseline,44,test,0.1,2988,284,0.09504685550928116,458,0.15327978580990628,0.30733614423064165
+vsb_rarefirst,baseline,Baseline,44,test,0.15,2988,242,0.08099062740802765,348,0.11646586345381527,0.36530079786804903
+vsb_rarefirst,baseline,Baseline,44,test,0.2,2988,208,0.06961178034543991,286,0.09571619812583668,0.4068586063551736
+vsb_rarefirst,baseline,Baseline,44,test,0.25,2988,179,0.05990629270672798,232,0.07764390896921017,0.44966086860874604
+vsb_rarefirst,baseline,Baseline,44,test,0.3,2988,152,0.0508701466023922,192,0.0642570281124498,0.4862939923380812
+vsb_rarefirst,baseline,Baseline,44,test,0.35,2988,132,0.04417670518159866,159,0.05321285140562249,0.5207341440818595
+vsb_rarefirst,baseline,Baseline,44,test,0.4,2988,113,0.03781794011592865,130,0.04350736278447122,0.5542629182338714
+vsb_rarefirst,baseline,Baseline,44,test,0.45,2988,100,0.03346720337867737,108,0.03614457831325301,0.5799174929658572
+vsb_rarefirst,baseline,Baseline,44,test,0.5,2988,76,0.0254350733011961,79,0.02643908969210174,0.6183368601376498
+vsb_rarefirst,baseline,Baseline,44,test,0.55,2988,61,0.020414993166923523,64,0.0214190093708166,0.6398564139381051
+vsb_rarefirst,baseline,Baseline,44,test,0.6,2988,37,0.012382864952087402,38,0.012717536813922356,0.6869850111635107
+vsb_rarefirst,baseline,Baseline,44,test,0.65,2988,25,0.008366800844669342,25,0.008366800535475234,0.7208050942420959
+vsb_rarefirst,baseline,Baseline,44,test,0.7,2988,16,0.0053547522984445095,16,0.00535475234270415,0.7462800927460194
+vsb_rarefirst,baseline,Baseline,44,test,0.75,2988,7,0.0023427042178809643,7,0.0023427041499330657,0.7780859044619969
+vsb_rarefirst,baseline,Baseline,44,test,0.8,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.8154410719871521
+vsb_rarefirst,baseline,Baseline,44,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,44,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,baseline,Baseline,44,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.05,2988,338,0.11311914026737213,598,0.2001338688085676,0.21786623834990537
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.1,2988,265,0.08868808299303055,398,0.13319946452476572,0.29209490970301266
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.15,2988,220,0.07362784445285797,301,0.10073627844712182,0.34660600378267786
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.2,2988,184,0.06157965213060379,234,0.0783132530120482,0.3961228557631501
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.25,2988,158,0.05287817865610123,195,0.06526104417670683,0.42988874117533366
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.3,2988,140,0.046854082494974136,160,0.0535475234270415,0.46286438051611184
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.35,2988,110,0.036813922226428986,125,0.04183400267737617,0.5024364738464355
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.4,2988,89,0.02978581003844738,101,0.033801874163319943,0.5327426549231652
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.45,2988,73,0.024431057274341583,81,0.02710843373493976,0.5596231623196307
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.5,2988,57,0.019076304510235786,61,0.020414993306559572,0.5874247179656732
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.55,2988,40,0.013386880978941917,43,0.014390896921017403,0.6112948364989702
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.6,2988,19,0.006358768325299025,20,0.006693440428380187,0.649114915728569
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.65,2988,6,0.00200803205370903,7,0.0023427041499330657,0.7001174347741264
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.7,2988,4,0.0013386880746111274,4,0.0013386880856760374,0.7282828241586685
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.75,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.7643076181411743
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.05,2988,340,0.11378848552703857,651,0.2178714859437751,0.2409948193440972
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.1,2988,284,0.09504685550928116,459,0.1536144578313253,0.31232126761625534
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.15,2988,250,0.08366800844669342,353,0.1181392235609103,0.369614193274009
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.2,2988,218,0.07295849919319153,284,0.09504685408299866,0.41736649092234357
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.25,2988,195,0.06526104360818863,246,0.0823293172690763,0.4467114551765163
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.3,2988,172,0.05756358802318573,208,0.06961178045515395,0.4777738977796756
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.35,2988,149,0.04986613243818283,172,0.05756358768406961,0.5105389749934507
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.4,2988,126,0.04216867312788963,140,0.04685408299866131,0.5425877043179104
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.45,2988,99,0.03313253074884415,107,0.035809906291834004,0.5780977467510188
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.5,2988,74,0.024765729904174805,78,0.02610441767068273,0.6162113937047812
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.55,2988,53,0.0177376177161932,56,0.018741633199464525,0.6514057474476951
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.6,2988,39,0.01305220928043127,42,0.014056224899598393,0.6777770760513487
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.65,2988,25,0.008366800844669342,25,0.008366800535475234,0.7168073058128357
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.7,2988,15,0.005020080134272575,15,0.0050200803212851405,0.748690390586853
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.75,2988,6,0.00200803205370903,6,0.002008032128514056,0.7739203671614329
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.8,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.8174535036087036
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,42,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.05,2988,367,0.12282463163137436,640,0.214190093708166,0.2183722774963826
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.1,2988,290,0.09705488383769989,427,0.142904953145917,0.2910720344449653
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.15,2988,237,0.07931727170944214,314,0.10508701472556894,0.3518724127370081
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.2,2988,186,0.06224899739027023,244,0.08165997322623829,0.4030672953021331
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.25,2988,154,0.05153949186205864,193,0.0645917001338688,0.4503403063573986
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.3,2988,125,0.04183400422334671,157,0.05254350736278447,0.49158752647934445
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.35,2988,105,0.03514056280255318,131,0.043842034805890225,0.5242245217771021
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.4,2988,95,0.03179384022951126,115,0.03848728246318608,0.5445159448229748
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.45,2988,79,0.026439089328050613,94,0.03145917001338688,0.5708601040408966
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.5,2988,64,0.021419009193778038,73,0.024431057563587683,0.5972159268104866
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.55,2988,47,0.01572958566248417,51,0.01706827309236948,0.6277228441892886
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.6,2988,33,0.011044176295399666,35,0.011713520749665328,0.654812673160008
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.65,2988,14,0.0046854084357619286,14,0.004685408299866131,0.7010015674999782
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.7,2988,6,0.00200803205370903,6,0.002008032128514056,0.7501809199651083
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.75,2988,3,0.001004016026854515,3,0.001004016064257028,0.7680935462315878
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.05,2988,342,0.11445783078670502,646,0.21619812583668005,0.25003440390937837
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.1,2988,284,0.09504685550928116,451,0.15093708165997322,0.32725786290517667
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.15,2988,247,0.08266399055719376,368,0.12315930388219545,0.37322478332435305
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.2,2988,219,0.07329317182302475,305,0.10207496653279786,0.41455065886505316
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.25,2988,202,0.06760375201702118,256,0.0856760374832664,0.45082297432236373
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.3,2988,176,0.05890227481722832,216,0.07228915662650602,0.48427565506211034
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.35,2988,154,0.05153949186205864,181,0.06057563587684069,0.5144554755305717
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.4,2988,129,0.0431726910173893,148,0.049531459170013385,0.5457218988118945
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.45,2988,97,0.032463185489177704,109,0.036479250334672024,0.5893763645526466
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.5,2988,79,0.026439089328050613,89,0.029785809906291833,0.6140521054857233
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.55,2988,61,0.020414993166923523,67,0.02242302543507363,0.6450746272926899
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.6,2988,40,0.013386880978941917,43,0.014390896921017403,0.6831192235613979
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.65,2988,30,0.01004016026854515,31,0.010374832663989291,0.7060651509992538
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.7,2988,14,0.0046854084357619286,14,0.004685408299866131,0.7382779674870628
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.75,2988,4,0.0013386880746111274,4,0.0013386880856760374,0.7668156623840332
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,43,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.05,2988,331,0.11077643930912018,612,0.20481927710843373,0.2155613422552063
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.1,2988,253,0.08467201888561249,407,0.13621151271753681,0.28811264817925575
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.15,2988,218,0.07295849919319153,310,0.1037483266398929,0.33979341118566453
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.2,2988,184,0.06157965213060379,245,0.0819946452476573,0.3839315195472873
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.25,2988,158,0.05287817865610123,197,0.06593038821954485,0.4223922108333123
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.3,2988,134,0.044846050441265106,162,0.05421686746987952,0.45503856903976864
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.35,2988,114,0.03815260902047157,133,0.044511378848728245,0.48398029961084066
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.4,2988,88,0.02945113740861416,97,0.03246318607764391,0.5240405392400997
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.45,2988,68,0.022757697850465775,74,0.024765729585006693,0.5557583759765368
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.5,2988,46,0.015394913032650948,49,0.01639892904953146,0.5978289015439092
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.55,2988,38,0.01271753665059805,40,0.013386880856760375,0.6143637016415596
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.6,2988,22,0.00736278435215354,23,0.007697456492637216,0.6478816089422806
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.65,2988,9,0.0030120480805635452,9,0.0030120481927710845,0.6939195394515991
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.7,2988,4,0.0013386880746111274,4,0.0013386880856760374,0.7219776213169098
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.05,2988,315,0.10542168468236923,625,0.20917001338688085,0.22795559138655663
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.1,2988,253,0.08467201888561249,424,0.14190093708165996,0.301945878842951
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.15,2988,209,0.06994645297527313,316,0.10575635876840696,0.3625982784772221
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.2,2988,195,0.06526104360818863,263,0.08801874163319946,0.4002160543271344
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.25,2988,170,0.05689424276351929,220,0.07362784471218206,0.4350628370588476
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.3,2988,149,0.04986613243818283,178,0.059571619812583666,0.47269042673405637
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.35,2988,126,0.04216867312788963,147,0.04919678714859438,0.5040302864548301
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.4,2988,105,0.03514056280255318,118,0.039491298527443104,0.5368759028487287
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.45,2988,80,0.026773761957883835,88,0.029451137884872823,0.5754361934959888
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.5,2988,63,0.021084336563944817,67,0.02242302543507363,0.6075822604236318
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.55,2988,48,0.01606425642967224,49,0.01639892904953146,0.6377751839404203
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.6,2988,32,0.010709504596889019,33,0.01104417670682731,0.6685990799557079
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.65,2988,18,0.0060240961611270905,18,0.006024096385542169,0.7078576783339182
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.7,2988,8,0.0026773761492222548,8,0.002677376171352075,0.7370938956737518
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.75,2988,2,0.0006693440373055637,2,0.0006693440428380187,0.7689858376979828
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p1_clahe,P1 CLAHE,44,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.05,2988,381,0.12751004099845886,700,0.23427041499330656,0.20801033379243952
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.1,2988,308,0.10307898372411728,474,0.15863453815261044,0.2739857832433554
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.15,2988,249,0.0833333358168602,347,0.11613119143239625,0.3297465950336511
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.2,2988,199,0.06659973412752151,256,0.0856760374832664,0.3857515672571026
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.25,2988,176,0.05890227481722832,214,0.07161981258366801,0.4175954945733614
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.3,2988,155,0.05187416449189186,180,0.060240963855421686,0.44498670233620535
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.35,2988,128,0.042838018387556076,142,0.04752342704149933,0.4779705048446924
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.4,2988,103,0.034471217542886734,113,0.03781793842034806,0.5036791969189601
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.45,2988,74,0.024765729904174805,79,0.02643908969210174,0.5396328919296023
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.5,2988,52,0.017402945086359978,55,0.018406961178045515,0.5663981925357472
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.55,2988,29,0.009705488570034504,31,0.010374832663989291,0.5976675095096711
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.6,2988,12,0.00401606410741806,13,0.004350736278447122,0.6323943229822012
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.65,2988,2,0.0006693440373055637,2,0.0006693440428380187,0.686060220003128
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.7,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.7044706344604492
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,42,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.05,2988,357,0.11947791278362274,711,0.23795180722891565,0.23496523134819064
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.1,2988,302,0.10107094794511795,495,0.16566265060240964,0.30523574734577025
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.15,2988,265,0.08868808299303055,382,0.1278447121820616,0.35829519195706433
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.2,2988,236,0.07898259907960892,313,0.10475234270414993,0.39871785896845136
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.25,2988,200,0.06693440675735474,254,0.08500669344042838,0.4388499247042213
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.3,2988,175,0.058567602187395096,211,0.07061579651941098,0.47240814792601415
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.35,2988,152,0.0508701466023922,175,0.05856760374832664,0.5040088217599051
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.4,2988,129,0.0431726910173893,144,0.04819277108433735,0.5321634871264299
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.45,2988,105,0.03514056280255318,116,0.038821954484605084,0.5582432518231457
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.5,2988,82,0.02744310535490513,89,0.029785809906291833,0.583709789795822
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.55,2988,51,0.017068272456526756,55,0.018406961178045515,0.6210242065516385
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.6,2988,28,0.009370816871523857,30,0.010040160642570281,0.6603806535402934
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.65,2988,14,0.0046854084357619286,15,0.0050200803212851405,0.6991275469462077
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.7,2988,7,0.0023427042178809643,7,0.0023427041499330657,0.7302106363432748
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.75,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.7536193132400513
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,42,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.05,2988,330,0.11044176667928696,612,0.20481927710843373,0.2171072914733801
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.1,2988,270,0.09036144614219666,428,0.14323962516733602,0.2792762307119425
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.15,2988,221,0.07396251708269119,310,0.1037483266398929,0.33892114455661465
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.2,2988,193,0.06459169834852219,244,0.08165997322623829,0.384212106038801
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.25,2988,162,0.05421686917543411,192,0.0642570281124498,0.4270125717545549
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.3,2988,135,0.04518072307109833,154,0.051539491298527446,0.4647665577275412
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.35,2988,112,0.03748326748609543,126,0.04216867469879518,0.4956446975942642
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.4,2988,84,0.02811245061457157,97,0.03246318607764391,0.5317749482454713
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.45,2988,66,0.02208835259079933,77,0.025769745649263723,0.5599309953002186
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.5,2988,48,0.01606425642967224,53,0.017737617135207495,0.5978537505527712
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.55,2988,32,0.010709504596889019,36,0.012048192771084338,0.6333743979533514
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.6,2988,22,0.00736278435215354,22,0.007362784471218206,0.6736714081330732
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.65,2988,17,0.005689424462616444,17,0.005689424364123159,0.6872793926912195
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.7,2988,5,0.0016733601223677397,5,0.0016733601070950468,0.7196757316589355
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,43,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.05,2988,365,0.12215528637170792,676,0.22623828647925034,0.23844009697900193
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.1,2988,299,0.10006693750619888,477,0.15963855421686746,0.3079092593656646
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.15,2988,251,0.08400268107652664,356,0.11914323962516733,0.3713072118966767
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.2,2988,212,0.0709504708647728,277,0.0927041499330656,0.4277171152593427
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.25,2988,195,0.06526104360818863,241,0.08065595716198126,0.4582385195736074
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.3,2988,163,0.054551538079977036,195,0.06526104417670683,0.5014354520883315
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.35,2988,144,0.048192769289016724,163,0.054551539491298526,0.5362221633364086
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.4,2988,124,0.04149933159351349,141,0.04718875502008032,0.5610986542194447
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.45,2988,102,0.03413654491305351,115,0.03848728246318608,0.5917162278424138
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.5,2988,85,0.028447121381759644,92,0.030789825970548863,0.6212567291829897
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.55,2988,64,0.021419009193778038,69,0.023092369477911646,0.652434954608696
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.6,2988,48,0.01606425642967224,52,0.01740294511378849,0.6785571838800724
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.65,2988,32,0.010709504596889019,32,0.0107095046854083,0.7113782148808241
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.7,2988,17,0.005689424462616444,17,0.005689424364123159,0.742749249233919
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.75,2988,6,0.00200803205370903,6,0.002008032128514056,0.7735175589720408
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,43,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.05,2988,329,0.11010709404945374,570,0.19076305220883535,0.21820932172500251
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.1,2988,250,0.08366800844669342,385,0.1288487282463186,0.28895348085985556
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.15,2988,215,0.07195448130369186,291,0.09738955823293173,0.3421997332695833
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.2,2988,180,0.0602409653365612,226,0.07563587684069611,0.3891583282863144
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.25,2988,144,0.048192769289016724,174,0.05823293172690763,0.4381942968258912
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.3,2988,124,0.04149933159351349,146,0.048862115127175365,0.46915662737741864
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.35,2988,102,0.03413654491305351,119,0.03982597054886212,0.5025179135699233
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.4,2988,87,0.029116466641426086,98,0.03279785809906292,0.530375104777667
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.45,2988,73,0.024431057274341583,79,0.02643908969210174,0.5552633084073851
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.5,2988,53,0.0177376177161932,56,0.018741633199464525,0.586356595158577
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.55,2988,34,0.011378848925232887,35,0.011713520749665328,0.6252059885433742
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.6,2988,21,0.007028112653642893,21,0.007028112449799197,0.6539479267029535
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.65,2988,10,0.0033467202447354794,10,0.0033467202141900937,0.6885943830013275
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.7,2988,3,0.001004016026854515,3,0.001004016064257028,0.7310227155685425
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,44,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.05,2988,323,0.108099065721035,611,0.20448460508701471,0.23703050856675142
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.1,2988,260,0.08701472729444504,412,0.13788487282463185,0.3158250320160273
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.15,2988,226,0.0756358802318573,323,0.10809906291834002,0.36834824541958494
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.2,2988,198,0.0662650614976883,264,0.08835341365461848,0.4118753575127233
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.25,2988,173,0.05789826065301895,215,0.07195448460508702,0.4545918779317723
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.3,2988,151,0.050535473972558975,181,0.06057563587684069,0.48853864953004195
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.35,2988,133,0.044511377811431885,154,0.051539491298527446,0.5166933443639186
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.4,2988,112,0.03748326748609543,123,0.04116465863453815,0.5526307857618099
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.45,2988,89,0.02978581003844738,94,0.03145917001338688,0.5914488304802712
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.5,2988,72,0.024096384644508362,75,0.025100401606425703,0.6206906541188558
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.55,2988,54,0.01807228848338127,55,0.018406961178045515,0.6551650556651029
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.6,2988,40,0.013386880978941917,40,0.013386880856760375,0.684131509065628
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.65,2988,26,0.008701472543179989,26,0.008701472556894244,0.7126192358823923
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.7,2988,15,0.005020080134272575,15,0.0050200803212851405,0.7409204085667928
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.75,2988,6,0.00200803205370903,6,0.002008032128514056,0.7691288987795512
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p2_illumination,P2 illumination,44,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.05,2988,339,0.11345381289720535,611,0.20448460508701471,0.2200108975379342
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.1,2988,265,0.08868808299303055,403,0.1348728246318608,0.29725964973789293
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.15,2988,220,0.07362784445285797,309,0.10341365461847389,0.35073172366156163
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.2,2988,191,0.06392235308885574,238,0.07965194109772424,0.4044029721442391
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.25,2988,166,0.0555555559694767,203,0.0679384203480589,0.4355929815416853
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.3,2988,141,0.04718875512480736,166,0.05555555555555555,0.4718906602945672
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.35,2988,119,0.03982597216963768,132,0.04417670682730924,0.5087619073914759
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.4,2988,101,0.03380187600851059,110,0.03681392235609103,0.5361043271693317
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.45,2988,88,0.02945113740861416,92,0.030789825970548863,0.5573523932177088
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.5,2988,70,0.023427041247487068,71,0.023761713520749666,0.581956255603844
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.55,2988,42,0.014056225307285786,43,0.014390896921017403,0.6181643785432328
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.6,2988,23,0.007697456516325474,24,0.008032128514056224,0.6519160295526186
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.65,2988,12,0.00401606410741806,12,0.004016064257028112,0.6889979392290115
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.7,2988,4,0.0013386880746111274,4,0.0013386880856760374,0.7219485640525818
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.05,2988,331,0.11077643930912018,632,0.21151271753681392,0.24534853919161648
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.1,2988,276,0.09236947447061539,442,0.14792503346720215,0.3202657362960313
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.15,2988,240,0.0803212821483612,341,0.1141231593038822,0.3786851495853967
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.2,2988,214,0.07161981612443924,280,0.09370816599732262,0.42308289217097417
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.25,2988,194,0.06492637097835541,236,0.07898259705488621,0.45998243103593084
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.3,2988,174,0.05823293328285217,203,0.0679384203480589,0.49010355131966726
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.35,2988,149,0.04986613243818283,169,0.056559571619812586,0.5230770915217654
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.4,2988,126,0.04216867312788963,138,0.04618473895582329,0.5564625943484514
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.45,2988,107,0.03580990806221962,116,0.038821954484605084,0.5809820042601948
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.5,2988,87,0.029116466641426086,91,0.030455153949129853,0.6104256563134246
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.55,2988,65,0.02175368182361126,68,0.022757697456492636,0.6392482782111448
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.6,2988,48,0.01606425642967224,49,0.01639892904953146,0.6615128286030828
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.65,2988,23,0.007697456516325474,23,0.007697456492637216,0.7045052207034567
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.7,2988,12,0.00401606410741806,12,0.004016064257028112,0.7351323316494623
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.75,2988,3,0.001004016026854515,3,0.001004016064257028,0.7709684371948242
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,42,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.05,2988,312,0.10441767424345016,566,0.1894243641231593,0.20013751997859233
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.1,2988,245,0.08199464529752731,361,0.12081659973226239,0.27395672084882317
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.15,2988,204,0.06827308982610703,274,0.09170013386880857,0.32212359295056686
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.2,2988,165,0.05522088333964348,203,0.0679384203480589,0.37442270831521507
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.25,2988,135,0.04518072307109833,162,0.05421686746987952,0.4121172356384772
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.3,2988,110,0.036813922226428986,126,0.04216867469879518,0.4514045613625693
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.35,2988,90,0.0301204826682806,102,0.03413654618473896,0.481843514769685
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.4,2988,67,0.022423025220632553,75,0.025100401606425703,0.5206158288319905
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.45,2988,55,0.018406961113214493,60,0.020080321285140562,0.5444573322931926
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.5,2988,39,0.01305220928043127,41,0.013721552878179385,0.5785844369632441
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.55,2988,25,0.008366800844669342,26,0.008701472556894244,0.6121785984589503
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.6,2988,13,0.004350736271589994,13,0.004350736278447122,0.6525038801706754
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.65,2988,5,0.0016733601223677397,5,0.0016733601070950468,0.7102569580078125
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.7,2988,4,0.0013386880746111274,4,0.0013386880856760374,0.7162063121795654
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.05,2988,311,0.10408300161361694,574,0.19210174029451138,0.22310751191752506
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.1,2988,253,0.08467201888561249,395,0.1321954484605087,0.29222586468050754
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.15,2988,206,0.06894243508577347,288,0.0963855421686747,0.35520739056583905
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.2,2988,175,0.058567602187395096,232,0.07764390896921017,0.3987520779643593
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.25,2988,151,0.050535473972558975,186,0.06224899598393574,0.4425534043581255
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.3,2988,125,0.04183400422334671,156,0.05220883534136546,0.4748685109691742
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.35,2988,114,0.03815260902047157,135,0.045180722891566265,0.4986702601114909
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.4,2988,99,0.03313253074884415,113,0.03781793842034806,0.5237775669161198
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.45,2988,73,0.024431057274341583,84,0.028112449799196786,0.5579446539992378
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.5,2988,52,0.017402945086359978,57,0.019076305220883535,0.5975743793604666
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.55,2988,38,0.01271753665059805,42,0.014056224899598393,0.6263073129313332
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.6,2988,23,0.007697456516325474,23,0.007697456492637216,0.6730292154395062
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.65,2988,15,0.005020080134272575,15,0.0050200803212851405,0.7023089408874512
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.7,2988,6,0.00200803205370903,6,0.002008032128514056,0.7435258626937866
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.75,2988,3,0.001004016026854515,3,0.001004016064257028,0.7711061636606852
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,43,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.05,2988,317,0.10609102994203568,574,0.19210174029451138,0.22760333194160504
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.1,2988,259,0.08668005466461182,404,0.13520749665327977,0.2935294001040482
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.15,2988,220,0.07362784445285797,319,0.10676037483266398,0.3397544451922085
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.2,2988,195,0.06526104360818863,258,0.08634538152610442,0.37949522867683294
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.25,2988,168,0.05622490122914314,204,0.06827309236947791,0.4205850359855914
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.3,2988,140,0.046854082494974136,163,0.054551539491298526,0.45752321412226904
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.35,2988,117,0.03915662690997124,133,0.044511378848728245,0.4880963967258769
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.4,2988,94,0.03145917132496834,105,0.035140562248995984,0.5177933150813693
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.45,2988,68,0.022757697850465775,74,0.024765729585006693,0.5580661965383066
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.5,2988,50,0.016733601689338684,53,0.017737617135207495,0.5921622762140238
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.55,2988,35,0.011713520623743534,36,0.012048192771084338,0.6245553973648283
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.6,2988,19,0.006358768325299025,19,0.006358768406961178,0.6673278526255959
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.65,2988,12,0.00401606410741806,12,0.004016064257028112,0.6933783789475759
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.7,2988,3,0.001004016026854515,3,0.001004016064257028,0.7365090449651083
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.75,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.7714300751686096
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.05,2988,358,0.11981258541345596,651,0.2178714859437751,0.2386314369417647
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.1,2988,296,0.09906291961669922,444,0.14859437751004015,0.31601426070807753
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.15,2988,255,0.08534136414527893,341,0.1141231593038822,0.3734804546990353
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.2,2988,216,0.07228915393352509,281,0.09404283801874164,0.4164535097804358
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.25,2988,189,0.0632530152797699,234,0.0783132530120482,0.45578783279300755
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.3,2988,160,0.05354752391576767,192,0.0642570281124498,0.4951595445163548
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.35,2988,139,0.046519409865140915,157,0.05254350736278447,0.5323768087253449
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.4,2988,116,0.038821954280138016,132,0.04417670682730924,0.5619216990290266
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.45,2988,99,0.03313253074884415,112,0.03748326639892905,0.5867890204702105
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.5,2988,85,0.028447121381759644,95,0.03179384203480589,0.6067686884026778
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.55,2988,63,0.021084336563944817,68,0.022757697456492636,0.6394517176291522
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.6,2988,46,0.015394913032650948,50,0.01673360107095047,0.6642833912372589
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.65,2988,21,0.007028112653642893,21,0.007028112449799197,0.7188904086748759
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.7,2988,12,0.00401606410741806,12,0.004016064257028112,0.7500017136335373
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.75,2988,5,0.0016733601223677397,5,0.0016733601070950468,0.7887537837028503
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.8,2988,2,0.0006693440373055637,2,0.0006693440428380187,0.8216860592365265
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p3_unsharp,P3 unsharp,44,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.05,2988,598,0.20013387501239777,1491,0.49899598393574296,0.16464923515086363
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.1,2988,442,0.14792503416538239,843,0.2821285140562249,0.23681140124515
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.15,2988,359,0.12014725804328918,572,0.19143239625167335,0.29172291127326605
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.2,2988,296,0.09906291961669922,409,0.13688085676037484,0.3388978417753299
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.25,2988,237,0.07931727170944214,308,0.10307898259705489,0.37642527787716357
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.3,2988,173,0.05789826065301895,213,0.071285140562249,0.42221247702137404
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.35,2988,129,0.0431726910173893,149,0.0498661311914324,0.46549997933758985
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.4,2988,91,0.030455153435468674,108,0.03614457831325301,0.5003663077950478
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.45,2988,67,0.022423025220632553,74,0.024765729585006693,0.5346493185371965
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.5,2988,38,0.01271753665059805,41,0.013721552878179385,0.5833414298732106
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.55,2988,23,0.007697456516325474,25,0.008366800535475234,0.6182376837730408
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.6,2988,13,0.004350736271589994,14,0.004685408299866131,0.657143554517201
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.65,2988,6,0.00200803205370903,6,0.002008032128514056,0.6860083937644958
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.7,2988,3,0.001004016026854515,3,0.001004016064257028,0.7117940982182821
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,42,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.05,2988,578,0.19344042241573334,1493,0.499665327978581,0.17586602270852697
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.1,2988,427,0.14290495216846466,867,0.2901606425702811,0.2517757276814289
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.15,2988,359,0.12014725804328918,601,0.20113788487282463,0.30992118637395183
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.2,2988,303,0.10140562057495117,444,0.14859437751004015,0.3587512982388337
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.25,2988,252,0.08433734625577927,329,0.11010709504685408,0.4066262237025612
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.3,2988,209,0.06994645297527313,261,0.08734939759036145,0.44168492729179704
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.35,2988,167,0.05589022859930992,194,0.06492637215528782,0.4825005612729751
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.4,2988,131,0.04384203627705574,144,0.04819277108433735,0.5193252652469609
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.45,2988,99,0.03313253074884415,106,0.03547523427041499,0.5537428391991921
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.5,2988,71,0.02376171387732029,75,0.025100401606425703,0.5866471513112386
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.55,2988,49,0.016398929059505463,50,0.01673360107095047,0.6181120443344116
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.6,2988,22,0.00736278435215354,22,0.007362784471218206,0.6679654581980272
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.65,2988,11,0.00368139217607677,11,0.003681392235609103,0.7177704518491571
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.7,2988,7,0.0023427042178809643,7,0.0023427041499330657,0.7412804109709603
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.75,2988,3,0.001004016026854515,3,0.001004016064257028,0.7649479905764262
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,42,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.05,2988,471,0.15763051807880402,885,0.2961847389558233,0.2360041242450644
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.1,2988,378,0.1265060305595398,603,0.20180722891566266,0.3132041340468337
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.15,2988,318,0.1064257025718689,466,0.15595716198125836,0.36831376321070186
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.2,2988,281,0.0940428376197815,380,0.12717536813922356,0.4123156507548533
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.25,2988,250,0.08366800844669342,312,0.10441767068273092,0.4535800345624105
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.3,2988,223,0.07463186234235764,268,0.08969210174029452,0.48340091209358244
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.35,2988,191,0.06392235308885574,226,0.07563587684069611,0.5128673659225481
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.4,2988,160,0.05354752391576767,184,0.06157965194109773,0.5447371226289998
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.45,2988,122,0.040829986333847046,138,0.04618473895582329,0.5849500184041866
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.5,2988,104,0.034805890172719955,117,0.0391566265060241,0.6041533029996432
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.55,2988,80,0.026773761957883835,87,0.029116465863453816,0.630456473635531
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.6,2988,52,0.017402945086359978,58,0.019410977242302542,0.6591167172481274
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.65,2988,25,0.008366800844669342,28,0.009370816599732263,0.6963735371828079
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.7,2988,12,0.00401606410741806,12,0.004016064257028112,0.7200341920057932
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.75,2988,2,0.0006693440373055637,2,0.0006693440428380187,0.7547573745250702
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,43,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.05,2988,455,0.15227577090263367,903,0.30220883534136544,0.25613202747877517
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.1,2988,370,0.12382864952087402,621,0.20783132530120482,0.33983138218018166
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.15,2988,339,0.11345381289720535,512,0.1713520749665328,0.38651010987814516
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.2,2988,308,0.10307898372411728,427,0.142904953145917,0.42966243774745727
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.25,2988,274,0.09170013666152954,356,0.11914323962516733,0.4709950393337882
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.3,2988,252,0.08433734625577927,312,0.10441767068273092,0.49818663404156
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.35,2988,224,0.07496653497219086,266,0.08902275769745649,0.5279740796501475
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.4,2988,195,0.06526104360818863,227,0.07597054886211513,0.554776291096263
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.45,2988,167,0.05589022859930992,196,0.06559571619812583,0.5755197775303101
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.5,2988,137,0.04585006833076477,153,0.05120481927710843,0.6035539083231508
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.55,2988,105,0.03514056280255318,113,0.03781793842034806,0.6322957583233318
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.6,2988,73,0.024431057274341583,76,0.025435073627844713,0.6603617377971348
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.65,2988,36,0.012048192322254181,36,0.012048192771084338,0.7030716174178653
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.7,2988,16,0.0053547522984445095,16,0.00535475234270415,0.7439255267381668
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.75,2988,8,0.0026773761492222548,8,0.002677376171352075,0.7690489292144775
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,43,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.05,2988,512,0.1713520735502243,995,0.3329986613119143,0.22629711457607735
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.1,2988,401,0.1342034786939621,666,0.22289156626506024,0.30242031204091896
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.15,2988,345,0.11546184867620468,514,0.17202141900937082,0.3562579975691751
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.2,2988,300,0.1004016101360321,403,0.1348728246318608,0.4066598481930811
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.25,2988,270,0.09036144614219666,336,0.11244979919678715,0.4428698170397963
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.3,2988,230,0.07697456330060959,270,0.09036144578313253,0.4839340768478535
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.35,2988,206,0.06894243508577347,239,0.07998661311914324,0.5049117370878802
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.4,2988,175,0.058567602187395096,193,0.0645917001338688,0.5371411052083722
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.45,2988,141,0.04718875512480736,156,0.05220883534136546,0.564027203581272
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.5,2988,106,0.0354752354323864,116,0.038821954484605084,0.5962743856783571
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.55,2988,78,0.02610441856086254,84,0.028112449799196786,0.6241948888415382
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.6,2988,46,0.015394913032650948,49,0.01639892904953146,0.6597701505738862
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.65,2988,22,0.00736278435215354,23,0.007697456492637216,0.697487613429194
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.7,2988,8,0.0026773761492222548,8,0.002677376171352075,0.7350616529583931
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.75,2988,2,0.0006693440373055637,2,0.0006693440428380187,0.7783105969429016
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,44,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.05,2988,490,0.16398929059505463,1012,0.3386880856760375,0.2511817344166191
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.1,2988,420,0.1405622512102127,709,0.23728246318607765,0.32813913331003214
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.15,2988,363,0.12148594111204147,557,0.1864123159303882,0.3842568443803856
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.2,2988,330,0.11044176667928696,464,0.15528781793842034,0.426677770334585
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.25,2988,303,0.10140562057495117,405,0.1355421686746988,0.4563546121120453
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.3,2988,276,0.09236947447061539,345,0.11546184738955824,0.48783862832663716
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.35,2988,237,0.07931727170944214,279,0.09337349397590361,0.5268881940499857
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.4,2988,201,0.06726907938718796,234,0.0783132530120482,0.5563538665445442
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.45,2988,173,0.05789826065301895,197,0.06593038821954485,0.5801753188450325
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.5,2988,139,0.046519409865140915,154,0.051539491298527446,0.6097633838653564
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.55,2988,110,0.036813922226428986,117,0.0391566265060241,0.6370554892425864
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.6,2988,73,0.024431057274341583,76,0.025435073627844713,0.6735431293123647
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.65,2988,37,0.012382864952087402,39,0.013052208835341365,0.721212428349715
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.7,2988,26,0.008701472543179989,26,0.008701472556894244,0.7461521648443662
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.75,2988,11,0.00368139217607677,11,0.003681392235609103,0.7759095918048512
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a1_crop,A1 crop,44,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.05,2988,309,0.1034136563539505,541,0.18105756358768407,0.2223189369587713
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.1,2988,250,0.08366800844669342,369,0.12349397590361445,0.2933383133353257
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.15,2988,209,0.06994645297527313,281,0.09404283801874164,0.3465720194514536
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.2,2988,178,0.05957162007689476,227,0.07597054886211513,0.38841873289204903
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.25,2988,153,0.05120481923222542,188,0.06291834002677377,0.42264476291676784
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.3,2988,130,0.04350736364722252,149,0.0498661311914324,0.4610176368447758
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.35,2988,105,0.03514056280255318,117,0.0391566265060241,0.49870545665423077
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.4,2988,84,0.02811245061457157,93,0.03112449799196787,0.5310979818785062
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.45,2988,63,0.021084336563944817,68,0.022757697456492636,0.5697217101559919
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.5,2988,49,0.016398929059505463,52,0.01740294511378849,0.5994557016170942
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.55,2988,34,0.011378848925232887,36,0.012048192771084338,0.6334963474008772
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.6,2988,24,0.00803212821483612,24,0.008032128514056224,0.6630202929178873
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.65,2988,11,0.00368139217607677,11,0.003681392235609103,0.705033768307079
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.7,2988,7,0.0023427042178809643,7,0.0023427041499330657,0.7328770927020481
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.75,2988,2,0.0006693440373055637,2,0.0006693440428380187,0.7582180202007294
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.05,2988,326,0.10910307615995407,604,0.20214190093708165,0.23842389467758257
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.1,2988,269,0.09002677351236343,411,0.13755020080321284,0.3167806304356768
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.15,2988,227,0.07597054541110992,315,0.10542168674698796,0.3763599291680351
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.2,2988,198,0.0662650614976883,260,0.08701472556894244,0.4186493852390693
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.25,2988,178,0.05957162007689476,218,0.07295850066934405,0.4563021770584474
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.3,2988,157,0.052543506026268005,183,0.06124497991967871,0.4906921966479776
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.35,2988,139,0.046519409865140915,155,0.05187416331994645,0.5204115944523965
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.4,2988,115,0.038487281650304794,127,0.04250334672021419,0.5522736458797154
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.45,2988,95,0.03179384022951126,104,0.03480589022757698,0.5819148260813493
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.5,2988,73,0.024431057274341583,79,0.02643908969210174,0.6161250524883028
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.55,2988,54,0.01807228848338127,59,0.019745649263721552,0.6490497861878347
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.6,2988,39,0.01305220928043127,41,0.013721552878179385,0.6798938396500378
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.65,2988,23,0.007697456516325474,25,0.008366800535475234,0.7149670934677124
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.7,2988,14,0.0046854084357619286,14,0.004685408299866131,0.7431040917124067
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.75,2988,6,0.00200803205370903,6,0.002008032128514056,0.7846863369146982
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.8,2988,2,0.0006693440373055637,2,0.0006693440428380187,0.805490642786026
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,42,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.05,2988,329,0.11010709404945374,572,0.19143239625167335,0.22201946409666665
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.1,2988,247,0.08266399055719376,376,0.12583668005354753,0.3005727613542942
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.15,2988,209,0.06994645297527313,289,0.0967202141900937,0.35358565597179437
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.2,2988,181,0.060575634241104126,233,0.07797858099062918,0.3971682006069519
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.25,2988,151,0.050535473972558975,186,0.06224899598393574,0.4415658943114742
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.3,2988,134,0.044846050441265106,159,0.05321285140562249,0.4703035660134921
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.35,2988,116,0.038821954280138016,136,0.04551539491298527,0.4947408492512563
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.4,2988,97,0.032463185489177704,108,0.03614457831325301,0.525841793804257
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.45,2988,75,0.025100402534008026,81,0.02710843373493976,0.5595193884254973
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.5,2988,55,0.018406961113214493,59,0.019745649263721552,0.5887881163823403
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.55,2988,44,0.01472556870430708,44,0.014725568942436412,0.6114985509352251
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.6,2988,23,0.007697456516325474,23,0.007697456492637216,0.6462661468464396
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.65,2988,9,0.0030120480805635452,9,0.0030120481927710845,0.6833986639976501
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.7,2988,2,0.0006693440373055637,2,0.0006693440428380187,0.7077356278896332
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.05,2988,330,0.11044176667928696,623,0.20850066934404285,0.2461094862301602
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.1,2988,263,0.0880187451839447,423,0.14156626506024098,0.3282383113888139
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.15,2988,228,0.07630521804094315,336,0.11244979919678715,0.3810019237211063
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.2,2988,200,0.06693440675735474,277,0.0927041499330656,0.42523663784192356
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.25,2988,185,0.06191432476043701,235,0.07864792503346721,0.46207378138887123
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.3,2988,167,0.05589022859930992,203,0.0679384203480589,0.4918296310701981
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.35,2988,147,0.04919678717851639,172,0.05756358768406961,0.5225841184688169
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.4,2988,125,0.04183400422334671,142,0.04752342704149933,0.5530813294397273
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.45,2988,112,0.03748326748609543,122,0.040829986613119144,0.57420208219622
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.5,2988,86,0.028781794011592865,91,0.030455153949129853,0.6091964428241436
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.55,2988,67,0.022423025220632553,70,0.023427041499330656,0.6349210705075945
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.6,2988,43,0.014390897005796432,44,0.014725568942436412,0.6715153333815661
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.65,2988,27,0.009036144241690636,27,0.009036144578313253,0.699535036528552
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.7,2988,10,0.0033467202447354794,10,0.0033467202141900937,0.7505996227264404
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.75,2988,4,0.0013386880746111274,4,0.0013386880856760374,0.764790341258049
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,43,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.05,2988,370,0.12382864952087402,758,0.2536813922356091,0.17934833607073666
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.1,2988,284,0.09504685550928116,444,0.14859437751004015,0.25576432549335937
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.15,2988,236,0.07898259907960892,337,0.11278447121820616,0.2979359999520135
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.2,2988,181,0.060575634241104126,243,0.08132530120481928,0.3461147983378344
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.25,2988,149,0.04986613243818283,185,0.06191432396251673,0.38518068661560884
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.3,2988,123,0.04116465896368027,145,0.04852744310575636,0.41614644034155485
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.35,2988,88,0.02945113740861416,103,0.034471218206157964,0.45278572312836507
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.4,2988,66,0.02208835259079933,72,0.024096385542168676,0.485561513238483
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.45,2988,40,0.013386880978941917,46,0.015394912985274432,0.5183499902486801
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.5,2988,20,0.006693440489470959,21,0.007028112449799197,0.5769026478131613
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.55,2988,12,0.00401606410741806,12,0.004016064257028112,0.6169779549042383
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.6,2988,7,0.0023427042178809643,7,0.0023427041499330657,0.6532835023743766
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.65,2988,3,0.001004016026854515,3,0.001004016064257028,0.6905086040496826
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.7,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.7147263288497925
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.05,2988,387,0.1295180767774582,805,0.26941097724230256,0.1952042498666307
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.1,2988,303,0.10140562057495117,503,0.16834002677376173,0.27020665286312523
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.15,2988,253,0.08467201888561249,377,0.12617135207496652,0.31977062512297844
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.2,2988,215,0.07195448130369186,290,0.09705488621151272,0.3639772418757965
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.25,2988,180,0.0602409653365612,231,0.07730923694779117,0.4005179598733976
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.3,2988,146,0.048862114548683167,179,0.05990629183400268,0.43713429203912535
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.35,2988,108,0.03614457696676254,122,0.040829986613119144,0.4899127539552626
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.4,2988,84,0.02811245061457157,92,0.030789825970548863,0.5266412282767503
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.45,2988,59,0.01974564976990223,64,0.0214190093708166,0.5717817428521812
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.5,2988,47,0.01572958566248417,50,0.01673360107095047,0.5992220997810364
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.55,2988,37,0.012382864952087402,38,0.012717536813922356,0.6244284291016428
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.6,2988,26,0.008701472543179989,26,0.008701472556894244,0.6503596443396348
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.65,2988,11,0.00368139217607677,11,0.003681392235609103,0.6839820092374628
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.7,2988,2,0.0006693440373055637,2,0.0006693440428380187,0.7416004538536072
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.75,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.778881311416626
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,a2_colorjitter,A2 colour jitter,44,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.05,2988,647,0.21653279662132263,1330,0.44511378848728245,0.24297083604772737
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.1,2988,532,0.17804551124572754,931,0.3115796519410977,0.31704003760785215
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.15,2988,464,0.15528781712055206,721,0.24129852744310576,0.37386185606623823
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.2,2988,421,0.14089691638946533,601,0.20113788487282463,0.4138791286161854
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.25,2988,364,0.1218206137418747,498,0.16666666666666666,0.45299220899022724
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.3,2988,323,0.108099065721035,424,0.14190093708165996,0.4841634359140441
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.35,2988,284,0.09504685550928116,359,0.12014725568942436,0.5133806261179507
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.4,2988,250,0.08366800844669342,303,0.10140562248995984,0.538899436150447
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.45,2988,203,0.0679384171962738,240,0.08032128514056225,0.569013366351525
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.5,2988,153,0.05120481923222542,180,0.060240963855421686,0.6010575205087662
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.55,2988,115,0.038487281650304794,129,0.04317269076305221,0.630549664645232
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.6,2988,76,0.0254350733011961,83,0.027777777777777776,0.6610193855791207
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.65,2988,41,0.013721552677452564,42,0.014056224899598393,0.6977939846969786
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.7,2988,18,0.0060240961611270905,19,0.006358768406961178,0.7302122116088867
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.75,2988,3,0.001004016026854515,3,0.001004016064257028,0.7724270621935526
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.05,2988,618,0.206827312707901,1301,0.43540829986613117,0.24727521089695217
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.1,2988,511,0.17101740837097168,896,0.2998661311914324,0.3267316712216208
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.15,2988,446,0.14926372468471527,702,0.23493975903614459,0.3829606008156073
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.2,2988,384,0.12851405143737793,569,0.19042838018741634,0.4322132528980503
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.25,2988,347,0.11613119393587112,488,0.16331994645247658,0.4669929643268468
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.3,2988,311,0.10408300161361694,409,0.13688085676037484,0.5042839641967438
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.35,2988,283,0.09471218287944794,356,0.11914323962516733,0.5306381539682324
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.4,2988,251,0.08400268107652664,314,0.10508701472556894,0.5519383766089275
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.45,2988,210,0.07028112560510635,250,0.08366800535475234,0.5842962857484818
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.5,2988,176,0.05890227481722832,201,0.06726907630522089,0.6108448965039419
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.55,2988,137,0.04585006833076477,151,0.05053547523427041,0.6392953502421348
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.6,2988,93,0.031124498695135117,98,0.03279785809906292,0.6729639616547799
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.65,2988,58,0.019410977140069008,58,0.019410977242302542,0.7077414033741787
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.7,2988,31,0.010374832898378372,31,0.010374832663989291,0.7352210725507429
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.75,2988,9,0.0030120480805635452,9,0.0030120481927710845,0.7701265083418952
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.8,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.8084339499473572
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,42,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.05,2988,664,0.2222222238779068,1629,0.5451807228915663,0.1964810455390615
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.1,2988,544,0.1820615828037262,1049,0.3510709504685408,0.2665212678414964
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.15,2988,461,0.154283806681633,762,0.25502008032128515,0.32094729990940396
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.2,2988,391,0.13085676729679108,585,0.19578313253012047,0.36573623890041285
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.25,2988,325,0.10876840353012085,454,0.15194109772423026,0.40617535397869897
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.3,2988,265,0.08868808299303055,351,0.11746987951807229,0.4447242817138335
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.35,2988,219,0.07329317182302475,276,0.09236947791164658,0.47746150098417117
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.4,2988,169,0.056559570133686066,209,0.06994645247657295,0.5106340996101142
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.45,2988,127,0.042503345757722855,152,0.050870147255689425,0.5436058224816072
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.5,2988,88,0.02945113740861416,106,0.03547523427041499,0.5741153381905466
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.55,2988,52,0.017402945086359978,62,0.020749665327978582,0.6110165369126105
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.6,2988,24,0.00803212821483612,27,0.009036144578313253,0.6582263619811447
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.65,2988,12,0.00401606410741806,13,0.004350736278447122,0.6943223751508273
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.7,2988,4,0.0013386880746111274,5,0.0016733601070950468,0.7174116969108582
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.75,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.05,2988,626,0.20950467884540558,1514,0.5066934404283802,0.20506608207639962
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.1,2988,494,0.1653279811143875,959,0.32095046854083,0.28270806243975294
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.15,2988,418,0.13989290595054626,715,0.2392904953145917,0.33730025220584203
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.2,2988,369,0.1234939768910408,552,0.18473895582329317,0.38595875733248564
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.25,2988,320,0.10709504783153534,443,0.14825970548862116,0.42593927092799755
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.3,2988,278,0.09303881973028183,359,0.12014725568942436,0.4618679476813686
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.35,2988,231,0.07730923593044281,291,0.09738955823293173,0.4935760053572376
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.4,2988,194,0.06492637097835541,235,0.07864792503346721,0.5214661787164973
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.45,2988,149,0.04986613243818283,175,0.05856760374832664,0.5545076916899
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.5,2988,113,0.03781794011592865,125,0.04183400267737617,0.5879158806800843
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.55,2988,73,0.024431057274341583,78,0.02610441767068273,0.6259217667273986
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.6,2988,37,0.012382864952087402,40,0.013386880856760375,0.6718745574355125
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.65,2988,21,0.007028112653642893,22,0.007362784471218206,0.7080916247584603
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.7,2988,12,0.00401606410741806,12,0.004016064257028112,0.7337623536586761
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.75,2988,3,0.001004016026854515,3,0.001004016064257028,0.7675337195396423
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,43,test,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.05,2988,530,0.1773761659860611,1203,0.4026104417670683,0.19784912192947846
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.1,2988,428,0.14323963224887848,760,0.2543507362784471,0.27156808538068283
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.15,2988,367,0.12282463163137436,556,0.18607764390896922,0.32630485596416664
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.2,2988,318,0.1064257025718689,449,0.15026773761713522,0.3626972781390549
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.25,2988,267,0.08935742825269699,350,0.11713520749665328,0.4024167393786567
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.3,2988,217,0.0726238265633583,272,0.09103078982597054,0.43886279851636467
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.35,2988,166,0.0555555559694767,205,0.06860776439089693,0.4762806938915718
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.4,2988,125,0.04183400422334671,152,0.050870147255689425,0.5109208077192307
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.45,2988,94,0.03145917132496834,110,0.03681392235609103,0.5445494551550258
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.5,2988,60,0.0200803205370903,69,0.023092369477911646,0.58750162349231
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.55,2988,43,0.014390897005796432,49,0.01639892904953146,0.6133700925476697
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.6,2988,22,0.00736278435215354,22,0.007362784471218206,0.6621995216066187
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.65,2988,12,0.00401606410741806,12,0.004016064257028112,0.6923328191041946
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.7,2988,5,0.0016733601223677397,5,0.0016733601070950468,0.7222532272338867
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.75,2988,1,0.00033467201865278184,1,0.00033467202141900936,0.7759267687797546
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,val,0.95,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.05,2988,492,0.16465863585472107,1127,0.3771753681392236,0.20856119632165623
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.1,2988,388,0.12985274195671082,706,0.2362784471218206,0.2896299304878577
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.15,2988,336,0.11244980245828629,530,0.17737617135207498,0.3450735753156104
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.2,2988,299,0.10006693750619888,422,0.14123159303882196,0.3894610873542691
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.25,2988,259,0.08668005466461182,330,0.11044176706827309,0.43577694793542227
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.3,2988,221,0.07396251708269119,274,0.09170013386880857,0.469224737943524
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.35,2988,181,0.060575634241104126,216,0.07228915662650602,0.507770768608208
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.4,2988,149,0.04986613243818283,177,0.05923694779116466,0.5365788242911215
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.45,2988,124,0.04149933159351349,141,0.04718875502008032,0.5646624374896922
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.5,2988,98,0.032797858119010925,108,0.03614457831325301,0.5909865310898533
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.55,2988,71,0.02376171387732029,72,0.024096385542168676,0.6253069738547007
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.6,2988,39,0.01305220928043127,40,0.013386880856760375,0.6693829149007797
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.65,2988,20,0.006693440489470959,20,0.006693440428380187,0.7143396705389022
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.7,2988,9,0.0030120480805635452,9,0.0030120481927710845,0.7624306281407675
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.75,2988,7,0.0023427042178809643,7,0.0023427041499330657,0.770441506590162
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.8,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.85,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.9,2988,0,0.0,0,0.0,nan
+vsb_rarefirst,p4_a4_combined,P4+A4 combined,44,test,0.95,2988,0,0.0,0,0.0,nan

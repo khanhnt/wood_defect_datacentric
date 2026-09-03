@@ -1,0 +1,12 @@
+variant,split,selected_threshold,source_id,seed,fp_tiles,false_detections,max_confidence,tile_ids,present_seed_count,present_seeds
+p2_illumination,test,0.75,115100048,43,1,1,0.777272641658783,images/test/clean/115100048__x0000_y0000.jpg,1,43
+p2_illumination,test,0.75,125100016,42,1,1,0.7536193132400513,images/test/clean/125100016__x0896_y0000.jpg,3,42;43;44
+p2_illumination,test,0.75,125100016,43,2,2,0.7752711772918701,images/test/clean/125100016__x0000_y0000.jpg;images/test/clean/125100016__x0896_y0000.jpg,3,42;43;44
+p2_illumination,test,0.75,125100016,44,2,2,0.7787393927574158,images/test/clean/125100016__x0000_y0000.jpg;images/test/clean/125100016__x0896_y0000.jpg,3,42;43;44
+p2_illumination,test,0.75,126800046,43,1,1,0.7868931293487549,images/test/clean/126800046__x0896_y0000.jpg,2,43;44
+p2_illumination,test,0.75,126800046,44,1,1,0.7850660085678101,images/test/clean/126800046__x0896_y0000.jpg,2,43;44
+p2_illumination,test,0.75,129300018,44,1,1,0.7584971189498901,images/test/clean/129300018__x0896_y0000.jpg,1,44
+p2_illumination,test,0.75,131100072,44,1,1,0.7524901032447815,images/test/clean/131100072__x0000_y0000.jpg,1,44
+p2_illumination,test,0.75,148900029,43,1,1,0.790352463722229,images/test/clean/148900029__x0896_y0000.jpg,2,43;44
+p2_illumination,test,0.75,148900029,44,1,1,0.7673813700675964,images/test/clean/148900029__x0896_y0000.jpg,2,43;44
+p2_illumination,test,0.75,166700044,43,1,1,0.7577036619186401,images/test/clean/166700044__x0896_y0000.jpg,1,43
