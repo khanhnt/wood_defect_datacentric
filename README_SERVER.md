@@ -1,190 +1,79 @@
-# Vast.ai Server README
+# GPU Server Notes
 
-This repository is the independent IJACSA data-centric wood surface defect project. It keeps the detector fixed as YOLOv8s and studies preprocessing, augmentation, and negative-aware VNWoodKnot evaluation. It is intentionally separate from the accepted CMC detector-comparison repository.
+These notes cover the reported YOLOv8s and Faster R-CNN experiment environments. Use `RUNBOOK.md` for the complete generation workflow and `REPRODUCE.md` for the paper-artifact map. Do not commit raw datasets, materialized image trees, checkpoints, prediction exports, credentials, or generated run directories.
 
-Do not commit datasets, weights, checkpoints, archives, or generated results to GitHub.
+## Environment
 
-## 1. Clone On Vast.ai
-
-```bash
-cd /workspace
-git clone <YOUR_GITHUB_REPO_URL> wood_defect_datacentric
-cd /workspace/wood_defect_datacentric
-```
-
-## 2. Create Environment
-
-Use either conda:
+The frozen runs used Python 3.12, PyTorch 2.6.0 with CUDA 12.4, Ultralytics 8.4.60, OpenCV 4.10.0, and two NVIDIA RTX 3090 GPUs. The runtime gate records exact package and driver versions:
 
 ```bash
-conda create -n wooddc python=3.10 -y
-conda activate wooddc
-pip install -r requirements.txt
+python scripts/verify_generation_runtime.py \
+  --expected-gpus 2 \
+  --output /path/to/generation/provenance/runtime_preflight.json
 ```
 
-Or venv:
+The gate must report `PASS` before training.
+
+## Data
+
+Obtain VNWoodKnot and VSB from the sources in `data/README.md`. Reconstruct canonical datasets only from the tracked manifests:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-## 3. Configure `.env`
-
-```bash
-cp .env.example .env
-nano .env
-```
-
-Set at least:
-
-- `PROJECT_ROOT=/workspace/wood_defect_datacentric`
-- `DATA_ROOT=/workspace/data`
-- `VSB_ROOT=/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo`
-- `VNWOODKNOT_ROOT=/workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo`
-- `WOOD_DC_VSB_BASELINE_DATASET_YAML=/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/dataset.yaml`
-- `WOOD_DC_VN_BASELINE_DATASET_YAML=/workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/dataset.yaml`
-- `RESULTS_ROOT=/workspace/wood_defect_datacentric/results`
-- `DEVICE=0`
-- `BATCH_SIZE=16`
-- `IMG_SIZE=1024`
-
-## 4. Copy Datasets From Google Drive
-
-Use one of the methods in `docs/google_drive_dataset_setup.md`: `gdown`, `rclone`, or `rsync/scp` from a local machine that already has the files.
-
-Expected baseline YOLO dataset YAMLs:
-
-```text
-/workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo/dataset.yaml
-/workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/dataset.yaml
-```
-
-## 5. Verify Server Environment
-
-```bash
-./scripts/setup_server.sh
-```
-
-This checks GPU visibility, PyTorch CUDA, Ultralytics, disk space, and required folders. It does not start training.
-
-## 6. Generate YOLO Datasets From Manifests If Needed
-
-If the copied data contains only `images/`, `manifest.jsonl`, and `metadata.json`, generate YOLO folders before running training.
-
-VNWoodKnot usually has manifest split labels:
-
-```bash
-PYTHONDONTWRITEBYTECODE=1 python scripts/materialize_yolo_from_manifest.py \
-  --manifest /workspace/data/vnwoodknot/manifest.jsonl \
-  --images-root /workspace/data/vnwoodknot/images \
-  --output-root /workspace/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo \
-  --dataset-name vnwoodknot_live_dead_2class_yolo \
+python scripts/materialize_yolo_from_manifest.py \
+  --manifest data/vnwoodknot_split/manifest.jsonl \
+  --images-root /path/to/VNWoodKnot/images \
+  --output-root /path/to/datasets_rebuilt/canonical/vnwoodknot \
+  --dataset-name vnwoodknot \
   --classes live_knot dead_knot \
   --split-strategy manifest \
-  --link-mode symlink
-```
+  --link-mode copy \
+  --exclude-image-id train/2/img_3671
 
-For VSB, prefer an existing curated split. If the manifest has no split labels and you need a server-ready YOLO folder, create a deterministic random split:
-
-```bash
-PYTHONDONTWRITEBYTECODE=1 python scripts/materialize_yolo_from_manifest.py \
-  --manifest /workspace/data/main_dataset/manifest.jsonl \
-  --images-root /workspace/data/main_dataset/images \
-  --output-root /workspace/data/main_dataset/benchmarks/vsb7_3600_rare_first_yolo \
-  --dataset-name vsb7_3600_rare_first_yolo \
+python scripts/materialize_yolo_from_manifest.py \
+  --manifest data/vsb_rarefirst_split/manifest.jsonl \
+  --images-root /path/to/VSB/images \
+  --output-root /path/to/datasets_rebuilt/canonical/vsb_rarefirst \
+  --dataset-name vsb_rarefirst \
   --classes live_knot dead_knot resin knot_with_crack crack marrow knot_missing \
-  --split-strategy random \
-  --seed 42 \
-  --link-mode symlink
+  --split-strategy manifest \
+  --link-mode copy
 ```
 
-Review `materialization_report.json` before training. Records with unknown classes or invalid boxes are skipped by default to avoid creating false-negative labels.
-
-## 7. Verify Datasets
+Build preprocessing variants for all splits and augmentation variants for `train` only. The verification gate must pass before any training starts:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 python scripts/check_server_ready.py
+python scripts/verify_rebuilt_datasets.py \
+  --root /path/to/datasets_rebuilt \
+  --datasets vnwoodknot vsb_rarefirst \
+  --output-csv /path/to/datasets_rebuilt/reports/verification_gate.csv \
+  --output-md /path/to/datasets_rebuilt/reports/verification_gate.md
 ```
 
-This checks:
+Expected canonical counts are VNWoodKnot 1,059/226/229 and VSB rare-first 7,679/977/972 for train/validation/test.
 
-- VSB and VNWoodKnot dataset YAML paths.
-- Train/val/test split paths.
-- Image/label matching.
-- Label formatting and class IDs.
-- Expected class names.
-- VNWoodKnot empty/background labels and manifest `knot_free` retention.
-- Results folder writability.
+## Training
 
-## 8. Preview Data-Centric Transforms
+Run a dry-run before the full queue:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 python scripts/preview_preprocessing.py \
-  --dataset vnwoodknot \
-  --split test \
-  --num-samples 4 \
-  --output-dir results/server_previews/preprocessing
-
-PYTHONDONTWRITEBYTECODE=1 python scripts/preview_augmentation.py \
-  --dataset vnwoodknot \
-  --split test \
-  --num-samples 4 \
-  --output-dir results/server_previews/augmentation
+python scripts/run_all_experiments.py \
+  --job-set corrected24 --dataset all --batch-size 40 \
+  --epochs 50 --imgsz 1024 --workers 4 --gpus 0,1 \
+  --rebuilt-root /path/to/datasets_rebuilt \
+  --results-root /path/to/generation \
+  --dry-run
 ```
 
-Review the generated panels before training data-centric variants.
+Remove `--dry-run` only after checking all 24 job rows. The complete YOLOv8s generation comprises these 24 runs plus the 18 unaffected registered checkpoints, for 42 runs total. Both `best.pt` and `last.pt` are required for newly trained runs.
 
-## 9. Run Baseline Dry-Runs
+The Faster R-CNN protocol and nine-run command are documented in `docs/FASTERRCNN_ROBUSTNESS_RUNBOOK.md`.
 
-Run the server sanity helper so dry-run metadata is kept away from real training run folders:
+## Before Releasing A Server
 
-```bash
-PYTHONDONTWRITEBYTECODE=1 python scripts/server_setup_sanity.py \
-  --output-dir results/server_setup_sanity_vast \
-  --write-launcher-dry-run
-```
+1. Verify the expected checkpoint and prediction counts.
+2. Run AP reproduction and require every primary cell to pass its exact tolerance.
+3. Write provenance and `SHA256SUMS`.
+4. Copy the complete generation off the server and validate the checksums at the destination.
+5. Build the external archive with `scripts/package_release_archive.py --strict`.
 
-Both baseline dry-runs must be `ok=true` before Batch 1.
-
-## 10. Run Batch 1 Baselines
-
-Use tmux so training survives SSH disconnects:
-
-```bash
-tmux new -s wooddc
-./scripts/run_batch1_baselines.sh
-```
-
-Detach with `Ctrl-b d`. Reattach with:
-
-```bash
-tmux attach -t wooddc
-```
-
-## 11. Aggregate After Batch 1
-
-```bash
-./scripts/aggregate_after_batch.sh
-```
-
-Review baseline mAP, precision, recall, logs, and checkpoint files. Continue only if baselines are reasonable and no dataset/path issue appears.
-
-## 12. Continue Controlled Batches
-
-Run later batches only after confirming Batch 1:
-
-```bash
-./scripts/run_batch2_preprocessing.sh
-./scripts/aggregate_after_batch.sh
-
-./scripts/run_batch3_augmentation.sh
-./scripts/aggregate_after_batch.sh
-
-./scripts/run_batch4_combined.sh
-./scripts/aggregate_after_batch.sh
-```
-
-Optional copy-paste remains experimental and is not included in the default batch sequence.
+Do not terminate the server until the destination checksum check passes.

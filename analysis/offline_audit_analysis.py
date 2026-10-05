@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run reviewer-requested offline analyses on a frozen experiment generation."""
+"""Run additional offline robustness analyses on a frozen experiment generation."""
 
 from __future__ import annotations
 
@@ -43,12 +43,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--generation-root",
         type=Path,
-        default=PROJECT_ROOT / "revised" / "generations" / "access_r1_g2",
+        default=PROJECT_ROOT / "rebuilt" / "generations" / "yolo_generation_v1",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=PROJECT_ROOT / "revised" / "analysis" / "access_r1_g2" / "reviewer_offline",
+        default=PROJECT_ROOT / "rebuilt" / "analysis" / "yolo_generation_v1" / "offline_audits",
     )
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--subsample-draws", type=int, default=SUBSAMPLE_DRAWS)
@@ -68,7 +68,7 @@ def main() -> None:
         shutil.rmtree(output_dir)
     output_dir.mkdir(parents=True)
 
-    print("REVIEWER OFFLINE ANALYSIS")
+    print("OFFLINE ROBUSTNESS ANALYSIS")
     print(f"- frozen read-only input: {generation_root}")
     print(f"- new output directory: {output_dir}")
     print("- no training or inference")
@@ -409,9 +409,9 @@ def task0_report(
     lines = [
         "# T0 - Provenance and three preliminary questions",
         "",
-        "## 0.1 Why this is `access_r1_g2`",
+        "## 0.1 Why this is `yolo_generation_v1`",
         "",
-        "Yes. An earlier `access_r1_g1` server attempt existed and was superseded. The frozen registry preserves "
+        "Yes. An earlier `pilot_generation_v1` server attempt existed and was superseded. The frozen registry preserves "
         f"the old source root `{old_roots[0] if old_roots else 'not recorded'}` for the 18 explicitly deprecated "
         "augmentation checkpoints. The operator log recorded that the first attempt used OpenCV 5.0.0 while the "
         "pinned environment required 4.10.0; the runtime checker was also corrected to the CUDA-12.4-compatible "
@@ -1927,7 +1927,7 @@ def write_t8_latex(output_dir: Path, summary: list[dict[str, Any]]) -> None:
 def build_master_report(output_dir: Path, reproduction: list[dict[str, Any]]) -> str:
     task_files = sorted(output_dir.glob("T[0-8]_*.md"))
     lines = [
-        "# Reviewer Offline Analysis - Master Report",
+        "# Offline Robustness Analysis - Master Report",
         "",
         "- Frozen generation was read only.",
         "- No training or GPU inference was run.",

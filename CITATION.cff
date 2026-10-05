@@ -3,8 +3,10 @@ message: "If you use this code or released analysis artifacts, please cite the p
 title: "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection"
 type: software
 authors:
-  - family-names: Nguyen
-    given-names: Trong Khanh
+  - family-names: Nguyen-Trong
+    given-names: Khanh
+    affiliation: "Posts and Telecommunications Institute of Technology (PTIT), Hanoi, Vietnam"
+    email: khanhnt@ptit.edu.vn
 repository-code: "https://github.com/khanhnt/wood_defect_datacentric"
 url: "https://github.com/khanhnt/wood_defect_datacentric"
 license: MIT
@@ -12,10 +14,12 @@ version: "1.1.0"
 date-released: "2026-09-02"
 abstract: "Code, manifests, tables, and figures for a data-centric wood-knot detection study with negative-aware evaluation and a second-detector robustness experiment."
 preferred-citation:
-  type: article
+  type: unpublished
   title: "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection"
   authors:
-    - family-names: Nguyen
-      given-names: Trong Khanh
-  journal: "Discover Artificial Intelligence"
+    - family-names: Nguyen-Trong
+      given-names: Khanh
+      affiliation: "Posts and Telecommunications Institute of Technology (PTIT), Hanoi, Vietnam"
+      email: khanhnt@ptit.edu.vn
+  notes: "Submitted to Discover Artificial Intelligence"
   year: 2026

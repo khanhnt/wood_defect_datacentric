@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate final quantitative revision figures from a frozen YOLOv8s generation."""
+"""Generate final quantitative manuscript figures from a frozen YOLOv8s generation."""
 
 import argparse
 import csv
@@ -28,8 +28,8 @@ def parse_args():
     parser.add_argument(
         "--generation-root",
         type=Path,
-        default=PROJECT_ROOT / "revised" / "generations" / "access_r1_g2",
-        help="Frozen access_r1_g2 generation containing prediction exports and training results.",
+        default=PROJECT_ROOT / "rebuilt" / "generations" / "yolo_generation_v1",
+        help="Frozen YOLOv8s generation containing prediction exports and training results.",
     )
     parser.add_argument(
         "--output-dir",

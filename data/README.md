@@ -4,8 +4,8 @@ This repository does not redistribute raw wood-surface images. Use the original 
 
 ## Sources
 
-- VNWoodKnot: Data in Brief, DOI `10.1016/j.dib.2025.112039`.
-- VSB/Kodytek large-scale wood surface defects: F1000Research, DOI `10.12688/f1000research.52903`.
+- VNWoodKnot: Mendeley Data, DOI `10.17632/vnst548g5n.1`.
+- VSB/Kodytek large-scale wood surface defects: Zenodo, DOI `10.5281/zenodo.4694695`.
 
 The VSB clean-wood set used for the negative-aware extension consists of the 1,992 source images whose annotation files are empty (`*_anno.txt`). Each source yields three 1024-pixel tiles at `x=0`, `x=896`, and `x=source_width-1024`, for 5,976 tiles in total. The released manifest records every actual origin and overlap; the final overlap varies with source width and should not be represented as a uniform nominal value. A machine-readable distribution is provided in `vsb_clean_manifest/tile_geometry_summary.json`.
 

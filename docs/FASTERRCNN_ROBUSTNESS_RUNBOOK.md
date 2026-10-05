@@ -9,7 +9,7 @@ cd /workspace/wood_defect_datacentric
 source /workspace/wood_env/bin/activate
 
 export DATA=/workspace/data/datasets_rebuilt
-export FRCNN_GEN=/workspace/generations/access_r1_g3_fasterrcnn
+export FRCNN_GEN=/workspace/generations/fasterrcnn_generation_v1
 
 python scripts/verify_fasterrcnn_protocol.py \
   --rebuilt-root "$DATA" \

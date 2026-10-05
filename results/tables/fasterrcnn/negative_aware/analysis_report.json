@@ -56,14 +56,14 @@
   "bootstrap_samples": 10000,
   "bootstrap_seed": 20260825,
   "outputs": {
-    "validation_threshold_raw": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/negative_aware/validation_threshold_raw.csv",
-    "test_threshold_raw": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/negative_aware/test_threshold_raw.csv",
-    "selected_thresholds": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/negative_aware/validation_selected_thresholds.csv",
-    "test_per_seed": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/negative_aware/test_operating_metrics_per_seed.csv",
-    "test_summary": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/negative_aware/test_operating_summary.csv",
-    "zero_fp_binding_audit": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/negative_aware/zero_fp_binding_audit.csv",
-    "epsilon_rank_audit": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/negative_aware/epsilon_rank_audit.csv",
-    "operational_stability_audit": "/workspace/generations/access_r1_g3_fasterrcnn/fasterrcnn/negative_aware/operational_stability_audit.json"
+    "validation_threshold_raw": "/workspace/generations/fasterrcnn_generation_v1/fasterrcnn/negative_aware/validation_threshold_raw.csv",
+    "test_threshold_raw": "/workspace/generations/fasterrcnn_generation_v1/fasterrcnn/negative_aware/test_threshold_raw.csv",
+    "selected_thresholds": "/workspace/generations/fasterrcnn_generation_v1/fasterrcnn/negative_aware/validation_selected_thresholds.csv",
+    "test_per_seed": "/workspace/generations/fasterrcnn_generation_v1/fasterrcnn/negative_aware/test_operating_metrics_per_seed.csv",
+    "test_summary": "/workspace/generations/fasterrcnn_generation_v1/fasterrcnn/negative_aware/test_operating_summary.csv",
+    "zero_fp_binding_audit": "/workspace/generations/fasterrcnn_generation_v1/fasterrcnn/negative_aware/zero_fp_binding_audit.csv",
+    "epsilon_rank_audit": "/workspace/generations/fasterrcnn_generation_v1/fasterrcnn/negative_aware/epsilon_rank_audit.csv",
+    "operational_stability_audit": "/workspace/generations/fasterrcnn_generation_v1/fasterrcnn/negative_aware/operational_stability_audit.json"
   },
   "operational_stability_audit": {
     "single_clean_image_binding": {

@@ -1,6 +1,6 @@
 # Reproduction Map
 
-This document maps the revised manuscript artifacts to released files and replay commands. Commands assume the repository root as the working directory. Training is optional; the lightweight table package is sufficient to inspect every reported numerical result.
+This document maps the accompanying manuscript artifacts to released files and replay commands. Commands assume the repository root as the working directory. Training is optional; the lightweight table package is sufficient to inspect every reported numerical result.
 
 ## 1. Verify the Release
 
@@ -21,13 +21,13 @@ The first command checks artifact cardinalities, key manuscript values, clean-se
 | YOLOv8s tolerance analysis | `results/tables/yolov8s/locked_test_sensitivity_summary.csv` |
 | YOLOv8s clean false alarms | `results/tables/yolov8s/clean_fp_sweep_per_seed.csv`, `results/tables/yolov8s/clean_fp_sweep_summary.csv` |
 | YOLOv8s calibration and clean confidence | `results/tables/yolov8s/calibration_*.csv`, `results/tables/yolov8s/clean_max_confidence_*.csv`, `results/tables/yolov8s/reliability_bins.csv` |
-| Reviewer-requested YOLOv8s audits | `results/tables/yolov8s/reviewer_audits/` |
+| Additional YOLOv8s robustness audits | `results/tables/yolov8s/robustness_audits/` |
 | Faster R-CNN standard metrics | `results/tables/fasterrcnn/standard/per_seed_metrics.csv`, `results/tables/fasterrcnn/standard/summary.csv` |
 | Faster R-CNN negative-aware results | `results/tables/fasterrcnn/negative_aware/test_operating_metrics_per_seed.csv`, `results/tables/fasterrcnn/negative_aware/test_operating_summary.csv` |
 | Faster R-CNN threshold stability | `results/tables/fasterrcnn/negative_aware/zero_fp_binding_audit.csv`, `results/tables/fasterrcnn/negative_aware/epsilon_rank_audit.csv`, `results/tables/fasterrcnn/negative_aware/operational_stability_audit.json` |
 | Faster R-CNN provenance | `results/tables/fasterrcnn/provenance/` |
 
-Pre-revision flat table files are preserved under `results/_deprecated/pre_revision_tables/` for audit history. They are not inputs to the revised manuscript.
+Superseded flat table files are preserved under `results/_deprecated/superseded_tables/` for audit history. They are not inputs to the accompanying manuscript.
 
 ## 3. Paper Artifact Map
 
@@ -39,7 +39,7 @@ Pre-revision flat table files are preserved under `results/_deprecated/pre_revis
 | YOLOv8s false-alarm, operating-point, and sensitivity tables | `results/tables/yolov8s/clean_fp_sweep_summary.csv`, `results/tables/yolov8s/locked_test_operating_points_summary.csv`, `results/tables/yolov8s/locked_test_sensitivity_summary.csv` |
 | YOLOv8s calibration tables | `results/tables/yolov8s/calibration_summary.csv`, `results/tables/yolov8s/clean_max_confidence_summary.csv` |
 | Faster R-CNN robustness tables | `results/tables/fasterrcnn/standard/summary.csv`, `results/tables/fasterrcnn/negative_aware/test_operating_summary.csv` |
-| Final quantitative figures | `scripts/generate_revision_figures.py`; released copies in `figures/` and `results/figures/` |
+| Final quantitative figures | `scripts/generate_manuscript_figures.py`; released copies in `figures/` and `results/figures/` |
 | Dataset samples and detection scenarios | `scripts/fig_dataset_samples.py`, `scripts/fig_detection_scenarios.py` |
 | Inference cost | `analysis/inference_cost.py` |
 
@@ -51,8 +51,9 @@ Maintainers with the two frozen generations restored locally can rebuild the pub
 
 ```bash
 python scripts/build_release_artifacts.py \
-  --yolo-analysis-dir /path/to/access_r1_g2_analysis \
-  --fasterrcnn-generation-dir /path/to/access_r1_g3_fasterrcnn \
+  --yolo-analysis-dir /path/to/yolo_generation_v1_analysis \
+  --yolo-audit-dir /path/to/offline_audits \
+  --fasterrcnn-generation-dir /path/to/fasterrcnn_generation_v1 \
   --output-root results/tables
 ```
 

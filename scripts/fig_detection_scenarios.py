@@ -604,7 +604,7 @@ def require_common_image(query: str, lookups: dict[str, dict[str, dict[str, Any]
 
 def choose_best(name: str, candidates: list[dict[str, Any]], *, score_key: str, log_size: int) -> tuple[str, list[dict[str, Any]]]:
     if not candidates:
-        raise SystemExit(f"No suitable candidate found for {name}. Review prediction JSONs or pass an override image.")
+        raise SystemExit(f"No suitable candidate found for {name}. Inspect prediction JSONs or pass an override image.")
     ranked = sorted(candidates, key=lambda row: float(row[score_key]), reverse=True)
     return str(ranked[0]["image_id"]), ranked[:log_size]
 

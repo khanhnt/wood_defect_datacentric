@@ -1,7 +1,7 @@
 # Single-Generation Vast Runbook
 
-This runbook creates one isolated, fully provenanced generation for the IEEE Access
-resubmission. It does not reuse the 18 deprecated A1/A2/P4+A4 checkpoints for primary
+This runbook creates one isolated, fully provenanced experiment generation for the
+accompanying manuscript. It does not reuse the 18 deprecated A1/A2/P4+A4 checkpoints for primary
 results; it stages them only in a separate inference audit. Commands marked **Mac** run
 locally; commands marked **Vast** run on the rented server.
 
@@ -20,14 +20,14 @@ provenance, and are never read by primary tables or the 42-checkpoint registry.
 Use one immutable tag throughout:
 
 ```bash
-export GENERATION_TAG=access_r1_g1
+export GENERATION_TAG=pilot_generation_v1
 ```
 
 Never point any command in this document at `results/`, `results 2/`, or `results 3/`.
 
 ## 1. Minimal data set and transfer cost
 
-Measured logical sizes from `revised/datasets_rebuilt/` are below. An `eval` suffix
+Measured logical sizes from `rebuilt/datasets_rebuilt/` are below. An `eval` suffix
 means only `val` and `test` images/labels plus YAML/report files are required.
 
 | Tree | GiB | Needed for | Transfer or regenerate? |
@@ -64,8 +64,8 @@ The source-only alternative is about **51.7 GiB**:
 | Source | Approximate size |
 |---|---:|
 | VN raw plus archived canonical val/test pixels | 0.94 GiB |
-| `revised/data/main_dataset/images` | 35 GiB |
-| `revised/data/clean_data` | 16 GiB |
+| `rebuilt/data/main_dataset/images` | 35 GiB |
+| `rebuilt/data/clean_data` | 16 GiB |
 | authoritative manifests/configs in git | under 0.03 GiB |
 
 The source-only total is therefore about **52.0 GiB**. The complete derived tree is
@@ -101,13 +101,13 @@ only where needed and only val/test from preprocessing trees used for evaluation
 ```bash
 cd <REPO_ROOT>
 python scripts/build_minimal_transfer_manifest.py \
-  --rebuilt-root revised/datasets_rebuilt \
-  --output-list revised/minimal_transfer_files.txt \
-  --output-summary revised/minimal_transfer_summary.csv
+  --rebuilt-root rebuilt/datasets_rebuilt \
+  --output-list rebuilt/minimal_transfer_files.txt \
+  --output-summary rebuilt/minimal_transfer_summary.csv
 
 rsync -aH --partial --info=progress2 \
-  --files-from=revised/minimal_transfer_files.txt \
-  revised/datasets_rebuilt/ \
+  --files-from=rebuilt/minimal_transfer_files.txt \
+  rebuilt/datasets_rebuilt/ \
   <VAST_SSH>:/workspace/data/datasets_rebuilt/
 ```
 
@@ -119,9 +119,9 @@ compare those values with Section 1 before starting the transfer.
 
 ## 2. Freeze code and stage surviving checkpoints
 
-### 2.1 Mac: commit and record the exact code revision
+### 2.1 Mac: commit and record the exact code commit
 
-Review all changes before committing; do not commit dataset pixels or old results.
+Inspect all changes before committing; do not commit dataset pixels or old results.
 
 ```bash
 cd <REPO_ROOT>
@@ -185,7 +185,7 @@ rclone copyto \
   "$RCLONE_SMOKE/IMG_4832.jpg" -P
 test -s "$RCLONE_SMOKE/IMG_4832.jpg"
 cmp "$RCLONE_SMOKE/IMG_4832.jpg" \
-  revised/data/vnwoodknot/images/test/knot_free/IMG_4832.jpg
+  rebuilt/data/vnwoodknot/images/test/knot_free/IMG_4832.jpg
 
 rclone lsf \
   "gdrive:2.Work/1.PTIT/1.Ca_nhan/2.Research/2026/workspace_20260624/data/vnwoodknot/benchmarks/vnwoodknot_live_dead_2class_yolo/images" \
@@ -210,7 +210,7 @@ The training queue is resumable, but an interruptible instance can lose the loca
 source, 78 GiB derived tree, and unreturned checkpoints. The small spot discount is not
 worth that provenance risk.
 
-### 3.1 Vast: clone the exact revision
+### 3.1 Vast: clone the exact commit
 
 ```bash
 cd /workspace
@@ -257,7 +257,7 @@ python -m pip check
 Create the isolated generation root and verify every package and GPU:
 
 ```bash
-export GENERATION_TAG=access_r1_g1
+export GENERATION_TAG=pilot_generation_v1
 export GEN=/workspace/generations/$GENERATION_TAG
 export DATA=/workspace/data/datasets_rebuilt
 mkdir -p "$GEN/provenance" /workspace/source
@@ -328,7 +328,7 @@ rsync -avh --partial --info=progress2 \
   "$BUNDLE/" \
   <VAST_SSH>:/workspace/generations/$GENERATION_TAG/
 rsync -avh --partial \
-  revised/wood_defect_datacentric/yolov8s.pt \
+  rebuilt/wood_defect_datacentric/yolov8s.pt \
   <VAST_SSH>:/workspace/wood_defect_datacentric/yolov8s.pt
 ```
 
@@ -539,7 +539,7 @@ second Mac terminal immediately after the 24-job queue is running:
 cd <REPO_ROOT>
 export CLEAN_UPLOAD_LOG="/tmp/${GENERATION_TAG}_clean_upload.log"
 nohup rsync -avh --partial --info=progress2 \
-  revised/data/clean_data/ \
+  rebuilt/data/clean_data/ \
   <VAST_SSH>:/workspace/source/clean_data/ \
   > "$CLEAN_UPLOAD_LOG" 2>&1 &
 echo $!
@@ -875,7 +875,7 @@ python scripts/verify_prediction_map_reproduction.py \
   --output-csv "$GEN/fair_eval/prediction_ap_reproduction.csv" \
   --diagnostics-csv "$GEN/fair_eval/prediction_ap_matching_diagnostics.csv" \
   --exact-tolerance 0.002 \
-  --review-tolerance 0.005
+  --method-tolerance 0.005
 
 python scripts/verify_prediction_map_reproduction.py \
   --predictions-root "$GEN/deprecated_audit/predictions" \
@@ -884,7 +884,7 @@ python scripts/verify_prediction_map_reproduction.py \
   --output-csv "$GEN/deprecated_audit/fair_eval/prediction_ap_reproduction.csv" \
   --diagnostics-csv "$GEN/deprecated_audit/fair_eval/prediction_ap_matching_diagnostics.csv" \
   --exact-tolerance 0.002 \
-  --review-tolerance 0.005
+  --method-tolerance 0.005
 ```
 
 This is a diagnostic gate, not a reason to leave paid GPUs idle. The script verifies
@@ -895,7 +895,7 @@ still compares rematching from serialized boxes with the confidence-ordered gree
 matcher used by older offline analyses.
 
 - `abs residual <= 0.002`: `EXACT_PASS`, accepted as direct reproduction.
-- `0.002 < abs residual <= 0.005`: `METHOD_REVIEW`, acceptable only when all provenance
+- `0.002 < abs residual <= 0.005`: `METHOD_TOLERANCE`, acceptable only when all provenance
   hashes/counts match and the per-image diagnostic attributes the difference to matching
   or numerical/AP interpolation convention. Report it as method sensitivity, not exact
   equality.
@@ -939,10 +939,10 @@ threshold.
 
 ```bash
 cd <REPO_ROOT>
-mkdir -p "revised/generations/$GENERATION_TAG"
+mkdir -p "rebuilt/generations/$GENERATION_TAG"
 rsync -avzh --partial --info=progress2 \
   <VAST_SSH>:/workspace/generations/$GENERATION_TAG/ \
-  "revised/generations/$GENERATION_TAG/"
+  "rebuilt/generations/$GENERATION_TAG/"
 ```
 
 Bring back the complete generation, including new `best.pt`/`last.pt`, the 18
@@ -953,7 +953,7 @@ caches, or the smoke directory; the corresponding pixels already exist locally.
 ### 10.2 Mac: verify before destroying Vast
 
 ```bash
-cd "<REPO_ROOT>/revised/generations/$GENERATION_TAG"
+cd "<REPO_ROOT>/rebuilt/generations/$GENERATION_TAG"
 shasum -a 256 -c provenance/SHA256SUMS
 
 find multiseed -path '*/weights/best.pt' -size +10M | wc -l
@@ -1025,7 +1025,7 @@ preserved. The safest simple fallback is the complete rebuilt tree (about 78 GiB
 because it can run both verification gates without rematerializing pixels:
 
 ```bash
-cd <REPO_ROOT>/revised
+cd <REPO_ROOT>/rebuilt
 rsync -aHh --partial --info=progress2 \
   datasets_rebuilt/ \
   <VAST_SSH>:/workspace/data/datasets_rebuilt/

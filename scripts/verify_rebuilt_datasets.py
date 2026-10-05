@@ -66,16 +66,16 @@ class DatasetIdentity:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path("revised/datasets_rebuilt"))
+    parser.add_argument("--root", type=Path, default=Path("rebuilt/datasets_rebuilt"))
     parser.add_argument(
         "--output-csv",
         type=Path,
-        default=Path("revised/datasets_rebuilt/reports/verification_gate.csv"),
+        default=Path("rebuilt/datasets_rebuilt/reports/verification_gate.csv"),
     )
     parser.add_argument(
         "--output-md",
         type=Path,
-        default=Path("revised/datasets_rebuilt/reports/verification_gate.md"),
+        default=Path("rebuilt/datasets_rebuilt/reports/verification_gate.md"),
     )
     parser.add_argument(
         "--datasets",
@@ -186,7 +186,7 @@ def hardlink_audit(yaml_path: Path, split: str, rebuilt_root: Path) -> tuple[str
     source_yaml = Path(report["source_yaml"]).expanduser().resolve()
     if not source_yaml.exists():
         portable = str(report["source_yaml"]).replace("\\", "/")
-        marker = "/revised/datasets_rebuilt/"
+        marker = "/rebuilt/datasets_rebuilt/"
         if marker in portable:
             source_yaml = rebuilt_root / portable.split(marker, 1)[1]
     if not source_yaml.exists():

@@ -69,12 +69,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--generation-root",
         type=Path,
-        default=PROJECT_ROOT / "revised" / "generations" / "access_r1_g2",
+        default=PROJECT_ROOT / "rebuilt" / "generations" / "yolo_generation_v1",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=PROJECT_ROOT / "revised" / "analysis" / "access_r1_g2",
+        default=PROJECT_ROOT / "rebuilt" / "analysis" / "yolo_generation_v1",
     )
     parser.add_argument("--bootstrap-samples", type=int, default=10000)
     parser.add_argument("--bootstrap-seed", type=int, default=20260817)

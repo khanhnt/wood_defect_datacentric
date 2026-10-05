@@ -1,8 +1,8 @@
 # Deprecated augmentation checkpoints
 
-The 18 checkpoints listed below are retained for audit only. Their materialized A-variant datasets applied A1/A2/A4 to validation and test images as well as training images. They must not be used in the revised primary comparison because augmentation is a training-only intervention.
+The 18 checkpoints listed below are retained for audit only. Their materialized A-variant datasets applied A1/A2/A4 to validation and test images as well as training images. They must not be used in the primary comparison because augmentation is a training-only intervention.
 
-Replacement runs must use the rebuilt train-only datasets under `revised/datasets_rebuilt/variants/<dataset>/augmentation/seed<seed>/`. Validation and test are hardlinked from the non-augmented canonical input appropriate to the pipeline. New runs must retain both `best.pt` and `last.pt`.
+Replacement runs must use the rebuilt train-only datasets under `rebuilt/datasets_rebuilt/variants/<dataset>/augmentation/seed<seed>/`. Validation and test are hardlinked from the non-augmented canonical input appropriate to the pipeline. New runs must retain both `best.pt` and `last.pt`.
 
 | Dataset | Variant | Seeds | Archived run paths | Status |
 |---|---|---|---|---|

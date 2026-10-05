@@ -157,7 +157,7 @@ tmux attach -t wooddc
 ./scripts/aggregate_after_batch.sh
 ```
 
-Review:
+Inspect:
 
 - `results/batch_summaries/*.csv`
 - `results/batch_logs/batch1_baselines/*.log`
