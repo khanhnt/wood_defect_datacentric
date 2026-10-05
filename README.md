@@ -1,6 +1,6 @@
 # Beyond mAP: Negative-Aware Evaluation of Data-Centric Wood Knot Detection
 
-This repository contains the code, configurations, public-release manifests, tables, and figures for the IEEE Access paper:
+This repository contains the code, configurations, public-release manifests, tables, and figures for the above paper:
 
 > Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection
 
