@@ -4,7 +4,7 @@ title: "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood
 type: software
 authors:
   - family-names: Nguyen
-    given-names: Thanh Khanh
+    given-names: Trong Khanh
 repository-code: "https://github.com/khanhnt/wood_defect_datacentric"
 url: "https://github.com/khanhnt/wood_defect_datacentric"
 license: MIT
@@ -16,6 +16,6 @@ preferred-citation:
   title: "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection"
   authors:
     - family-names: Nguyen
-      given-names: Thanh Khanh
-  journal: "IEEE Access"
+      given-names: Trong Khanh
+  journal: "Discover Artificial Intelligence"
   year: 2026
