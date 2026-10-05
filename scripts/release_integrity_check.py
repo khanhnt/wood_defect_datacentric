@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the lightweight public artifacts for the revised manuscript."""
+"""Validate the lightweight public artifacts for the accompanying manuscript."""
 
 from __future__ import annotations
 
@@ -109,7 +109,7 @@ def check_paper_values() -> tuple[str, bool, str]:
     deltas = [abs(float(value) - expected) for _, value, expected in targets]
     passed = all(delta <= 0.0007 for delta in deltas)
     detail = "; ".join(f"{name}={float(value):.3f}" for name, value, _ in targets)
-    return "key revised-manuscript values", passed, detail
+    return "key manuscript values", passed, detail
 
 
 def check_vnwoodknot_manifest() -> tuple[str, bool, str]:
@@ -326,7 +326,7 @@ def check_packaged_checksums() -> tuple[str, bool, str]:
 def check_deprecated_note() -> tuple[str, bool, str]:
     paths = (
         PROJECT_ROOT / "results" / "_deprecated" / "README.md",
-        PROJECT_ROOT / "results" / "_deprecated" / "pre_revision_tables" / "README.md",
+        PROJECT_ROOT / "results" / "_deprecated" / "superseded_tables" / "README.md",
     )
     text = "\n".join(path.read_text(encoding="utf-8") for path in paths if path.is_file())
     passed = "6252" in text and "5976" in text and "supersed" in text.lower()
@@ -385,7 +385,7 @@ def release_files() -> list[Path]:
     names = {line.strip() for line in result.stdout.splitlines() if line.strip()}
     extra_roots = (
         PROJECT_ROOT / "scripts",
-        PROJECT_ROOT / "docs" / "RELEASE_NOTES_REVISION.md",
+        PROJECT_ROOT / "docs" / "RELEASE_NOTES.md",
         TABLES,
         PROJECT_ROOT / "results" / "_deprecated",
     )

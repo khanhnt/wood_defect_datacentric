@@ -58,8 +58,11 @@ Thumbs.db
 !/results/per_seed/README.md
 !/results/_deprecated/
 !/results/_deprecated/README.md
+!/results/_deprecated/superseded_tables/
+!/results/_deprecated/superseded_tables/**
 /results [0-9]*/
-/revised/
+/*vised/
+/rebuilt/
 /figures_new/
 /figures_old_backup/
 /make_figures.py

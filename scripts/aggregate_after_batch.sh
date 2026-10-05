@@ -79,4 +79,4 @@ print(f"Wrote: {summary_csv}")
 print(f"Runs summarized: {len(rows)}")
 PY
 
-echo "Aggregation complete. Review the CSV before starting the next batch."
+echo "Aggregation complete. Inspect the CSV before starting the next batch."

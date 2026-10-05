@@ -65,13 +65,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--yolo-analysis-dir",
         type=Path,
-        default=PROJECT_ROOT / "revised" / "analysis" / "access_r1_g2",
+        default=PROJECT_ROOT / "rebuilt" / "analysis" / "yolo_generation_v1",
         help="Frozen YOLOv8s analysis directory.",
     )
     parser.add_argument(
         "--fasterrcnn-generation-dir",
         type=Path,
-        default=PROJECT_ROOT / "revised" / "generations" / "access_r1_g3_fasterrcnn",
+        default=PROJECT_ROOT / "rebuilt" / "generations" / "fasterrcnn_generation_v1",
         help="Frozen Faster R-CNN generation directory.",
     )
     parser.add_argument(
@@ -79,6 +79,11 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=PROJECT_ROOT / "results" / "tables",
         help="Destination for the lightweight public table package.",
+    )
+    parser.add_argument(
+        "--yolo-audit-dir",
+        type=Path,
+        help="Offline robustness-audit directory; defaults to <yolo-analysis-dir>/offline_audits.",
     )
     return parser.parse_args()
 
@@ -88,6 +93,11 @@ def main() -> None:
     yolo_src = args.yolo_analysis_dir.resolve()
     frcnn_src = args.fasterrcnn_generation_dir.resolve()
     output = args.output_root.resolve()
+    yolo_audit_src = (
+        args.yolo_audit_dir.resolve()
+        if args.yolo_audit_dir is not None
+        else yolo_src / "offline_audits"
+    )
 
     require_directory(yolo_src, "YOLOv8s analysis")
     require_directory(frcnn_src, "Faster R-CNN generation")
@@ -96,7 +106,7 @@ def main() -> None:
     frcnn_dst = output / "fasterrcnn"
     copy_named(yolo_src, yolo_dst, YOLO_ROOT_FILES)
     copy_matching(yolo_src / "deprecated_impact", yolo_dst, ("*.csv",))
-    copy_matching(yolo_src / "reviewer_offline", yolo_dst / "reviewer_audits", ("*.csv",))
+    copy_matching(yolo_audit_src, yolo_dst / "audits", ("*.csv",))
     copy_matching(yolo_src / "latex", yolo_dst / "latex", ("*.tex",))
 
     analysis_src = frcnn_src / "fasterrcnn" / "analysis"

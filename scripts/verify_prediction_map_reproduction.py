@@ -20,7 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-csv", type=Path, required=True)
     parser.add_argument("--diagnostics-csv", type=Path, required=True)
     parser.add_argument("--exact-tolerance", type=float, default=0.002)
-    parser.add_argument("--review-tolerance", type=float, default=0.005)
+    parser.add_argument("--method-tolerance", type=float, default=0.005)
     parser.add_argument("--strict", action="store_true", help="Exit nonzero when any row requires investigation.")
     return parser.parse_args()
 
@@ -188,8 +188,8 @@ def write_csv(path: Path, rows: list[dict[str, object]], fieldnames: list[str]) 
 
 def main() -> None:
     args = parse_args()
-    if args.review_tolerance < args.exact_tolerance:
-        raise SystemExit("--review-tolerance must be >= --exact-tolerance")
+    if args.method_tolerance < args.exact_tolerance:
+        raise SystemExit("--method-tolerance must be >= --exact-tolerance")
     import ultralytics
     from ultralytics.utils.metrics import ap_per_class
 
@@ -256,20 +256,20 @@ def main() -> None:
             status = "EXACT_PASS"
             diagnosis = "same_generation_and_within_exact_tolerance"
         elif (
-            abs(residual) <= args.review_tolerance
-            and abs(validator_residual) <= args.review_tolerance
+            abs(residual) <= args.method_tolerance
+            and abs(validator_residual) <= args.method_tolerance
             and provenance_consistent
         ):
-            status = "METHOD_REVIEW"
+            status = "METHOD_TOLERANCE"
             diagnosis = "matching_convention_candidate" if differences else "export_rounding_or_ap_interpolation_candidate"
         else:
             status = "INVESTIGATE"
             if not provenance_consistent:
                 diagnosis = "generation_or_input_mismatch"
-            elif abs(validator_residual) > args.review_tolerance:
+            elif abs(validator_residual) > args.method_tolerance:
                 diagnosis = "validator_metric_differs_from_fair_evaluation"
             elif differences:
-                diagnosis = "matching_difference_exceeds_review_tolerance"
+                diagnosis = "matching_difference_exceeds_method_tolerance"
             else:
                 diagnosis = "unexplained_ap_estimator_difference"
         rows.append(
@@ -307,7 +307,7 @@ def main() -> None:
         "validator_tp50", "offline_ultralytics_style_tp50", "confidence_greedy_tp50",
     ]
     write_csv(args.diagnostics_csv.expanduser().resolve(), diagnostic_rows, diagnostic_fields)
-    counts = {status: sum(row["status"] == status for row in rows) for status in ("EXACT_PASS", "METHOD_REVIEW", "INVESTIGATE")}
+    counts = {status: sum(row["status"] == status for row in rows) for status in ("EXACT_PASS", "METHOD_TOLERANCE", "INVESTIGATE")}
     maximum = max(float(row["abs_residual"]) for row in rows)
     print(f"Ultralytics: {ultralytics.__version__} ({Path(ultralytics.__file__).resolve()})")
     print(f"Wrote: {args.output_csv.expanduser().resolve()}")

@@ -1,13 +1,12 @@
-# Revision result artifacts
+# Result artifacts
 
-This directory contains the lightweight numerical artifacts used by the revised
-IEEE Access manuscript. Results are separated by detector family so that absolute
+This directory contains the lightweight numerical artifacts used by the accompanying manuscript. Results are separated by detector family so that absolute
 values and protocols are not mixed across model blocks.
 
 ## YOLOv8s
 
 The authoritative YOLOv8s artifacts are in `yolov8s/` and were derived from the
-frozen `access_r1_g2` generation.
+frozen `yolo_generation_v1` generation.
 
 - `fair_metrics_summary.csv` and `fair_metrics_per_seed.csv`: standard fair-test
   precision, recall, mAP50, and mAP50-95 on the common non-augmented evaluation
@@ -20,15 +19,15 @@ frozen `access_r1_g2` generation.
 - `clean_fp_sweep_*.csv`: clean-image false-positive rates and FPPI inputs.
 - `calibration_*.csv`, `clean_max_confidence_*.csv`, and
   `reliability_bins.csv`: calibration and clean-confidence analyses.
-- `reviewer_audits/`: exact-binomial intervals, source-level VSB analyses,
+- `robustness_audits/`: exact-binomial intervals, source-level VSB analyses,
   convergence diagnostics, retained-AP characterization, and deprecated-checkpoint
-  comparisons used in the revision and response letter.
+  comparisons used in the robustness and consistency analyses.
 - `latex/`: generated table rows retained for direct manuscript cross-checking.
 
 ## Faster R-CNN
 
 The second-detector robustness artifacts are in `fasterrcnn/` and were produced by
-the `access_r1_g3_fasterrcnn` generation.
+the `fasterrcnn_generation_v1` generation.
 
 - `standard/`: per-seed and aggregate validation/test metrics plus checkpoint and
   prediction audits.
@@ -39,5 +38,5 @@ the `access_r1_g3_fasterrcnn` generation.
 ## Superseded artifacts
 
 Files previously stored directly under `results/tables/` were moved to
-`results/_deprecated/pre_revision_tables/`. They are preserved for audit history but
-must not be used to reproduce the revised manuscript.
+`results/_deprecated/superseded_tables/`. They are preserved for audit history but
+must not be used to reproduce the accompanying manuscript.

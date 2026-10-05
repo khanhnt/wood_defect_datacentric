@@ -1,6 +1,6 @@
 # Faster R-CNN robustness artifacts
 
-Source generation: `access_r1_g3_fasterrcnn`.
+Source generation: `fasterrcnn_generation_v1`.
 
 The robustness block uses a COCO-pretrained Faster R-CNN with a MobileNetV3-Large
 FPN backbone on VNWoodKnot. Baseline, A1 crop, and A2 colour jitter are evaluated at

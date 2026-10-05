@@ -52,9 +52,9 @@ METADATA_NAMES = {"dataset.yaml", "materialization_report.json"}
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--rebuilt-root", type=Path, default=Path("revised/datasets_rebuilt"))
-    parser.add_argument("--output-list", type=Path, default=Path("revised/minimal_transfer_files.txt"))
-    parser.add_argument("--output-summary", type=Path, default=Path("revised/minimal_transfer_summary.csv"))
+    parser.add_argument("--rebuilt-root", type=Path, default=Path("rebuilt/datasets_rebuilt"))
+    parser.add_argument("--output-list", type=Path, default=Path("rebuilt/minimal_transfer_files.txt"))
+    parser.add_argument("--output-summary", type=Path, default=Path("rebuilt/minimal_transfer_summary.csv"))
     return parser.parse_args()
 
 

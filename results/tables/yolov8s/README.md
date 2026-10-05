@@ -1,6 +1,6 @@
 # YOLOv8s frozen-generation artifacts
 
-Source generation: `access_r1_g2`.
+Source generation: `yolo_generation_v1`.
 
 The seven variants are Baseline, P1 CLAHE, P2 illumination normalization, P3
 unsharp masking, A1 defect-preserving crop, A2 texture-aware colour jitter, and

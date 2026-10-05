@@ -1,12 +1,12 @@
 # Figure Artifacts
 
-This folder mirrors the final PDFs and PNGs used in the revised paper. The top-level `figures/` directory contains the same manuscript-ready assets.
+This folder mirrors the final PDFs and PNGs used in the accompanying manuscript. The top-level `figures/` directory contains the same manuscript-ready assets.
 
 Regenerate the final quantitative figures from a restored frozen YOLOv8s generation with:
 
 ```bash
-python scripts/generate_revision_figures.py \
-  --generation-root /path/to/access_r1_g2 \
+python scripts/generate_manuscript_figures.py \
+  --generation-root /path/to/yolo_generation_v1 \
   --output-dir /path/to/output_figures
 ```
 

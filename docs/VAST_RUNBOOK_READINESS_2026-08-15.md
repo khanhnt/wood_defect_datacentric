@@ -44,12 +44,12 @@ hash, and image count. It then reports per-image differences between the
 Ultralytics-style IoU-priority matcher and the confidence-ordered greedy matcher.
 
 - Up to 0.002 absolute mAP50 residual: exact reproduction.
-- Above 0.002 and up to 0.005: method review; acceptable only with matching provenance
+- Above 0.002 and up to 0.005: method tolerance; acceptable only with matching provenance
   and a documented matching/interpolation explanation.
 - Above 0.005, or any provenance mismatch: investigate before using the row in the
   manuscript.
 
-The paid run does not stop on a method-review row. It completes provenance, checksums,
+The paid run does not stop on a method-tolerance row. It completes provenance, checksums,
 and result transfer so diagnosis can continue offline.
 
 ## Script and feature inventory
@@ -87,7 +87,7 @@ end-to-end Mac test; its final artifact set still depends on those Vast outputs.
 
 ## Transfer order
 
-`revised/data/clean_data` is not part of STOP 2. The 24-job training queue starts after
+`rebuilt/data/clean_data` is not part of STOP 2. The 24-job training queue starts after
 the 84/84 VN/VSB training-data gate. The Mac uploads the 16 GiB clean source directory
 in parallel. Strict-clean materialization and its separate 15/15 gate run only before
 clean inference.
@@ -105,7 +105,7 @@ rclone copyto \
   "$RCLONE_SMOKE/IMG_4832.jpg" -P
 test -s "$RCLONE_SMOKE/IMG_4832.jpg"
 cmp "$RCLONE_SMOKE/IMG_4832.jpg" \
-  revised/data/vnwoodknot/images/test/knot_free/IMG_4832.jpg
+  rebuilt/data/vnwoodknot/images/test/knot_free/IMG_4832.jpg
 ```
 
 Success requires both `test` and `cmp` to exit zero. An HTTP 403 means the OAuth grant

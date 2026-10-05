@@ -3,7 +3,7 @@
 ## Verdict
 
 All requested scripts, flags, and experiment configurations exist. The six CPU tools
-requested for real Mac execution were run against `revised/datasets_rebuilt/` and
+requested for real Mac execution were run against `rebuilt/datasets_rebuilt/` and
 `results 2/`. No training or GPU inference was run.
 
 One defect was found during testing: `write_generation_provenance.py` passed
@@ -86,7 +86,7 @@ The split is a deterministic `random.Random(42)` shuffle of sorted source IDs. I
 ### YAML relocation
 
 A YAML-only copy of the actual rebuilt tree was relocated successfully: 33/33 files.
-The real `revised/datasets_rebuilt/` tree was not changed.
+The real `rebuilt/datasets_rebuilt/` tree was not changed.
 
 ## Flag Inventory
 

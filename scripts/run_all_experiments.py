@@ -71,9 +71,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dataset", choices=("vnwoodknot", "vsb", "all"), default="all")
     parser.add_argument(
         "--job-set",
-        choices=("legacy36", "corrected24", "full42"),
-        default="legacy36",
-        help="legacy36 reproduces the original matrix; corrected24 is the resubmission queue.",
+        choices=("original36", "corrected24", "full42"),
+        default="original36",
+        help="original36 reproduces the original 36-run matrix; corrected24 is the train-only augmentation queue.",
     )
     parser.add_argument("--variants", help="Optional comma-separated variant IDs.")
     parser.add_argument("--seeds", default="42,43,44", help="Comma-separated seeds.")
@@ -174,7 +174,7 @@ def build_jobs(
     if dataset_filter in {"vsb", "all"}:
         specs.extend(vsb_specs())
 
-    if job_set == "legacy36":
+    if job_set == "original36":
         specs = [spec for spec in specs if not (spec.dataset == "vnwoodknot" and spec.variant in {"p1_clahe", "p3_unsharp"})]
     elif job_set == "corrected24":
         selected = {

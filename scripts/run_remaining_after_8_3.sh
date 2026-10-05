@@ -4,7 +4,7 @@ set -Eeuo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$PROJECT_ROOT"
 
-GEN="${GEN:-/workspace/generations/access_r1_g2}"
+GEN="${GEN:-/workspace/generations/yolo_generation_v1}"
 DATA="${DATA:-/workspace/data/datasets_rebuilt}"
 GPU_LIST="${GPU_LIST:-0,1}"
 PYTHON_BIN="${PYTHON_BIN:-python}"
@@ -53,7 +53,7 @@ print("primary_json:", len(files))
 print("inference_paths:", dict(paths))
 print("dataset_split_counts:", dict(counts))
 if len(files) != 126 or bad:
-    print("ERROR: Sections 8.1-8.3 are incomplete or contain legacy exports.", file=sys.stderr)
+    print("ERROR: Sections 8.1-8.3 are incomplete or contain old exports.", file=sys.stderr)
     for path in bad[:10]:
         print(path, file=sys.stderr)
     raise SystemExit(1)
@@ -140,7 +140,7 @@ echo "[9.1] reproducing primary fair-evaluation AP"
   --output-csv "$GEN/fair_eval/prediction_ap_reproduction.csv" \
   --diagnostics-csv "$GEN/fair_eval/prediction_ap_matching_diagnostics.csv" \
   --exact-tolerance 0.002 \
-  --review-tolerance 0.005
+  --method-tolerance 0.005
 
 echo "[9.1] reproducing deprecated-checkpoint fair-evaluation AP"
 "$PYTHON_BIN" scripts/verify_prediction_map_reproduction.py \
@@ -150,7 +150,7 @@ echo "[9.1] reproducing deprecated-checkpoint fair-evaluation AP"
   --output-csv "$GEN/deprecated_audit/fair_eval/prediction_ap_reproduction.csv" \
   --diagnostics-csv "$GEN/deprecated_audit/fair_eval/prediction_ap_matching_diagnostics.csv" \
   --exact-tolerance 0.002 \
-  --review-tolerance 0.005
+  --method-tolerance 0.005
 
 echo "[9.2] writing provenance and checksums"
 "$PYTHON_BIN" scripts/write_generation_provenance.py \
@@ -195,7 +195,7 @@ print(
     "deprecated_prediction_json:",
     len(list((generation / "deprecated_audit" / "predictions").glob("*/*/*_predictions.json"))),
 )
-print("FINAL AUDIT:", "PASS" if all_exact else "REVIEW REQUIRED")
+print("FINAL AUDIT:", "PASS" if all_exact else "CHECK REQUIRED")
 PY
 
 echo "Completed remaining Sections 8.4-9.2. Generation: $GEN"

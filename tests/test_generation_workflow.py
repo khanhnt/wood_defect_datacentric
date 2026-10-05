@@ -10,7 +10,7 @@ import numpy as np
 import yaml
 
 from analysis.analyze_generation import compute_ap_ultralytics_8460, evaluate_detection_payload
-from analysis.reviewer_offline_analysis import binomial_intervals, clean_units
+from analysis.offline_audit_analysis import binomial_intervals, clean_units
 from scripts.run_all_experiments import build_jobs, job_completed, print_dry_run
 from scripts.split_vsb_clean_sources import partition_source_ids
 from scripts.stage_deprecated_checkpoints import DATASETS as DEPRECATED_DATASETS
@@ -111,7 +111,7 @@ class GenerationQueueTest(unittest.TestCase):
             epochs=50,
             imgsz=1024,
             rebuilt_root=Path("/workspace/data/datasets_rebuilt"),
-            results_root=Path("/workspace/generations/access_r1_g1"),
+            results_root=Path("/workspace/generations/generation_test"),
             vn_yaml="/workspace/data/datasets_rebuilt/canonical/vnwoodknot/dataset.yaml",
             vsb_yaml="/workspace/data/datasets_rebuilt/canonical/vsb_rarefirst/dataset.yaml",
             generated_root="/unused",

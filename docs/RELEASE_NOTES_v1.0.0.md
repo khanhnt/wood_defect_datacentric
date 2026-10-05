@@ -1,9 +1,9 @@
 # v1.0.0 Release Notes (Superseded Draft)
 
-This draft described the initial YOLOv8s-only package. The authoritative revision
-release is documented in `docs/RELEASE_NOTES_REVISION.md`.
+This draft described the initial YOLOv8s-only package. The authoritative current
+release is documented in `docs/RELEASE_NOTES.md`.
 
-Initial public reproducibility release for the IEEE Access paper "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection".
+Initial public reproducibility package for "Beyond mAP: Negative-Aware Evaluation of Data-Centric Pipelines for Wood Knot Detection".
 
 Included:
 
@@ -26,4 +26,4 @@ Before publishing:
 1. Upload the large per-seed prediction archive to Zenodo.
 2. Update `results/per_seed/README.md`, `README.md`, and `CITATION.cff` with the Zenodo DOI.
 3. Run `python scripts/release_integrity_check.py`.
-4. Tag the reviewed commit as `v1.0.0`.
+4. Tag the validated commit as `v1.0.0`.
